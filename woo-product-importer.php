@@ -1,0 +1,38 @@
+<?php /*
+    Plugin Name: Woo Product Importer
+    Plugin URI: http://webpresencepartners.com
+    Description: Free CSV import utility for WooCommerce
+    Version: .0.1
+    Author: Daniel Grundel, Web Presence Partners
+    Author URI: http://www.webpresencepartners.com
+*/
+    
+    //Admin Menu Code
+    add_action('admin_menu', 'woo_product_importer_admin_menu');
+    function woo_product_importer_admin_menu() {
+        add_management_page('Woo Product Importer', 'Woo Product Importer', 'manage_options', 'woo-product-importer', 'woo_product_importer_render_action');
+    }
+    
+    function woo_product_importer_render_action() {
+        $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'upload';
+        require_once('woo-product-importer-common.php');
+        require_once("woo-product-importer-{$action}.php");
+    }
+    
+    function woo_product_importer_generate_slug($str, $maxLength = 50)
+    {
+        $result = strtolower($str);
+        
+        $result = preg_replace("/[^a-z0-9\s-]/", "", $result);
+        $result = trim(preg_replace("/[\s-]+/", " ", $result));
+        $result = trim(substr($result, 0, $maxLength));
+        $result = preg_replace("/\s/", "-", $result);
+        
+        return $result;
+    }
+    
+    function woo_product_importer_clean_number($num) {
+        return preg_replace("/[^0-9,.]/", "", $num);
+    }
+    
+?>
