@@ -5,12 +5,14 @@ A simple, free CSV importer for WooCommerce
 
 Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 
-**Cool Stuff You Can Do**
+**Cool Stuff It/You Can Do**
 - Import Categories and Tags (Categories and Tags are created if they don't exist)
 - Import Custom Fields
 - Set Visibility on Custom Fields
 - Map any CSV column to any Product field (No header row required, but if you happened to include one, I'll use it to take a stab at what goes where)
 - Map multiple CSV columns to one Product field (last non-empty column wins, good for merging columns)
+- Basic validation for multiple-choice fields (fields with a limited set of valid values like yes/no, instock/outofstock, etc.)
+- Dollar signs, commas, etc. are stripped out of number fields like prices, weight, length, width, height
 
 **Full List of Importable Attributes**
 - post_title (Name)
