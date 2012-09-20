@@ -86,7 +86,7 @@
                     case '_regular_price':
                     case '_sale_price':
                     case '_price':
-                        $new_post_meta[$map_to] = $this->clean_number($col);
+                        $new_post_meta[$map_to] = WebPres_Woo_Product_Importer::clean_number($col);
                         break;
                     
                     case '_tax_status':

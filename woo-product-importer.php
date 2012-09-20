@@ -23,7 +23,7 @@
             require_once("woo-product-importer-{$action}.php");
         }
         
-        private function generate_slug($str, $maxLength = 50)
+        public static function generate_slug($str, $maxLength = 50)
         {
             $result = strtolower($str);
             
@@ -35,7 +35,7 @@
             return $result;
         }
         
-        private function woo_product_importer_clean_number($num) {
+        public static function woo_product_importer_clean_number($num) {
             return preg_replace("/[^0-9,.]/", "", $num);
         }
         

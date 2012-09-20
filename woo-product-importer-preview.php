@@ -23,7 +23,7 @@
         $uploaded_file_ext = strtolower(pathinfo($_FILES['import_csv']['name'], PATHINFO_EXTENSION));
         
         //full path to uploaded file. slugifys the file name in case there are weird characters present.
-        $uploaded_file_path = $upload_dir.'/'.$this->generate_slug(basename($_FILES['import_csv']['name'],'.'.$uploaded_file_ext)).'.'.$uploaded_file_ext;
+        $uploaded_file_path = $upload_dir.'/'.WebPres_Woo_Product_Importer::generate_slug(basename($_FILES['import_csv']['name'],'.'.$uploaded_file_ext)).'.'.$uploaded_file_ext;
         
         if($uploaded_file_ext != 'csv') {
             $error_messages[] = 'The file extension "'.$uploaded_file_ext.'" is not allowed.';
@@ -105,7 +105,7 @@
                 <?php if($_POST['header_row'] == '1'):
                     $header_row = array_shift($import_data); ?>
                     <tr>
-                        <th></th>
+                        <th>CSV Header Row</th>
                         <?php foreach($header_row as $col): ?>
                             <th><?php echo htmlspecialchars($col); ?></th>
                         <?php endforeach; ?>
