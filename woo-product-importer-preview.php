@@ -151,7 +151,7 @@
                                 </p>
                                 <p>
                                     <input type="checkbox" name="custom_field_import_empty[<?php echo $key; ?>]" id="custom_field_import_empty_<?php echo $key; ?>" value="1" />
-                                    <label for="custom_field_import_empty<?php echo $key; ?>">Import if empty?</label>
+                                    <label for="custom_field_import_empty_<?php echo $key; ?>">Import if empty?</label>
                                 </p>
                             </div>
                         </th>

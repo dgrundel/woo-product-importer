@@ -152,7 +152,6 @@
                                 "is_taxonomy" => 0
                             );
                         }
-                        
                         break;
                 }
             }
