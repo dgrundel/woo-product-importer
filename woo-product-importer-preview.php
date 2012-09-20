@@ -104,15 +104,15 @@
             <thead>
                 <?php if($_POST['header_row'] == '1'):
                     $header_row = array_shift($import_data); ?>
-                    <tr>
-                        <th>CSV Header Row</th>
+                    <tr class="header_row">
+                        <th class="narrow">CSV Header Row</th>
                         <?php foreach($header_row as $col): ?>
                             <th><?php echo htmlspecialchars($col); ?></th>
                         <?php endforeach; ?>
                     </tr>
                 <?php endif; ?>
                 <tr>
-                    <th>Import?</th>
+                    <th class="narrow">Import?</th>
                     <?php
                         reset($import_data);
                         $first_row = current($import_data);
@@ -131,7 +131,7 @@
             <tbody>
                 <?php foreach($import_data as $row_id => $row): ?>
                     <tr>
-                        <th><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></th>
+                        <td class="narrow"><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></td>
                         <?php foreach($row as $col): ?>
                             <td><?php echo htmlspecialchars($col); ?></td>
                         <?php endforeach; ?>
