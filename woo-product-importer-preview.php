@@ -87,11 +87,13 @@
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function($){
+        $('.custom_field_settings').hide();
+        
         $("select.map_to").change(function(){
             if($(this).val() == 'custom_field') {
-                $(this).closest('th').find('.custom_field_settings').css('display', 'block');
+                $(this).closest('th').find('.custom_field_settings').show(400);
             } else {
-                $(this).closest('th').find('.custom_field_settings').css('display', 'none');
+                $(this).closest('th').find('.custom_field_settings').hide(400);
             }
         });
     });
