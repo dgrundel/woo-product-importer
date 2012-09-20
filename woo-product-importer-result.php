@@ -73,6 +73,15 @@
             foreach($row as $key => $col) {
                 $map_to = $_POST['map_to'][$key];
                 
+                //skip if the column is blank.
+                //useful when two CSV cols are mapped to the same product field.
+                //you would do this to merge two columns in your CSV into one product field.
+                if(array_key_exists($map_to, $new_post)) {
+                    if(strlen(WebPres_Woo_Product_Importer::strip_extra_whitespace($col)) == 0) {
+                        continue;
+                    }
+                }
+                
                 switch($map_to) {
                     case 'post_title':
                     case 'post_content':

@@ -35,8 +35,22 @@
             return $result;
         }
         
-        public static function woo_product_importer_clean_number($num) {
+        public static function clean_number($num) {
             return preg_replace("/[^0-9,.]/", "", $num);
+        }
+        
+        public static function strip_extra_whitespace($content) {
+            
+            $content = trim($content);
+            
+            //remove line breaks
+            $content = str_replace("\n", ' ', $content );
+            $content = str_replace("\r", ' ', $content );
+            
+            //remove repeating spaces
+            $content = preg_replace('/(?:\s\s+|\n|\t)/', ' ', $content);
+            
+            return $content;
         }
         
     }
