@@ -149,10 +149,6 @@
                                     <input type="checkbox" name="custom_field_visible[<?php echo $key; ?>]" id="custom_field_visible_<?php echo $key; ?>" value="1" checked="checked" />
                                     <label for="custom_field_visible_<?php echo $key; ?>">Visible?</label>
                                 </p>
-                                <p>
-                                    <input type="checkbox" name="custom_field_import_empty[<?php echo $key; ?>]" id="custom_field_import_empty_<?php echo $key; ?>" value="1" />
-                                    <label for="custom_field_import_empty_<?php echo $key; ?>">Import if empty?</label>
-                                </p>
                             </div>
                         </th>
                     <?php endforeach; ?>

@@ -82,10 +82,8 @@
                 //skip if the column is blank.
                 //useful when two CSV cols are mapped to the same product field.
                 //you would do this to merge two columns in your CSV into one product field.
-                if(array_key_exists($map_to, $new_post)) {
-                    if(strlen(WebPres_Woo_Product_Importer::strip_extra_whitespace($col)) == 0) {
-                        continue;
-                    }
+                if(strlen(WebPres_Woo_Product_Importer::strip_extra_whitespace($col)) == 0) {
+                    continue;
                 }
                 
                 switch($map_to) {
@@ -140,18 +138,15 @@
                         $field_name = $_POST['custom_field_name'][$key];
                         $field_slug = sanitize_title($field_name);
                         $visible = intval($_POST['custom_field_visible'][$key]);
-                        $import_empty = intval($_POST['custom_field_import_empty'][$key]);
                         
-                        if($import_empty == 1 || strlen($col) > 0) {
-                            $new_post_custom_fields[$field_slug] = array (
-                                "name" => $field_name,
-                                "value" => $col,
-                                "position" => $new_post_custom_field_count++,
-                                "is_visible" => $visible,
-                                "is_variation" => 0,
-                                "is_taxonomy" => 0
-                            );
-                        }
+                        $new_post_custom_fields[$field_slug] = array (
+                            "name" => $field_name,
+                            "value" => $col,
+                            "position" => $new_post_custom_field_count++,
+                            "is_visible" => $visible,
+                            "is_variation" => 0,
+                            "is_taxonomy" => 0
+                        );
                         break;
                 }
             }
