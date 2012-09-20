@@ -23,7 +23,7 @@
         $uploaded_file_ext = strtolower(pathinfo($_FILES['import_csv']['name'], PATHINFO_EXTENSION));
         
         //full path to uploaded file. slugifys the file name in case there are weird characters present.
-        $uploaded_file_path = $upload_dir.'/'.WebPres_Woo_Product_Importer::generate_slug(basename($_FILES['import_csv']['name'],'.'.$uploaded_file_ext)).'.'.$uploaded_file_ext;
+        $uploaded_file_path = $upload_dir.'/'.sanitize_title(basename($_FILES['import_csv']['name'],'.'.$uploaded_file_ext)).'.'.$uploaded_file_ext;
         
         if($uploaded_file_ext != 'csv') {
             $error_messages[] = 'The file extension "'.$uploaded_file_ext.'" is not allowed.';
@@ -78,10 +78,23 @@
         '_backorders' => 'Backorders',
         '_manage_stock' => 'Manage Stock',
         'product_cat' => 'Categories (By Name, Separated by "|")',
-        'product_tag' => 'Tags (By Name, Separated by "|")'
+        'product_tag' => 'Tags (By Name, Separated by "|")',
+        'custom_field' => 'Custom Field (Set Name Below)'
     );
     
 ?>
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        $("select.map_to").change(function(){
+            if($(this).val() == 'custom_field') {
+                $(this).closest('th').find('.custom_field_settings').css('display', 'block');
+            } else {
+                $(this).closest('th').find('.custom_field_settings').css('display', 'none');
+            }
+        });
+    });
+</script>
+
 <div class="woo_product_importer_wrapper wrap">
     <div id="icon-tools" class="icon32"><br /></div>
     <h2>Woo Product Importer &raquo; Preview</h2>
@@ -104,7 +117,7 @@
         
         <table class="wp-list-table widefat fixed pages" cellspacing="0">
             <thead>
-                <?php if($_POST['header_row'] == '1'):
+                <?php if(intval($_POST['header_row']) == 1):
                     $header_row = array_shift($import_data); ?>
                     <tr class="header_row">
                         <th class="narrow">CSV Header Row</th>
@@ -121,11 +134,26 @@
                         foreach($first_row as $key => $col):
                     ?>
                         <th>
-                            Map to: <select name="map_to[<?php echo $key; ?>]">
+                            Map to: <select name="map_to[<?php echo $key; ?>]" class="map_to">
                                 <?php foreach($col_mapping_options as $value => $name): ?>
                                     <option value="<?php echo $value; ?>" <?php if($header_row[$key] == $value || $header_row[$key] == $name) echo 'selected="selected"'; ?>><?php echo $name; ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            <div class="custom_field_settings">
+                                <h4>Custom Field Settings</h4>
+                                <p>
+                                    <label for="custom_field_name_<?php echo $key; ?>">Name</label>
+                                    <input type="text" name="custom_field_name[<?php echo $key; ?>]" id="custom_field_name_<?php echo $key; ?>" value="<?php echo $header_row[$key]; ?>" />
+                                </p>
+                                <p>
+                                    <input type="checkbox" name="custom_field_visible[<?php echo $key; ?>]" id="custom_field_visible_<?php echo $key; ?>" value="1" checked="checked" />
+                                    <label for="custom_field_visible_<?php echo $key; ?>">Visible?</label>
+                                </p>
+                                <p>
+                                    <input type="checkbox" name="custom_field_import_empty[<?php echo $key; ?>]" id="custom_field_import_empty_<?php echo $key; ?>" value="1" />
+                                    <label for="custom_field_import_empty<?php echo $key; ?>">Import if empty?</label>
+                                </p>
+                            </div>
                         </th>
                     <?php endforeach; ?>
                 </tr>

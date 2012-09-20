@@ -22,7 +22,7 @@
         }
         
         //discard header row
-        if($_POST['header_row'] == '1') array_shift($import_data);
+        if(intval($_POST['header_row']) == 1) array_shift($import_data);
         
         $inserted_rows = array();
         
@@ -30,7 +30,7 @@
         foreach($import_data as $row_id => $row) {
             
             //don't import if the checkbox wasn't checked
-            if($_POST['import_row'][$row_id] != '1') continue;
+            if(intval($_POST['import_row'][$row_id]) != 1) continue;
             
             //$post = array(
             //    'post_content' => [ <the text of the post> ] //The full text of the post.
@@ -64,7 +64,6 @@
             $new_post_meta['_tax_status'] = 'taxable';
             $new_post_meta['_tax_class'] = '';
             $new_post_meta['_purchase_note'] = '';
-            $new_post_meta['_product_attributes'] = 'a:0:{}';
             $new_post_meta['_downloadable'] = 'no';
             $new_post_meta['_virtual'] = 'no';
             $new_post_meta['_backorders'] = 'no';
@@ -73,6 +72,9 @@
             //this is a multidimensional array that stores tax and term ids.
             //format is: array( 'tax_name' => array(1, 3, 4), 'another_tax_name' => array(5, 9, 23) )
             $new_post_terms = array();
+            
+            $new_post_custom_fields = array();
+            $new_post_custom_field_count = 0;
             
             foreach($row as $key => $col) {
                 $map_to = $_POST['map_to'][$key];
@@ -133,11 +135,31 @@
                             }
                         }
                         break;
+                    
+                    case 'custom_field':
+                        $field_name = $_POST['custom_field_name'][$key];
+                        $field_slug = sanitize_title($field_name);
+                        $visible = intval($_POST['custom_field_visible'][$key]);
+                        $import_empty = intval($_POST['custom_field_import_empty'][$key]);
+                        
+                        if($import_empty == 1 || strlen($col) > 0) {
+                            $new_post_custom_fields[$field_slug] = array (
+                                "name" => $field_name,
+                                "value" => $col,
+                                "position" => $new_post_custom_field_count++,
+                                "is_visible" => $visible,
+                                "is_variation" => 0,
+                                "is_taxonomy" => 0
+                            );
+                        }
+                        
+                        break;
                 }
             }
             
             //set some more post_meta and parse things as appropriate
             $new_post_meta['_regular_price'] = $new_post_meta['_price'];
+            $new_post_meta['_product_attributes'] = serialize($new_post_custom_fields);
             
             if(strlen($new_post['post_title']) > 0) {
                 $new_post_id = wp_insert_post($new_post, true);

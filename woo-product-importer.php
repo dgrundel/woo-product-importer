@@ -23,18 +23,6 @@
             require_once("woo-product-importer-{$action}.php");
         }
         
-        public static function generate_slug($str, $maxLength = 50)
-        {
-            $result = strtolower($str);
-            
-            $result = preg_replace("/[^a-z0-9\s-]/", "", $result);
-            $result = trim(preg_replace("/[\s-]+/", " ", $result));
-            $result = trim(substr($result, 0, $maxLength));
-            $result = preg_replace("/\s/", "-", $result);
-            
-            return $result;
-        }
-        
         public static function clean_number($num) {
             return preg_replace("/[^0-9,.]/", "", $num);
         }
