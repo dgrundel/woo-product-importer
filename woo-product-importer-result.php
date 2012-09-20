@@ -82,7 +82,7 @@
                 //skip if the column is blank.
                 //useful when two CSV cols are mapped to the same product field.
                 //you would do this to merge two columns in your CSV into one product field.
-                if(strlen(WebPres_Woo_Product_Importer::strip_extra_whitespace($col)) == 0) {
+                if(strlen($col) == 0) {
                     continue;
                 }
                 
@@ -99,7 +99,8 @@
                     case '_regular_price':
                     case '_sale_price':
                     case '_price':
-                        $new_post_meta[$map_to] = WebPres_Woo_Product_Importer::clean_number($col);
+                        //remove any non-numeric chars except for '.'
+                        $new_post_meta[$map_to] = preg_replace("/[^0-9.]/", "", $col);
                         break;
                     
                     case '_tax_status':
