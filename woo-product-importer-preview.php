@@ -134,11 +134,13 @@
                         foreach($first_row as $key => $col):
                     ?>
                         <th>
-                            Map to: <select name="map_to[<?php echo $key; ?>]" class="map_to">
-                                <?php foreach($col_mapping_options as $value => $name): ?>
-                                    <option value="<?php echo $value; ?>" <?php if($header_row[$key] == $value || $header_row[$key] == $name) echo 'selected="selected"'; ?>><?php echo $name; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <div class="map_to_settings">
+                                Map to: <select name="map_to[<?php echo $key; ?>]" class="map_to">
+                                    <?php foreach($col_mapping_options as $value => $name): ?>
+                                        <option value="<?php echo $value; ?>" <?php if($header_row[$key] == $value || $header_row[$key] == $name) echo 'selected="selected"'; ?>><?php echo $name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
                             <div class="custom_field_settings">
                                 <h4>Custom Field Settings</h4>
                                 <p>
