@@ -86,7 +86,7 @@
                     case '_regular_price':
                     case '_sale_price':
                     case '_price':
-                        $new_post_meta[$map_to] = woo_product_importer_clean_number($col);
+                        $new_post_meta[$map_to] = $this->clean_number($col);
                         break;
                     
                     case '_tax_status':
@@ -133,6 +133,7 @@
     
 ?>
 <div class="woo_product_importer_wrapper wrap">
+    <div id="icon-tools" class="icon32"><br /></div>
     <h2>Woo Product Importer &raquo; Results</h2>
     
     <?php if(sizeof($error_messages) > 0): ?>

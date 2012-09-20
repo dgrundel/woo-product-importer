@@ -23,7 +23,7 @@
         $uploaded_file_ext = strtolower(pathinfo($_FILES['import_csv']['name'], PATHINFO_EXTENSION));
         
         //full path to uploaded file. slugifys the file name in case there are weird characters present.
-        $uploaded_file_path = $upload_dir.'/'.woo_product_importer_generate_slug(basename($_FILES['import_csv']['name'],'.'.$uploaded_file_ext)).'.'.$uploaded_file_ext;
+        $uploaded_file_path = $upload_dir.'/'.$this->generate_slug(basename($_FILES['import_csv']['name'],'.'.$uploaded_file_ext)).'.'.$uploaded_file_ext;
         
         if($uploaded_file_ext != 'csv') {
             $error_messages[] = 'The file extension "'.$uploaded_file_ext.'" is not allowed.';
@@ -80,15 +80,17 @@
     );
     
 ?>
-<?php if(sizeof($error_messages) > 0): ?>
-    <ul class="import_error_messages">
-        <?php foreach($error_messages as $message):?>
-            <li><?php echo $message; ?></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
 <div class="woo_product_importer_wrapper wrap">
+    <div id="icon-tools" class="icon32"><br /></div>
     <h2>Woo Product Importer &raquo; Preview</h2>
+    
+    <?php if(sizeof($error_messages) > 0): ?>
+        <ul class="import_error_messages">
+            <?php foreach($error_messages as $message):?>
+                <li><?php echo $message; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
     
     <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
         <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($uploaded_file_path); ?>">
