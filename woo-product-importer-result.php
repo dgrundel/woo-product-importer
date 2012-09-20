@@ -70,6 +70,8 @@
             $new_post_meta['_backorders'] = 'no';
             $new_post_meta['_manage_stock'] = 'no';
             
+            //this is a multidimensional array that stores tax and term ids.
+            //format is: array( 'tax_name' => array(1, 3, 4), 'another_tax_name' => array(5, 9, 23) )
             $new_post_terms = array();
             
             foreach($row as $key => $col) {
