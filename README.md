@@ -7,7 +7,6 @@ A simple, free CSV importer for WooCommerce
 - Import Categories and Tags (Categories and Tags are created if they don't exist)
 - Import Custom Fields
 - Set Visibility on Custom Fields
-- Only import non-empty Custom Fields
 - Map any CSV column to any Product field (No header row required, but if you happened to include one, I'll use it to take a stab at what goes where)
 - Map multiple CSV columns to one Product field (last non-empty column wins, good for merging columns)
 
