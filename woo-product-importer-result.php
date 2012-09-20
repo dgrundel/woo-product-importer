@@ -70,6 +70,8 @@
             $new_post_meta['_backorders'] = 'no';
             $new_post_meta['_manage_stock'] = 'no';
             
+            $new_post_terms = array();
+            
             foreach($row as $key => $col) {
                 $map_to = $_POST['map_to'][$key];
                 
@@ -111,6 +113,24 @@
                     case '_manage_stock':
                         $new_post_meta[$map_to] = $col;
                         break;
+                    
+                    case 'product_cat':
+                    case 'product_tag':
+                        $term_names = explode('|', $col);
+                        foreach($term_names as $term_name) {
+                            $term = get_term_by('name', $term_name, $map_to, 'ARRAY_A');
+                            
+                            //if term does not exist, try to insert it.
+                            if($term === false) {
+                                $term = wp_insert_term($term_name, $map_to);
+                            }
+                            
+                            //if we got a term, save the id so we can associate
+                            if(is_array($term)) {
+                                $new_post_terms[$map_to][] = intval($term['term_id']);
+                            }
+                        }
+                        break;
                 }
             }
             
@@ -129,8 +149,14 @@
                         'new_post_meta' => $new_post_meta
                     );
                     
+                    //set post_meta on inserted post
                     foreach($new_post_meta as $meta_key => $meta_value) {
                         update_post_meta($new_post_id, $meta_key, $meta_value);
+                    }
+                    
+                    //set post terms on inserted post
+                    foreach($new_post_terms as $tax => $term_ids) {
+                        wp_set_object_terms($new_post_id, $term_ids, $tax);
                     }
                 }
                 

@@ -76,7 +76,9 @@
         '_stock' => 'Stock',
         '_stock_status' => 'Stock Status',
         '_backorders' => 'Backorders',
-        '_manage_stock' => 'Manage Stock'
+        '_manage_stock' => 'Manage Stock',
+        'product_cat' => 'Categories (By Name, Separated by "|")',
+        'product_tag' => 'Tags (By Name, Separated by "|")'
     );
     
 ?>
