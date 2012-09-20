@@ -60,6 +60,7 @@
         'do_not_import' => 'Do Not Import',
         'post_title' => 'Name',
         'post_content' => 'Description',
+        'post_excerpt' => 'Short Description',
         '_price' => 'Price',
         '_sale_price' => 'Sale Price',
         '_tax_status' => 'Tax Status',

@@ -89,6 +89,7 @@
                 switch($map_to) {
                     case 'post_title':
                     case 'post_content':
+                    case 'post_excerpt':
                         $new_post[$map_to] = $col;
                         break;
                     
