@@ -86,6 +86,37 @@
                     continue;
                 }
                 
+                //validate col value if necessary
+                switch($map_to) {
+                    case '_downloadable':
+                    case '_virtual':
+                    case '_manage_stock':
+                    case '_featured':
+                        if(!in_array($col, array('yes', 'no'))) continue;
+                        break;
+                    
+                    case '_visibility':
+                        if(!in_array($col, array('visible', 'catalog', 'search', 'hidden'))) continue;
+                        break;
+                    
+                    case '_stock_status':
+                        if(!in_array($col, array('instock', 'outofstock'))) continue;
+                        break;
+                    
+                    case '_backorders':
+                        if(!in_array($col, array('yes', 'no', 'notify'))) continue;
+                        break;
+                    
+                    case '_tax_status':
+                        if(!in_array($col, array('taxable', 'shipping', 'none'))) continue;
+                        break;
+                    
+                    case '_product_type':
+                        if(!in_array($col, array('simple', 'variable', 'grouped', 'external'))) continue;
+                        break;
+                }
+                
+                //prepare the col value for insertion into the database
                 switch($map_to) {
                     case 'post_title':
                     case 'post_content':
