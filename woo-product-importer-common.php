@@ -20,6 +20,7 @@
     }
     
     .woo_product_importer_wrapper .custom_field_settings {
+        display: none;
         margin: 2px 0;
         padding: 4px;
         background-color: #e0e0e0;
