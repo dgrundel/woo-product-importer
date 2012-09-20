@@ -1,5 +1,4 @@
 <style type="text/css">
-    
     .woo_product_importer_wrapper form { padding: 20px 0; }
     .woo_product_importer_wrapper input { margin: 1px 0; }
     
