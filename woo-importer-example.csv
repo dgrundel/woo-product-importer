@@ -1,0 +1,4 @@
+Name,Price,Sale Price,Short Description,Description,Description,Manufacturer,Featured,Categories
+Some Widget,5,,An example product. It's featured!,A longer description of this product.,This description will override the one to the left of it.,XYZ Doohickey Company,yes,Widgets|Doohickeys
+Some Other Widget,12,8,A second example product. It's on sale!,A longer description of this product.,"Note that the Manufacturer column can be imported as a custom field. Since the Manufacturer column is blank for this product, the attribute won't be created.",,no,Widgets
+Yet Another Widget,14,,A third example product made by someone else.,A longer description of this product.,,"Acme, Inc.",no,Doohickeys

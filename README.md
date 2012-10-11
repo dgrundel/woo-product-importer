@@ -3,6 +3,8 @@ woo-product-importer
 
 A simple, free CSV importer for WooCommerce
 
+A sample CSV file is now included to help you get started. (woo-importer-example.csv)
+
 Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 
 **Cool Stuff It/You Can Do**
@@ -13,6 +15,9 @@ Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 - Map multiple CSV columns to one Product field (last non-empty column wins, good for merging columns)
 - Basic validation for multiple-choice fields (fields with a limited set of valid values like yes/no, instock/outofstock, etc.)
 - Dollar signs, commas, etc. are stripped out of number fields like prices, weight, length, width, height
+
+**Coming Soon**
+- Image import via URL
 
 **Full List of Importable Attributes**
 - post_title (Name)
@@ -35,8 +40,8 @@ Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 - _stock_status (Stock Status)
 - _backorders (Backorders)
 - _manage_stock (Manage Stock)
-- product_cat (Categories (By Name Separated by "|"))
-- product_tag (Tags (By Name Separated by "|"))
+- product_cat (Categories (By Name, Separated by "|"))
+- product_tag (Tags (By Name, Separated by "|"))
 - Custom Fields
 
 More information on our blog:
