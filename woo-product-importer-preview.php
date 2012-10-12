@@ -89,10 +89,17 @@
 <script type="text/javascript">
     jQuery(document).ready(function($){
         $("select.map_to").change(function(){
+            
             if($(this).val() == 'custom_field') {
                 $(this).closest('th').find('.custom_field_settings').show(400);
             } else {
                 $(this).closest('th').find('.custom_field_settings').hide(400);
+            }
+            
+            if($(this).val() == 'product_image') {
+                $(this).closest('th').find('.product_image_settings').show(400);
+            } else {
+                $(this).closest('th').find('.product_image_settings').hide(400);
             }
         });
     });
@@ -153,6 +160,13 @@
                                 <p>
                                     <input type="checkbox" name="custom_field_visible[<?php echo $key; ?>]" id="custom_field_visible_<?php echo $key; ?>" value="1" checked="checked" />
                                     <label for="custom_field_visible_<?php echo $key; ?>">Visible?</label>
+                                </p>
+                            </div>
+                            <div class="product_image_settings">
+                                <h4>Image Settings</h4>
+                                <p>
+                                    <input type="checkbox" name="product_image_set_featured[<?php echo $key; ?>]" id="product_image_set_featured_<?php echo $key; ?>" value="1" checked="checked" />
+                                    <label for="product_image_set_featured_<?php echo $key; ?>">Set First Image as Featured</label>
                                 </p>
                             </div>
                         </th>

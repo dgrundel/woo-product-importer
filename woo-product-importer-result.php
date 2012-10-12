@@ -223,7 +223,7 @@
                     //grab product images
                     $wp_upload_dir = wp_upload_dir();
                     
-                    foreach($new_post_images as $image_url) {
+                    foreach($new_post_images as $image_index => $image_url) {
                         
                         $parsed_url = parse_url($image_url);
                         $pathinfo = pathinfo($parsed_url['path']);
@@ -284,12 +284,16 @@
                             'post_content' => '',
                             'post_status' => 'inherit'
                         );
-                        $attach_id = wp_insert_attachment( $attachment, $dest_path, $new_post_id );
+                        $attachment_id = wp_insert_attachment( $attachment, $dest_path, $new_post_id );
                         // you must first include the image.php file
                         // for the function wp_generate_attachment_metadata() to work
                         require_once(ABSPATH . 'wp-admin/includes/image.php');
-                        $attach_data = wp_generate_attachment_metadata( $attach_id, $dest_path );
-                        wp_update_attachment_metadata( $attach_id, $attach_data );
+                        $attach_data = wp_generate_attachment_metadata( $attachment_id, $dest_path );
+                        wp_update_attachment_metadata( $attachment_id, $attach_data );
+                        
+                        if($image_index == 0 && intval($_POST['product_image_set_featured'][$key]) == 1) {
+                            update_post_meta($new_post_id, '_thumbnail_id', $attachment_id);
+                        }
                     }
                 }
                 
