@@ -8,6 +8,8 @@ A sample CSV file is now included to help you get started. (woo-importer-example
 Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 
 **Cool Stuff It/You Can Do**
+- Import Images via a URL
+- Set Featured Image
 - Import Categories and Tags (Categories and Tags are created if they don't exist)
 - Import Custom Fields
 - Set Visibility on Custom Fields
@@ -15,9 +17,6 @@ Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 - Map multiple CSV columns to one Product field (last non-empty column wins, good for merging columns)
 - Basic validation for multiple-choice fields (fields with a limited set of valid values like yes/no, instock/outofstock, etc.)
 - Dollar signs, commas, etc. are stripped out of number fields like prices, weight, length, width, height
-
-**Coming Soon**
-- Image import via URL
 
 **Full List of Importable Attributes**
 - post_title (Name)
