@@ -76,6 +76,8 @@
             $new_post_custom_fields = array();
             $new_post_custom_field_count = 0;
             
+            $new_post_images = array();
+            
             foreach($row as $key => $col) {
                 $map_to = $_POST['map_to'][$key];
                 
@@ -181,6 +183,14 @@
                             "is_taxonomy" => 0
                         );
                         break;
+                    
+                    case 'product_image':
+                        $image_urls = explode('|', $col);
+                        if(is_array($image_urls)) {
+                            $new_post_images = array_merge($new_post_images, $image_urls);
+                        }
+                        
+                        break;
                 }
             }
             
@@ -208,6 +218,78 @@
                     //set post terms on inserted post
                     foreach($new_post_terms as $tax => $term_ids) {
                         wp_set_object_terms($new_post_id, $term_ids, $tax);
+                    }
+                    
+                    //grab product images
+                    $wp_upload_dir = wp_upload_dir();
+                    
+                    foreach($new_post_images as $image_url) {
+                        
+                        $parsed_url = parse_url($image_url);
+                        $pathinfo = pathinfo($parsed_url['path']);
+                        
+                        //If our 'image' file doesn't have an image file extension, skip it.
+                        $allowed_extensions = array('jpg', 'jpeg', 'gif', 'png');
+                        $image_ext = strtolower($pathinfo['extension']);
+                        if(!in_array($image_ext, $allowed_extensions)) {
+                            $error_messages[] = "A valid file extension wasn't found in '$image_url'. Extension found was '$image_ext'. Allowed extensions are: ".implode(',', $allowed_extensions);
+                            continue;
+                        }
+                        
+                        //figure out where we're putting this thing.
+                        $dest_filename = wp_unique_filename( $wp_upload_dir['path'], $pathinfo['basename'] );
+                        $dest_path = $wp_upload_dir['path'] . '/' . $dest_filename;
+                        $dest_url = $wp_upload_dir['url'] . '/' . $dest_filename;
+                        
+                        //download the image to our local server.
+                        // if allow_url_fopen is enabled, we'll use that. Otherwise, we'll try cURL
+                        if(ini_get('allow_url_fopen')) {
+                            copy($image_url, $dest_path);
+                            
+                        } elseif(function_exists('curl_init')) {
+                            $ch = curl_init($image_url);
+                            $fp = fopen($dest_path, "wb");
+                            
+                            $options = array(
+                                CURLOPT_FILE => $fp,
+                                CURLOPT_HEADER => 0,
+                                CURLOPT_FOLLOWLOCATION => 1,
+                                CURLOPT_TIMEOUT => 60); // in seconds
+                            
+                            curl_setopt_array($ch, $options);
+                            curl_exec($ch);
+                            curl_close($ch);
+                            fclose($fp);
+                        } else {
+                            //well, damn. no joy, as they say.
+                            $error_messages[] = "Looks like allow_url_fopen is off and cURL is not enabled. No images were imported.";
+                            break;
+                        }
+                        
+                        //make sure we actually got the file.
+                        if(!file_exists($dest_path)) {
+                            $error_messages[] = "Couldn't download file from '$image_url'.";
+                            continue;
+                        }
+                        
+                        //whew. are we there yet?
+                        
+                        //add a post of type 'attachment' so this item shows up in the WP Media Library.
+                        //our imported product will be the post's parent.
+                        $wp_filetype = wp_check_filetype($dest_path);
+                        $attachment = array(
+                            'guid' => $dest_url, 
+                            'post_mime_type' => $wp_filetype['type'],
+                            'post_title' => preg_replace('/\.[^.]+$/', '', $dest_filename),
+                            'post_content' => '',
+                            'post_status' => 'inherit'
+                        );
+                        $attach_id = wp_insert_attachment( $attachment, $dest_path, $new_post_id );
+                        // you must first include the image.php file
+                        // for the function wp_generate_attachment_metadata() to work
+                        require_once(ABSPATH . 'wp-admin/includes/image.php');
+                        $attach_data = wp_generate_attachment_metadata( $attach_id, $dest_path );
+                        wp_update_attachment_metadata( $attach_id, $attach_data );
                     }
                 }
                 

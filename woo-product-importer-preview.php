@@ -81,7 +81,8 @@
         '_product_type' => 'Product Type (Valid: simple/variable/grouped/external)',
         'product_cat' => 'Categories (By Name, Separated by "|")',
         'product_tag' => 'Tags (By Name, Separated by "|")',
-        'custom_field' => 'Custom Field (Set Name Below)'
+        'custom_field' => 'Custom Field (Set Name Below)',
+        'product_image' => 'Images (By URL, Separated by "|")'
     );
     
 ?>
