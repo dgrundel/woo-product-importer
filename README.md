@@ -42,6 +42,7 @@ Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 - product_cat (Categories (By Name, Separated by "|"))
 - product_tag (Tags (By Name, Separated by "|"))
 - Custom Fields
+- Product Images (By URL, Separated by "|")
 
 More information on our blog:
 http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
