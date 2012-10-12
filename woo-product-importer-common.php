@@ -19,7 +19,7 @@
         overflow: hidden;
     }
     
-    .woo_product_importer_wrapper .custom_field_settings {
+    .woo_product_importer_wrapper .field_settings {
         display: none;
         margin: 2px 0;
         padding: 4px;
@@ -28,18 +28,18 @@
         -moz-border-radius: 3px;
         border-radius: 3px;
     }
-    .woo_product_importer_wrapper .custom_field_settings h4 {
+    .woo_product_importer_wrapper .field_settings h4 {
         margin: 0;
         font-size: 0.9em;
         line-height: 1.2em;
     }
-    .woo_product_importer_wrapper .custom_field_settings p {
+    .woo_product_importer_wrapper .field_settings p {
         margin: 4px 0;
         overflow: hidden;
         font-size: .9em;
         line-height: 1.3em;
     }
-    .woo_product_importer_wrapper .custom_field_settings input[type="text"] { width: 98%; }
+    .woo_product_importer_wrapper .field_settings input[type="text"] { width: 98%; }
     
     .woo_product_importer_wrapper .import_error_messages {
         margin: 6px 0;

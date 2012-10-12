@@ -151,7 +151,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="custom_field_settings">
+                            <div class="custom_field_settings field_settings">
                                 <h4>Custom Field Settings</h4>
                                 <p>
                                     <label for="custom_field_name_<?php echo $key; ?>">Name</label>
@@ -162,7 +162,7 @@
                                     <label for="custom_field_visible_<?php echo $key; ?>">Visible?</label>
                                 </p>
                             </div>
-                            <div class="product_image_settings">
+                            <div class="product_image_settings field_settings">
                                 <h4>Image Settings</h4>
                                 <p>
                                     <input type="checkbox" name="product_image_set_featured[<?php echo $key; ?>]" id="product_image_set_featured_<?php echo $key; ?>" value="1" checked="checked" />
