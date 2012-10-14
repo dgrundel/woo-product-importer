@@ -60,14 +60,6 @@
             //don't import if the checkbox wasn't checked
             if(intval($post_data['import_row'][$row_id]) != 1) continue;
             
-            //$post = array(
-            //    'post_content' => [ <the text of the post> ] //The full text of the post.
-            //    'post_status' => 'publish' //Set the status of the new post. 
-            //    'post_title' => [ <the title> ] //The title of your post.
-            //    'post_type' => 'product' //You may want to insert a regular post, page, link, a menu item or some custom post type
-            //    'tax_input' => [ array( 'taxonomy_name' => array( 'term', 'term2', 'term3' ) ) ] // support for custom taxonomies. 
-            //  );  
-            
             //set some initial post values
             $new_post = array();
             $new_post['post_type'] = 'product';
