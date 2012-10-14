@@ -52,8 +52,11 @@
         }
         
         if(sizeof($import_data) == 0) {
-            $error_messages[] = 'No data imported.';
+            $error_messages[] = 'No data to import.';
         }
+        
+        if(intval($_POST['header_row']) == 1)
+            $header_row = array_shift($import_data);
     }
     
     $col_mapping_options = array(
@@ -120,6 +123,7 @@
     <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
         <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($uploaded_file_path); ?>">
         <input type="hidden" name="header_row" value="<?php echo $_POST['header_row']; ?>">
+        <input type="hidden" name="row_count" value="<?php echo sizeof($import_data); ?>">
         <input type="hidden" name="limit" value="5">
         
         <p>
@@ -128,8 +132,7 @@
         
         <table class="wp-list-table widefat fixed pages" cellspacing="0">
             <thead>
-                <?php if(intval($_POST['header_row']) == 1):
-                    $header_row = array_shift($import_data); ?>
+                <?php if(intval($_POST['header_row']) == 1): ?>
                     <tr class="header_row">
                         <th class="narrow">CSV Header Row</th>
                         <?php foreach($header_row as $col): ?>

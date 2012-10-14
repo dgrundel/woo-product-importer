@@ -104,11 +104,11 @@
                 </tr>
                 <tr>
                     <th>Remaining</th>
-                    <td id="remaining_count">Unknown</td>
+                    <td id="remaining_count"><?php echo $_POST['row_count']; ?></td>
                 </tr>
                 <tr>
                     <th>Total</th>
-                    <td id="row_count">Unknown</td>
+                    <td id="row_count"><?php echo $_POST['row_count']; ?></td>
                 </tr>
             </tbody>
         </table>
