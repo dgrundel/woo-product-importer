@@ -1,14 +1,15 @@
 woo-product-importer
 ====================
 
-A simple, free CSV importer for WooCommerce
+A simple, free CSV importer for WooCommerce.
 
-A sample CSV file is now included to help you get started. (woo-importer-example.csv)
+A sample CSV file is included to help you get started. (woo-importer-example.csv)
 
 Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 
 **Cool Stuff It/You Can Do**
-- Import Images via a URL
+- AJAXy Importing (avoids timing out on large data sets)
+- Import Images via a URL (Requires allow_url_fopen or cURL on your server)
 - Set Featured Image
 - Import Categories and Tags (Categories and Tags are created if they don't exist)
 - Import Custom Fields
