@@ -44,9 +44,14 @@
                     tr.addClass("fail");
                 }
                 
+                var post_link = $(document.createElement("a"));
+                post_link.attr("target", "_blank");
+                post_link.attr("href", "<?php echo get_admin_url(); ?>post.php?post=" + response.inserted_rows[row_num]['post_id'] + "&action=edit");
+                post_link.text(response.inserted_rows[row_num]['post_id']);
+                
                 tr.append($(document.createElement("td")).append($(document.createElement("span")).addClass("icon")));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['row_id']));
-                tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['post_id']));
+                tr.append($(document.createElement("td")).append(post_link));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['name']));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['price']));
                 
