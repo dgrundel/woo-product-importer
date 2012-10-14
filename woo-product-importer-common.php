@@ -43,11 +43,34 @@
     
     .woo_product_importer_wrapper .import_error_messages {
         margin: 6px 0;
+        padding: 0;
+    }
+    
+    .woo_product_importer_wrapper .import_error_messages li {
+        margin: 2px 0;
         padding: 4px;
         background-color: #f9dede;
         border: 1px solid #ff8e8e;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
         border-radius: 4px;
+    }
+    
+    .woo_product_importer_wrapper #import_status {
+        padding: 8px 8px 8px 82px;
+        min-height: 66px;
+        position: relative;
+        margin: 6px 0;
+        background-color: #fff5d1;
+        border: 1px solid #ffc658;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+    
+    .woo_product_importer_wrapper #import_status #ajax_loader {
+        position: absolute;
+        top: 8px;
+        left: 8px;
     }
 </style>

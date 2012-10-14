@@ -330,8 +330,9 @@
     }
     
     echo json_encode(array(
-        'insert_count' => sizeof($inserted_rows),
         'remaining_count' => $rows_remaining,
+        'row_count' => $row_count,
+        'insert_count' => ($row_count - $rows_remaining),
         'inserted_rows' => $inserted_rows,
         'error_messages' => $error_messages,
         'limit' => $limit,
