@@ -1,6 +1,6 @@
 <script type="text/javascript">
     jQuery(document).ready(function($){
-        doAjaxImport(<?php echo intval($_POST['limit']); ?>, <?php echo (intval($_POST['offset']) + intval($_POST['limit'])); ?>);
+        doAjaxImport(<?php echo intval($_POST['limit']); ?>, 0);
         
         function doAjaxImport(limit, offset) {
             var data = {
@@ -33,9 +33,29 @@
             //show inserted rows
             for(var row_num in response.inserted_rows) {
                 var tr = $(document.createElement("tr"));
-                tr.append($(document.createElement("td")).text(row_num));
-                tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['new_post']['post_title']));
-                tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['new_post_meta']['_price']));
+                
+                if(response.inserted_rows[row_num]['success'] == true) {
+                    if(response.inserted_rows[row_num]['has_errors'] == true) {
+                        tr.addClass("error");
+                    } else {
+                        tr.addClass("success");
+                    }
+                } else {
+                    tr.addClass("fail");
+                }
+                
+                tr.append($(document.createElement("td")).append($(document.createElement("span")).addClass("icon")));
+                tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['row_id']));
+                tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['post_id']));
+                tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['name']));
+                tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['price']));
+                
+                if(response.inserted_rows[row_num]['has_errors'] == true) {
+                    tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['errors'].join("<br>")));
+                } else {
+                    tr.append($(document.createElement("td")).text("No errors."));
+                }
+                
                 tr.appendTo("#inserted_rows tbody");
             }
             
@@ -47,6 +67,8 @@
             //move on to the next set!
             if(parseInt(response.remaining_count) > 0) {
                 doAjaxImport(response.limit, response.new_offset);
+            } else {
+                $("#import_status").addClass("complete");
             }
         }
     });
@@ -60,12 +82,19 @@
     </ul>
     
     <div id="import_status">
-        <img id="ajax_loader"
-            src="<?php echo plugin_dir_url(__FILE__); ?>img/ajax-loader.gif"
-            alt="Importing. Please do not close this window or click your browser's stop button."
-            title="Importing. Please do not close this window or click your browser's stop button.">
-        
-        <strong>Importing. Please do not close this window or click your browser's stop button.</strong>
+        <div id="import_in_progress">
+            <img src="<?php echo plugin_dir_url(__FILE__); ?>img/ajax-loader.gif"
+                alt="Importing. Please do not close this window or click your browser's stop button."
+                title="Importing. Please do not close this window or click your browser's stop button.">
+            
+            <strong>Importing. Please do not close this window or click your browser's stop button.</strong>
+        </div>
+        <div id="import_complete">
+            <img src="<?php echo plugin_dir_url(__FILE__); ?>img/complete.png"
+                alt="Import complete!"
+                title="Import complete!">
+            <strong>Import Complete! Results below.</strong>
+        </div>
         
         <table>
             <tbody>
@@ -88,9 +117,12 @@
     <table id="inserted_rows" class="wp-list-table widefat fixed pages" cellspacing="0">
         <thead>
             <tr>
-                <th>Post ID</th>
+                <th style="width: 30px;"></th>
+                <th style="width: 80px;">CSV Row</th>
+                <th style="width: 80px;">New Post ID</th>
                 <th>Name</th>
-                <th>Price</th>
+                <th style="width: 120px;">Price</th>
+                <th>Result</th>
             </tr>
         </thead>
         <tbody><!-- rows inserted via AJAX --></tbody>
@@ -100,6 +132,6 @@
     
     <p id="credits">
         Woo Product Importer was created by Daniel Grundel of <a href="http://webpresencepartners.com">Web Presence Partners</a>.<br>
-        ajax-loader.gif courtesy of <a href="http://ajaxload.info">ajaxload.info</a>. All other icons are from the <a href="http://www.famfamfam.com/lab/icons/silk/">Silk icon set</a> by Mark James.
+        ajax-loader.gif courtesy of <a href="http://ajaxload.info">ajaxload.info</a>. The gigantic checkmark is public domain. All other icons are from the <a href="http://www.famfamfam.com/lab/icons/silk/">Silk icon set</a> by Mark James.
     </p>
 </div>

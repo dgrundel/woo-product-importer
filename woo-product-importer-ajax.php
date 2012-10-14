@@ -48,7 +48,7 @@
             $import_data = array_slice($import_data, $offset , ($limit > 0 ? $limit : null), true);
         }
         
-        $rows_remaining = $row_count - ($offset + $limit);
+        $rows_remaining = ($row_count - ($offset + $limit)) > 0 ? ($row_count - ($offset + $limit)) : 0;
         
         $inserted_rows = array();
         
@@ -103,6 +103,10 @@
             $new_post_custom_field_count = 0;
             
             $new_post_images = array();
+            
+            $new_post_errors = array();
+            
+            $new_post_insert_success = false;
             
             foreach($row as $key => $col) {
                 $map_to = $post_data['map_to'][$key];
@@ -228,13 +232,10 @@
                 $new_post_id = wp_insert_post($new_post, true);
                 
                 if(is_wp_error($new_post_id)) {
-                    $error_messages[] = 'Couldn\'t insert product with name "'.$new_post['post_title'].'".';
+                    $new_post_errors[] = 'Couldn\'t insert product with name "'.$new_post['post_title'].'".';
                 } else {
-                    //insert successful
-                    $inserted_rows[$new_post_id] = array(
-                        'new_post' => $new_post,
-                        'new_post_meta' => $new_post_meta
-                    );
+                    //insert successful!
+                    $new_post_insert_success = true;
                     
                     //set post_meta on inserted post
                     foreach($new_post_meta as $meta_key => $meta_value) {
@@ -258,7 +259,7 @@
                         $allowed_extensions = array('jpg', 'jpeg', 'gif', 'png');
                         $image_ext = strtolower($pathinfo['extension']);
                         if(!in_array($image_ext, $allowed_extensions)) {
-                            $error_messages[] = "A valid file extension wasn't found in '$image_url'. Extension found was '$image_ext'. Allowed extensions are: ".implode(',', $allowed_extensions);
+                            $new_post_errors[] = "A valid file extension wasn't found in '$image_url'. Extension found was '$image_ext'. Allowed extensions are: ".implode(',', $allowed_extensions);
                             continue;
                         }
                         
@@ -270,7 +271,7 @@
                         //download the image to our local server.
                         // if allow_url_fopen is enabled, we'll use that. Otherwise, we'll try cURL
                         if(ini_get('allow_url_fopen')) {
-                            copy($image_url, $dest_path);
+                            @copy($image_url, $dest_path);
                             
                         } elseif(function_exists('curl_init')) {
                             $ch = curl_init($image_url);
@@ -294,7 +295,7 @@
                         
                         //make sure we actually got the file.
                         if(!file_exists($dest_path)) {
-                            $error_messages[] = "Couldn't download file from '$image_url'.";
+                            $new_post_errors[] = "Couldn't download file from '$image_url'.";
                             continue;
                         }
                         
@@ -324,8 +325,18 @@
                 }
                 
             } else {
-                $error_messages[] = 'Skipped import of product without a name';
+                $new_post_errors[] = 'Skipped import of product without a name';
             }
+            
+            $inserted_rows[] = array(
+                'row_id' => $row_id,
+                'post_id' => $new_post_id ? $new_post_id : '',
+                'name' => $new_post['post_title'] ? $new_post['post_title'] : '',
+                'price' => $new_post_meta['_price'] ? $new_post_meta['_price'] : '',
+                'has_errors' => (sizeof($new_post_errors) > 0),
+                'errors' => $new_post_errors,
+                'success' => $new_post_insert_success
+            );
         }
     }
     
