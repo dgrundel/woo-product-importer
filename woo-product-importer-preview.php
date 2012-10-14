@@ -185,9 +185,5 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
-        <p>
-            <button class="button-primary" type="submit">Import</button>
-        </p>
     </form>
 </div>
