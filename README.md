@@ -50,5 +50,13 @@ Here's a look at the preview/column mapping screen:
 - Custom Fields
 - Product Images (By URL, Separated by "|")
 
+**Not Supported (Yet)**
+- Product types other than Simple Products
+- Image import via a local file path
+- Custom taxonomies
+- Attributes (and Global Attributes)
+
+If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, *cough* *cough* you could hire us!
+
 More information on our blog:
 http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/

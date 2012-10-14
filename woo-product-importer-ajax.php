@@ -29,29 +29,32 @@
             }
             fclose( $handle );
         } else {
-            $error_messages[] = 'Could not open file.';
+            $error_messages[] = 'Could not open CSV file.';
         }
         
         if(sizeof($import_data) == 0) {
-            $error_messages[] = 'No data imported.';
+            $error_messages[] = 'No data found in CSV file.';
         }
         
-        //discard header row
+        //discard header row from data set, if we have one
         if(intval($post_data['header_row']) == 1) array_shift($import_data);
         
+        //total size of data to import (not just what we're doing on this pass)
         $row_count = sizeof($import_data);
         
-        //respect limit and offset params
+        //slice down our data based on limit and offset params
         $limit = intval($post_data['limit']);
         $offset = intval($post_data['offset']);
         if($limit > 0 || $offset > 0) {
             $import_data = array_slice($import_data, $offset , ($limit > 0 ? $limit : null), true);
         }
         
+        //a few stats about the current operation to send back to the browser.
         $rows_remaining = ($row_count - ($offset + $limit)) > 0 ? ($row_count - ($offset + $limit)) : 0;
         $insert_count = ($row_count - $rows_remaining);
         $insert_percent = number_format(($insert_count / $row_count) * 100, 1);
         
+        //array that will be sent back to the browser with info about what we inserted.
         $inserted_rows = array();
         
         //this is where the fun begins
@@ -59,6 +62,9 @@
             
             //don't import if the checkbox wasn't checked
             if(intval($post_data['import_row'][$row_id]) != 1) continue;
+            
+            //unset new_post_id
+            $new_post_id = null;
             
             //set some initial post values
             $new_post = array();
@@ -89,17 +95,22 @@
             $new_post_meta['_backorders'] = 'no';
             $new_post_meta['_manage_stock'] = 'no';
             
-            //this is a multidimensional array that stores tax and term ids.
+            //stores tax and term ids so we can associate our product with terms and taxonomies
+            //this is a multidimensional array
             //format is: array( 'tax_name' => array(1, 3, 4), 'another_tax_name' => array(5, 9, 23) )
             $new_post_terms = array();
             
+            //a list of woocommerce "custom fields" to be added to product.
             $new_post_custom_fields = array();
             $new_post_custom_field_count = 0;
             
+            //a list of image URLs to be downloaded.
             $new_post_images = array();
             
+            //keep track of any errors generated during post insert or image downloads.
             $new_post_errors = array();
             
+            //track whether or not the post was actually inserted.
             $new_post_insert_success = false;
             
             foreach($row as $key => $col) {
@@ -223,6 +234,7 @@
             $new_post_meta['_product_attributes'] = serialize($new_post_custom_fields);
             
             if(strlen($new_post['post_title']) > 0) {
+                //try to insert our new product into the database!
                 $new_post_id = wp_insert_post($new_post, true);
                 
                 if(is_wp_error($new_post_id)) {
@@ -241,14 +253,18 @@
                         wp_set_object_terms($new_post_id, $term_ids, $tax);
                     }
                     
-                    //grab product images
+                    //figure out where the uploads folder lives
                     $wp_upload_dir = wp_upload_dir();
                     
+                    //grab product images
                     foreach($new_post_images as $image_index => $image_url) {
                         
                         //convert space chars into their hex equivalent.
+                        //thanks to github user 'becasual' for submitting this change
                         $image_url = str_replace(' ', '%20', $image_url);
                         
+                        //do some parsing on the image url so we can take a look at
+                        //its file extension and file name
                         $parsed_url = parse_url($image_url);
                         $pathinfo = pathinfo($parsed_url['path']);
                         
@@ -268,6 +284,7 @@
                         //download the image to our local server.
                         // if allow_url_fopen is enabled, we'll use that. Otherwise, we'll try cURL
                         if(ini_get('allow_url_fopen')) {
+                            //attempt to copy() file show error on failure.
                             if( ! @copy($image_url, $dest_path)) {
                                 $http_status = $http_response_header[0];
                                 $new_post_errors[] = "'{$http_status}' encountered while attempting to download '$image_url'.";
@@ -325,6 +342,8 @@
                         $attach_data = wp_generate_attachment_metadata( $attachment_id, $dest_path );
                         wp_update_attachment_metadata( $attachment_id, $attach_data );
                         
+                        //set the image as featured if it is the first image in the set AND
+                        //the user checked the box on the preview page.
                         if($image_index == 0 && intval($post_data['product_image_set_featured'][$key]) == 1) {
                             update_post_meta($new_post_id, '_thumbnail_id', $attachment_id);
                         }
@@ -332,14 +351,16 @@
                 }
                 
             } else {
-                $new_post_id = null;
                 $new_post_errors[] = 'Skipped import of product without a name';
             }
             
+            //this is returned back to the results page.
+            //any fields that should show up in results should be added to this array.
             $inserted_rows[] = array(
                 'row_id' => $row_id,
                 'post_id' => $new_post_id ? $new_post_id : '',
                 'name' => $new_post['post_title'] ? $new_post['post_title'] : '',
+                'sku' => $new_post_meta['_sku'] ? $new_post_meta['_sku'] : '',
                 'price' => $new_post_meta['_price'] ? $new_post_meta['_price'] : '',
                 'has_errors' => (sizeof($new_post_errors) > 0),
                 'errors' => $new_post_errors,

@@ -53,6 +53,7 @@
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['row_id']));
                 tr.append($(document.createElement("td")).append(post_link));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['name']));
+                tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['sku']));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['price']));
                 
                 if(response.inserted_rows[row_num]['has_errors'] == true) {
@@ -126,6 +127,7 @@
                 <th style="width: 80px;">CSV Row</th>
                 <th style="width: 80px;">New Post ID</th>
                 <th>Name</th>
+                <th>SKU</th>
                 <th style="width: 120px;">Price</th>
                 <th>Result</th>
             </tr>
