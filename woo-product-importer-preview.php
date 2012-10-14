@@ -120,6 +120,7 @@
     <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
         <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($uploaded_file_path); ?>">
         <input type="hidden" name="header_row" value="<?php echo $_POST['header_row']; ?>">
+        <input type="hidden" name="limit" value="5">
         
         <p>
             <button class="button-primary" type="submit">Import</button>

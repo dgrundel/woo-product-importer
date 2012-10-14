@@ -1,16 +1,18 @@
 <?php
     $post_data = array(
-        'ajax' => $_POST['ajax'],
         'uploaded_file_path' => $_POST['uploaded_file_path'],
         'header_row' => $_POST['header_row'],
         'limit' => $_POST['limit'],
         'offset' => $_POST['offset'],
-        'import_row' => maybe_unserialize($_POST['import_row']),
-        'map_to' => maybe_unserialize($_POST['map_to']),
-        'custom_field_name' => maybe_unserialize($_POST['custom_field_name']),
-        'custom_field_visible' => maybe_unserialize($_POST['custom_field_visible']),
-        'product_image_set_featured' => maybe_unserialize($_POST['product_image_set_featured'])
+        'import_row' => maybe_unserialize(stripslashes($_POST['import_row'])),
+        'map_to' => maybe_unserialize(stripslashes($_POST['map_to'])),
+        'custom_field_name' => maybe_unserialize(stripslashes($_POST['custom_field_name'])),
+        'custom_field_visible' => maybe_unserialize(stripslashes($_POST['custom_field_visible'])),
+        'product_image_set_featured' => maybe_unserialize(stripslashes($_POST['product_image_set_featured']))
     );
+    
+    //var_dump($post_data);
+    //var_dump($_POST['custom_field_name']);
     
     if(isset($post_data['uploaded_file_path'])) {
         
@@ -327,98 +329,11 @@
         }
     }
     
-    if($rows_remaining > 0): ?>
-        
-        <script type="text/javascript">
-            jQuery(document).ready(function($){
-                doAjaxImport(<?php echo json_encode($post_data['limit']); ?>, <?php echo json_encode($offset + $limit); ?>);
-                
-                function doAjaxImport(limit, offset) {
-                    var data = {
-                        "action": "woo-product-importer-ajax",
-                        "uploaded_file_path": <?php echo json_encode($post_data['uploaded_file_path']); ?>,
-                        "header_row": <?php echo json_encode($post_data['header_row']); ?>,
-                        "limit": limit,
-                        "offset": offset,
-                        "import_row": '<?php echo (serialize($post_data['import_row'])); ?>',
-                        "map_to": '<?php echo (serialize($post_data['map_to'])); ?>',
-                        "custom_field_name": '<?php echo (serialize($post_data['custom_field_name'])); ?>',
-                        "custom_field_visible": '<?php echo (serialize($post_data['custom_field_visible'])); ?>',
-                        "product_image_set_featured": '<?php echo (serialize($post_data['product_image_set_featured'])); ?>'
-                    };
-                    
-                    //ajaxurl is defined by WordPress
-                    $.post(ajaxurl, data, ajaxImportCallback);
-                }
-                
-                function ajaxImportCallback(response_text) {
-                    
-                    $("#debug").append($(document.createElement("p")).text(response_text));
-                    
-                    var response = jQuery.parseJSON(response_text);
-                    
-                    $("#insert_count").text(response.insert_count);
-                    $("#remaining_count").text(response.remaining_count);
-                    
-                    //show inserted rows
-                    for(var row_num in response.inserted_rows) {
-                        var tr = $(document.createElement("tr"));
-                        tr.append($(document.createElement("td")).text(row_num));
-                        tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['new_post']['post_title']));
-                        tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['new_post_meta']['_price']));
-                        tr.appendTo("#inserted_rows");
-                    }
-                    
-                    //show error messages
-                    for(var message in response.error_messages) {
-                        $(document.createElement("li")).text(response.error_messages[message]).appendTo(".import_error_messages");
-                    }
-                    
-                    //move on to the next set!
-                    if(parseInt(response.remaining_count) > 0) {
-                        doAjaxImport(response.limit, response.new_offset);
-                    }
-                }
-            });
-        </script>
-        
-    <?php endif; ?>
-    
-    <div class="woo_product_importer_wrapper wrap">
-        <div id="icon-tools" class="icon32"><br /></div>
-        <h2>Woo Product Importer &raquo; Results</h2>
-        
-        <?php if(sizeof($error_messages) > 0): ?>
-            <ul class="import_error_messages">
-                <?php foreach($error_messages as $message):?>
-                    <li><?php echo $message; ?></li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-        
-        <p>Inserted <span id="insert_count"><?php echo sizeof($inserted_rows); ?></span> of <?php echo $row_count; ?> row(s) successfully.<br>
-            <span id="remaining_count"><?php echo $rows_remaining; ?></span> row(s) remaining.</p>
-        
-        <table id="inserted_rows" class="wp-list-table widefat fixed pages" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Post ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($inserted_rows as $id => $data): ?>
-                    <tr>
-                        <td><?php echo $id; ?></td>
-                        <td><?php echo $data['new_post']['post_title']; ?></td>
-                        <td><?php echo $data['new_post_meta']['_price']; ?></td>
-                    </tr>
-                <?php endforeach;?>
-            </tbody>
-        </table>
-        
-        <div id="debug">
-            
-        </div>
-    </div>
+    echo json_encode(array(
+        'insert_count' => sizeof($inserted_rows),
+        'remaining_count' => $rows_remaining,
+        'inserted_rows' => $inserted_rows,
+        'error_messages' => $error_messages,
+        'limit' => $limit,
+        'new_offset' => ($limit + $offset)
+    ));
