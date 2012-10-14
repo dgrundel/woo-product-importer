@@ -104,7 +104,7 @@
         <table>
             <tbody>
                 <tr>
-                    <th>Inserted</th>
+                    <th>Processed</th>
                     <td id="insert_count">0</td>
                 </tr>
                 <tr>
