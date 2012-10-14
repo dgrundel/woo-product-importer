@@ -3,6 +3,8 @@ woo-product-importer
 
 A simple, free CSV importer for WooCommerce.
 
+![Import Complete Screenshot](http://webpresencepartners.com/wp-content/uploads/2012/10/complete.png)
+
 A sample CSV file is included to help you get started. (woo-importer-example.csv)
 
 Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
