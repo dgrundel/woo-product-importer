@@ -3,11 +3,11 @@ woo-product-importer
 
 A simple, free CSV importer for WooCommerce.
 
+Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
+
 ![Import Complete Screenshot](http://webpresencepartners.com/wp-content/uploads/2012/10/complete1.png)
 
 A sample CSV file is included to help you get started. (woo-importer-example.csv)
-
-Once installed, go to Tools -> Woo Product Importer in the Admin Panel to use.
 
 **Cool Stuff It/You Can Do**
 - AJAXy Importing (avoids timing out on large data sets)
@@ -56,7 +56,7 @@ Here's a look at the preview/column mapping screen:
 - Custom taxonomies
 - Attributes (and Global Attributes)
 
-If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, *cough* *cough* you could hire us!
+If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, (*cough* *cough*) you could hire us!
 
 More information on our blog:
 http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
