@@ -273,7 +273,10 @@
                         //download the image to our local server.
                         // if allow_url_fopen is enabled, we'll use that. Otherwise, we'll try cURL
                         if(ini_get('allow_url_fopen')) {
-                            @copy($image_url, $dest_path);
+                            if( ! @copy($image_url, $dest_path)) {
+                                $http_status = $http_response_header[0];
+                                $new_post_errors[] = "'{$http_status}' encountered while attempting to download '$image_url'.";
+                            }
                             
                         } elseif(function_exists('curl_init')) {
                             $ch = curl_init($image_url);
@@ -294,7 +297,7 @@
                             //delete the file if the download was unsuccessful
                             if($http_status != 200) {
                                 unlink($dest_path);
-                                $new_post_errors[] = "HTTP {$http_status} encountered while attempting to download '$image_url'.";
+                                $new_post_errors[] = "HTTP status '{$http_status}' encountered while attempting to download '$image_url'.";
                             }
                         } else {
                             //well, damn. no joy, as they say.
