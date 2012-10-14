@@ -329,6 +329,7 @@
                 }
                 
             } else {
+                $new_post_id = null;
                 $new_post_errors[] = 'Skipped import of product without a name';
             }
             
