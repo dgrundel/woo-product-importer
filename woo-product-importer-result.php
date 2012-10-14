@@ -26,7 +26,7 @@
             
             var response = jQuery.parseJSON(response_text);
             
-            $("#insert_count").text(response.insert_count);
+            $("#insert_count").text(response.insert_count + " (" + response.insert_percent +"%)");
             $("#remaining_count").text(response.remaining_count);
             $("#row_count").text(response.row_count);
             
@@ -51,7 +51,7 @@
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['price']));
                 
                 if(response.inserted_rows[row_num]['has_errors'] == true) {
-                    tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['errors'].join("<br>")));
+                    tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['errors'].join("\n")));
                 } else {
                     tr.append($(document.createElement("td")).text("No errors."));
                 }

@@ -49,6 +49,8 @@
         }
         
         $rows_remaining = ($row_count - ($offset + $limit)) > 0 ? ($row_count - ($offset + $limit)) : 0;
+        $insert_count = ($row_count - $rows_remaining);
+        $insert_percent = number_format(($insert_count / $row_count) * 100, 1);
         
         $inserted_rows = array();
         
@@ -285,8 +287,15 @@
                             
                             curl_setopt_array($ch, $options);
                             curl_exec($ch);
+                            $http_status = intval(curl_getinfo($ch, CURLINFO_HTTP_CODE));
                             curl_close($ch);
                             fclose($fp);
+                            
+                            //delete the file if the download was unsuccessful
+                            if($http_status != 200) {
+                                unlink($dest_path);
+                                $new_post_errors[] = "HTTP {$http_status} encountered while attempting to download '$image_url'.";
+                            }
                         } else {
                             //well, damn. no joy, as they say.
                             $error_messages[] = "Looks like allow_url_fopen is off and cURL is not enabled. No images were imported.";
@@ -295,7 +304,7 @@
                         
                         //make sure we actually got the file.
                         if(!file_exists($dest_path)) {
-                            $new_post_errors[] = "Couldn't download file from '$image_url'.";
+                            $new_post_errors[] = "Couldn't download file '$image_url'.";
                             continue;
                         }
                         
@@ -343,7 +352,8 @@
     echo json_encode(array(
         'remaining_count' => $rows_remaining,
         'row_count' => $row_count,
-        'insert_count' => ($row_count - $rows_remaining),
+        'insert_count' => $insert_count,
+        'insert_percent' => $insert_percent,
         'inserted_rows' => $inserted_rows,
         'error_messages' => $error_messages,
         'limit' => $limit,

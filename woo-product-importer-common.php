@@ -113,5 +113,16 @@
     .woo_product_importer_wrapper #inserted_rows tr.error .icon { background-image: url('<?php echo plugin_dir_url(__FILE__); ?>img/error.png'); }
     .woo_product_importer_wrapper #inserted_rows tr.fail .icon { background-image: url('<?php echo plugin_dir_url(__FILE__); ?>img/exclamation.png'); }
     
-    .woo_product_importer_wrapper #debug { display: none; }
+    .woo_product_importer_wrapper #debug {
+        display: none;
+        font-family: monospace;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333;
+        background-color: #f5f5f5;
+        border: 1px solid #efefef;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
 </style>
