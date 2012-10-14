@@ -246,6 +246,9 @@
                     
                     foreach($new_post_images as $image_index => $image_url) {
                         
+                        //convert space chars into their hex equivalent.
+                        $image_url = str_replace(' ', '%20', $image_url);
+                        
                         $parsed_url = parse_url($image_url);
                         $pathinfo = pathinfo($parsed_url['path']);
                         
