@@ -2,7 +2,7 @@
     Plugin Name: Woo Product Importer
     Plugin URI: http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
     Description: Free CSV import utility for WooCommerce
-    Version: .0.1
+    Version: 1
     Author: Daniel Grundel, Web Presence Partners
     Author URI: http://www.webpresencepartners.com
 */

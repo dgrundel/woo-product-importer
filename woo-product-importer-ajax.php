@@ -261,7 +261,7 @@
                         
                         //convert space chars into their hex equivalent.
                         //thanks to github user 'becasual' for submitting this change
-                        $image_url = str_replace(' ', '%20', $image_url);
+                        $image_url = str_replace(' ', '%20', trim($image_url));
                         
                         //do some parsing on the image url so we can take a look at
                         //its file extension and file name
