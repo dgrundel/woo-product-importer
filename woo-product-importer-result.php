@@ -1,5 +1,10 @@
 <script type="text/javascript">
     jQuery(document).ready(function($){
+        
+        $(".show_debug").click(function(){
+            $("#debug").show();
+        });
+        
         doAjaxImport(<?php echo intval($_POST['limit']); ?>, 0);
         
         function doAjaxImport(limit, offset) {
@@ -56,11 +61,16 @@
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['sku']));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['price']));
                 
-                if(response.inserted_rows[row_num]['has_errors'] == true) {
-                    tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['errors'].join("\n")));
-                } else {
-                    tr.append($(document.createElement("td")).text("No errors."));
+                var result_messages = "";
+                if(response.inserted_rows[row_num]['has_messages'] == true) {
+                    result_messages += response.inserted_rows[row_num]['messages'].join("\n") + "\n";
                 }
+                if(response.inserted_rows[row_num]['has_errors'] == true) {
+                    result_messages += response.inserted_rows[row_num]['errors'].join("\n") + "\n";
+                } else {
+                    result_messages += "No errors.";
+                }
+                tr.append($(document.createElement("td")).text(result_messages));
                 
                 tr.appendTo("#inserted_rows tbody");
             }
@@ -135,6 +145,7 @@
         <tbody><!-- rows inserted via AJAX --></tbody>
     </table>
     
+    <p><a href="#" class="show_debug">Show Raw AJAX Responses</a></p>
     <div id="debug"><!-- server responses get logged here --></div>
     
     <p id="credits">

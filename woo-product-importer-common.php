@@ -124,5 +124,6 @@
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
+        padding: 0 10px;
     }
 </style>

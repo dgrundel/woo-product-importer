@@ -107,8 +107,9 @@
             //a list of image URLs to be downloaded.
             $new_post_images = array();
             
-            //keep track of any errors generated during post insert or image downloads.
+            //keep track of any errors or messages generated during post insert or image downloads.
             $new_post_errors = array();
+            $new_post_messages = array();
             
             //track whether or not the post was actually inserted.
             $new_post_insert_success = false;
@@ -233,19 +234,50 @@
             $new_post_meta['_regular_price'] = $new_post_meta['_price'];
             $new_post_meta['_product_attributes'] = serialize($new_post_custom_fields);
             
-            if(strlen($new_post['post_title']) > 0) {
-                //try to insert our new product into the database!
-                $new_post_id = wp_insert_post($new_post, true);
+            //try to find a product with a matching SKU
+            $existing_product = null;
+            if(strlen($new_post_meta['_sku']) > 0) {
+                $existing_post_query = array(
+                    'numberposts' => 1,
+                    'meta_key' => '_sku',
+                    'meta_query' => array(
+                        array(
+                            'key'=>'_sku',
+                            'value'=> $new_post_meta['_sku'],
+                            'compare' => '='
+                        )
+                    ),
+                    'post_type' => 'product');
+                $existing_posts = get_posts($existing_post_query);
+                if(is_array($existing_posts) && sizeof($existing_posts) > 0) {
+                    $existing_product = array_shift($existing_posts);
+                }
+            }
+            
+            if(strlen($new_post['post_title']) > 0 || $existing_product !== null) {
+                
+                //insert/update product
+                if($existing_product !== null) {
+                    $new_post_messages[] = 'Updating product with ID '.$existing_product->ID.'.';
+                    
+                    $new_post['ID'] = $existing_product->ID;
+                    $new_post_id = wp_update_post($new_post);
+                } else {
+                    $new_post_id = wp_insert_post($new_post, true);
+                }
                 
                 if(is_wp_error($new_post_id)) {
                     $new_post_errors[] = 'Couldn\'t insert product with name "'.$new_post['post_title'].'".';
+                } elseif($new_post_id == 0) {
+                    $new_post_errors[] = 'Couldn\'t update product with ID "'.$new_post['ID'].'".';
                 } else {
                     //insert successful!
                     $new_post_insert_success = true;
                     
                     //set post_meta on inserted post
                     foreach($new_post_meta as $meta_key => $meta_value) {
-                        update_post_meta($new_post_id, $meta_key, $meta_value);
+                        add_post_meta($new_post_id, $meta_key, $meta_value, true) or
+                            update_post_meta($new_post_id, $meta_key, $meta_value);
                     }
                     
                     //set post terms on inserted post
@@ -364,6 +396,8 @@
                 'price' => $new_post_meta['_price'] ? $new_post_meta['_price'] : '',
                 'has_errors' => (sizeof($new_post_errors) > 0),
                 'errors' => $new_post_errors,
+                'has_messages' => (sizeof($new_post_messages) > 0),
+                'messages' => $new_post_messages,
                 'success' => $new_post_insert_success
             );
         }

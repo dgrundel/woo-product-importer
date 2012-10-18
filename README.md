@@ -20,6 +20,7 @@ A sample CSV file is included to help you get started. (woo-importer-example.csv
 - Map multiple CSV columns to one Product field (last non-empty column wins, good for merging columns)
 - Basic validation for multiple-choice fields (fields with a limited set of valid values like yes/no, instock/outofstock, etc.)
 - Dollar signs, commas, etc. are stripped out of number fields like prices, weight, length, width, height
+- If SKU already exists, existing product is updated rather than inserting new product.
 
 Here's a look at the preview/column mapping screen:
 ![Column Mapping Screenshot](http://webpresencepartners.com/wp-content/uploads/2012/10/preview.png)
