@@ -187,21 +187,39 @@
                         $new_post_meta[$map_to] = $col;
                         break;
                     
-                    case 'product_cat':
-                    case 'product_tag':
+                    case 'product_cat_by_name':
+                    case 'product_tag_by_name':
+                        $tax = str_replace('_by_name', '', $map_to);
                         $term_names = explode('|', $col);
                         foreach($term_names as $term_name) {
-                            $term = get_term_by('name', $term_name, $map_to, 'ARRAY_A');
+                            $term = get_term_by('name', $term_name, $tax, 'ARRAY_A');
                             
                             //if term does not exist, try to insert it.
                             if($term === false) {
-                                $term = wp_insert_term($term_name, $map_to);
+                                $term = wp_insert_term($term_name, $tax);
                             }
                             
                             //if we got a term, save the id so we can associate
                             if(is_array($term)) {
-                                $new_post_terms[$map_to][] = intval($term['term_id']);
+                                $new_post_terms[$tax][] = intval($term['term_id']);
                             }
+                        }
+                        break;
+                    
+                    case 'product_cat_by_id':
+                    case 'product_tag_by_id':
+                        $tax = str_replace('_by_id', '', $map_to);
+                        $term_ids = explode('|', $col);
+                        foreach($term_ids as $term_id) {
+                            $term = get_term_by('id', $term_id, $tax, 'ARRAY_A');
+                            
+                            //if we got a term, save the id so we can associate
+                            if($term !== false && is_array($term)) {
+                                $new_post_terms[$tax][] = intval($term['term_id']);
+                            } else {
+                                $new_post_errors[] = "Couldn't find {$tax} with ID {$term_id}.";
+                            }
+                            
                         }
                         break;
                     

@@ -14,6 +14,7 @@ A sample CSV file is included to help you get started. (woo-importer-example.csv
 - Import Images via a URL (Requires allow_url_fopen or cURL on your server)
 - Set Featured Image
 - Import Categories and Tags (Categories and Tags are created if they don't exist)
+- Add Categories and Tags to Products by Category/Tag Name or ID.
 - Import Custom Fields
 - Set Visibility on Custom Fields
 - Map any CSV column to any Product field (No header row required, but if you happened to include one, I'll use it to take a stab at what goes where)
@@ -46,10 +47,10 @@ Here's a look at the preview/column mapping screen:
 - _stock_status (Stock Status)
 - _backorders (Backorders)
 - _manage_stock (Manage Stock)
-- product_cat (Categories (By Name, Separated by "|"))
-- product_tag (Tags (By Name, Separated by "|"))
+- product_cat (Categories, by Name or ID)
+- product_tag (Tags, by Name or ID)
 - Custom Fields
-- Product Images (By URL, Separated by "|")
+- Product Images (By URL)
 
 **Not Supported (Yet)**
 - Product types other than Simple Products

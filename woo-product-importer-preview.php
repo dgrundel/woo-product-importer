@@ -81,8 +81,10 @@
         '_stock_status' => 'Stock Status (Valid: instock/outofstock)',
         '_backorders' => 'Backorders (Valid: yes/no/notify)',
         '_manage_stock' => 'Manage Stock (Valid: yes/no)',
-        'product_cat' => 'Categories (By Name, Separated by "|")',
-        'product_tag' => 'Tags (By Name, Separated by "|")',
+        'product_cat_by_name' => 'Categories By Name (Separated by "|")',
+        'product_cat_by_id' => 'Categories By ID (Separated by "|")',
+        'product_tag_by_name' => 'Tags By Name (Separated by "|")',
+        'product_tag_by_id' => 'Tags By ID (Separated by "|")',
         'custom_field' => 'Custom Field (Set Name Below)',
         'product_image' => 'Images (By URL, Separated by "|")'
     );
