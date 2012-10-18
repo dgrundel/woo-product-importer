@@ -1,8 +1,9 @@
 <script type="text/javascript">
     jQuery(document).ready(function($){
         
-        $(".show_debug").click(function(){
+        $("#show_debug").click(function(){
             $("#debug").show();
+            $(this).hide();
         });
         
         doAjaxImport(<?php echo intval($_POST['limit']); ?>, 0);
@@ -145,7 +146,7 @@
         <tbody><!-- rows inserted via AJAX --></tbody>
     </table>
     
-    <p><a href="#" class="show_debug">Show Raw AJAX Responses</a></p>
+    <p><a id="show_debug" href="#" class="button">Show Raw AJAX Responses</a></p>
     <div id="debug"><!-- server responses get logged here --></div>
     
     <p id="credits">
