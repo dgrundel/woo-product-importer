@@ -239,7 +239,7 @@
                         break;
                     
                     case 'product_image':
-                        $image_urls = explode('|', $col);
+                        $image_urls = explode('|', strtolower($col));
                         if(is_array($image_urls)) {
                             $new_post_images = array_merge($new_post_images, $image_urls);
                         }
