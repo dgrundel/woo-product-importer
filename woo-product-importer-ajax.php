@@ -184,6 +184,8 @@
                     case '_stock_status':
                     case '_backorders':
                     case '_manage_stock':
+                    case '_product_type':
+                    case '_product_url':
                         $new_post_meta[$map_to] = $col;
                         break;
                     
