@@ -61,7 +61,8 @@
         foreach($import_data as $row_id => $row) {
             
             //don't import if the checkbox wasn't checked
-            if(intval($post_data['import_row'][$row_id]) != 1) continue;
+            //only applies when row_count is less than 100
+            if($row_count < 100 && intval($post_data['import_row'][$row_id]) != 1) continue;
             
             //unset new_post_id
             $new_post_id = null;

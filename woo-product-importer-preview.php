@@ -57,6 +57,8 @@
         
         if(intval($_POST['header_row']) == 1)
             $header_row = array_shift($import_data);
+            
+        $row_count = sizeof($import_data);
     }
     
     $col_mapping_options = array(
@@ -126,7 +128,7 @@
     <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
         <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($uploaded_file_path); ?>">
         <input type="hidden" name="header_row" value="<?php echo $_POST['header_row']; ?>">
-        <input type="hidden" name="row_count" value="<?php echo sizeof($import_data); ?>">
+        <input type="hidden" name="row_count" value="<?php echo $row_count; ?>">
         <input type="hidden" name="limit" value="5">
         
         <p>
@@ -144,7 +146,7 @@
                     </tr>
                 <?php endif; ?>
                 <tr>
-                    <th class="narrow">Import?</th>
+                    <?php if($row_count < 100): ?><th class="narrow">Import?</th><?php endif; ?>
                     <?php
                         reset($import_data);
                         $first_row = current($import_data);
@@ -183,7 +185,7 @@
             <tbody>
                 <?php foreach($import_data as $row_id => $row): ?>
                     <tr>
-                        <td class="narrow"><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></td>
+                        <?php if($row_count < 100): ?><td class="narrow"><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></td><?php endif; ?>
                         <?php foreach($row as $col): ?>
                             <td><?php echo htmlspecialchars($col); ?></td>
                         <?php endforeach; ?>
