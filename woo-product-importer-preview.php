@@ -1,7 +1,12 @@
 <?php
-    if(isset($_FILES['import_csv']['tmp_name'])) {
+    $error_messages = array();
+    
+    
+    if(isset($_POST['import_csv_url']) && strlen($_POST['import_csv_url']) > 0) {
         
-        $error_messages = array();
+        $file_path = $_POST['import_csv_url'];
+        
+    } elseif(isset($_FILES['import_csv']['tmp_name'])) {
         
         if(function_exists('wp_upload_dir')) {
             $upload_dir = wp_upload_dir();
@@ -31,24 +36,27 @@
         } else {
             
             if(move_uploaded_file($_FILES['import_csv']['tmp_name'], $uploaded_file_path)) {
-                
-                //now that we have the file, grab contents
-                $handle = fopen( $uploaded_file_path, 'r' );
-                $import_data = array();
-                
-                if ( $handle !== FALSE ) {
-                    while ( ( $line = fgetcsv($handle) ) !== FALSE ) {
-                        $import_data[] = $line;
-                    }
-                    fclose( $handle );
-                    
-                } else {
-                    $error_messages[] = 'Could not open file.';
-                }
+                $file_path = $uploaded_file_path;
                 
             } else {
-                 $error_messages[] = 'move_uploaded_file() returned false.';
+                $error_messages[] = 'move_uploaded_file() returned false.';
             }
+        }
+    }
+    
+    if($file_path) {
+        //now that we have the file, grab contents
+        $handle = fopen($_POST['import_csv_url'], 'r' );
+        $import_data = array();
+        
+        if ( $handle !== FALSE ) {
+            while ( ( $line = fgetcsv($handle) ) !== FALSE ) {
+                $import_data[] = $line;
+            }
+            fclose( $handle );
+            
+        } else {
+            $error_messages[] = 'Could not open file.';
         }
         
         if(sizeof($import_data) == 0) {
@@ -126,7 +134,7 @@
     <?php endif; ?>
     
     <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
-        <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($uploaded_file_path); ?>">
+        <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($file_path); ?>">
         <input type="hidden" name="header_row" value="<?php echo $_POST['header_row']; ?>">
         <input type="hidden" name="row_count" value="<?php echo $row_count; ?>">
         <input type="hidden" name="limit" value="5">

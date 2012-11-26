@@ -8,6 +8,10 @@
             <input type="file" name="import_csv">
         </p>
         <p>
+            <label for="import_csv">URL to Import</label>
+            <input type="file" name="import_csv_url">
+        </p>
+        <p>
             <input type="checkbox" name="header_row" id="header_row" value="1">
             <label for="header_row">First Row is Header Row</label>
         </p>
