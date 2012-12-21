@@ -3,20 +3,27 @@
     <h2>Woo Product Importer &raquo; Upload</h2>
     
     <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=preview'; ?>">
-        <p>
-            <label for="import_csv">File to Import</label>
-            <input type="file" name="import_csv">
-        </p>
-        <p>
-            <label for="import_csv">URL to Import</label>
-            <input type="file" name="import_csv_url">
-        </p>
-        <p>
-            <input type="checkbox" name="header_row" id="header_row" value="1">
-            <label for="header_row">First Row is Header Row</label>
-        </p>
-        <p>
-            <button class="button-primary" type="submit">Upload and Preview</button>
-        </p>
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <th><label for="import_csv">File to Import</label></th>
+                    <td><input type="file" name="import_csv"></td>
+                </tr>
+                <tr>
+                    <th><label for="import_csv">URL to Import</label></th>
+                    <td><input type="text" name="import_csv_url"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="checkbox" name="header_row" id="header_row" value="1">
+                        <label for="header_row">First Row is Header Row</label>
+                    </td>
+                <tr>
+                    <th></th>
+                    <td><button class="button-primary" type="submit">Upload and Preview</button></td>
+                </tr>
+            </tbody>
+        </table>
     </form>
 </div>

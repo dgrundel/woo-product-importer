@@ -46,7 +46,7 @@
     
     if($file_path) {
         //now that we have the file, grab contents
-        $handle = fopen($_POST['import_csv_url'], 'r' );
+        $handle = fopen($file_path, 'r' );
         $import_data = array();
         
         if ( $handle !== FALSE ) {
