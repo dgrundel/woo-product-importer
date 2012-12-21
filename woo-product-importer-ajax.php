@@ -83,8 +83,6 @@
             $new_post_meta['_width'] = 0;
             $new_post_meta['_height'] = 0;
             $new_post_meta['_sku'] = '';
-            $new_post_meta['_stock'] = '';
-            $new_post_meta['_stock_status'] = 'instock';
             $new_post_meta['_sale_price'] = '';
             $new_post_meta['_sale_price_dates_from'] = '';
             $new_post_meta['_sale_price_dates_to'] = '';
@@ -94,7 +92,6 @@
             $new_post_meta['_downloadable'] = 'no';
             $new_post_meta['_virtual'] = 'no';
             $new_post_meta['_backorders'] = 'no';
-            $new_post_meta['_manage_stock'] = 'no';
             
             //stores tax and term ids so we can associate our product with terms and taxonomies
             //this is a multidimensional array
@@ -254,6 +251,27 @@
             //set some more post_meta and parse things as appropriate
             $new_post_meta['_regular_price'] = $new_post_meta['_price'];
             $new_post_meta['_product_attributes'] = serialize($new_post_custom_fields);
+            
+            //check and set some inventory defaults
+            if(array_key_exists('_stock', $new_post_meta)) {
+                
+                //set _manage_stock to yes if not explicitly set by CSV
+                if(!array_key_exists('_manage_stock', $new_post_meta)) {
+                    $new_post_meta['_manage_stock'] = 'yes';
+                }
+                //set _stock_status based on _stock if not explicitly set by CSV
+                if(!array_key_exists('_stock_status', $new_post_meta)) {
+                    //set to instock if _stock is > 0, otherwise set to outofstock
+                    $new_post_meta['_stock_status'] = (intval($new_post_meta['_stock']) > 0) ? 'instock' : 'outofstock';
+                }
+                
+            } else {
+                //set empty string for stock value
+                $new_post_meta['_stock'] = '';
+                
+                //set _manage_stock to no if not explicitly set by CSV
+                if(!array_key_exists('_manage_stock', $new_post_meta)) $new_post_meta['_manage_stock'] = 'no';
+            }
             
             //try to find a product with a matching SKU
             $existing_product = null;
@@ -434,3 +452,4 @@
         'limit' => $limit,
         'new_offset' => ($limit + $offset)
     ));
+?>
