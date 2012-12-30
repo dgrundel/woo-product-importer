@@ -11,7 +11,10 @@
                 </tr>
                 <tr>
                     <th><label for="import_csv">URL to Import</label></th>
-                    <td><input type="text" name="import_csv_url"></td>
+                    <td>
+                        <input type="text" name="import_csv_url" class="regular-text code">
+                        <p class="description">Enter the full URL to a CSV file. Leave this field blank if uploading a file.</p>
+                    </td>
                 </tr>
                 <tr>
                     <th></th>
