@@ -26,6 +26,11 @@ A sample CSV file is included to help you get started. (woo-importer-example.csv
 Here's a look at the preview/column mapping screen:
 ![Column Mapping Screenshot](http://webpresencepartners.com/wp-content/uploads/2012/10/preview.png)
 
+**Importable Product Types**
+- Simple Products
+- Virtual Products
+- External Products
+
 **Full List of Importable Attributes**
 - post_title (Name)
 - post_content (Description)
@@ -51,9 +56,11 @@ Here's a look at the preview/column mapping screen:
 - product_tag (Tags, by Name or ID)
 - Custom Fields
 - Product Images (By URL)
+- _button_text (Button Text, for External Products)
+- _product_url (Product URL, for External Products)
 
 **Not Supported (Yet)**
-- Product types other than Simple Products
+- Variable and Grouped Products
 - Image import via a local file path
 - Custom taxonomies
 - Attributes (and Global Attributes)

@@ -98,7 +98,9 @@
         'product_tag_by_name' => 'Tags By Name (Separated by "|")',
         'product_tag_by_id' => 'Tags By ID (Separated by "|")',
         'custom_field' => 'Custom Field (Set Name Below)',
-        'product_image' => 'Images (By URL, Separated by "|")'
+        'product_image' => 'Images (By URL, Separated by "|")',
+        '_button_text' => 'Button Text (External Product Only)',
+        '_product_url' => 'Product URL (External Product Only)'
     );
     
 ?>
