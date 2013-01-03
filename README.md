@@ -70,6 +70,9 @@ Here's a look at the preview/column mapping screen:
 
 If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, (*cough* *cough*) you could hire us!
 
+**Other Items on the To Do List**
+- Test and refine handling of existing product. I suspect that certain existing attributes will be overwritten if not explicitly re-set in the CSV.
+
 **Thank Yous**
 
 Thanks to the following folks for helping make this plugin even better!

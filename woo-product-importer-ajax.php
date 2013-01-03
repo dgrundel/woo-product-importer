@@ -196,11 +196,25 @@
                     case '_stock_status':
                     case '_backorders':
                     case '_manage_stock':
-                    case '_product_type':
                     case '_button_text':
                     case '_product_url':
                     case '_file_path':
                         $new_post_meta[$map_to] = $col;
+                        break;
+                    
+                    case '_product_type':
+                        //product_type is saved as both post_meta and via a taxonomy.
+                        $new_post_meta[$map_to] = $col;
+                        
+                        $term_name = $col;
+                        $tax = 'product_type';
+                        $term = get_term_by('name', $term_name, $tax, 'ARRAY_A');
+                        
+                        //if we got a term, save the id so we can associate
+                        if(is_array($term)) {
+                            $new_post_terms[$tax][] = intval($term['term_id']);
+                        }
+                        
                         break;
                     
                     case 'product_cat_by_name':
@@ -274,7 +288,7 @@
             
             //set some more post_meta and parse things as appropriate
             $new_post_meta['_regular_price'] = $new_post_meta['_price'];
-            $new_post_meta['_product_attributes'] = serialize($new_post_custom_fields);
+            $new_post_meta['_product_attributes'] = $new_post_custom_fields;
             
             //check and set some inventory defaults
             if(array_key_exists('_stock', $new_post_meta)) {

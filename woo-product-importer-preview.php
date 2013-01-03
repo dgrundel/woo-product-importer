@@ -69,6 +69,8 @@
         $row_count = sizeof($import_data);
     }
     
+    $show_import_checkboxes = !!($row_count < 100);
+    
     $col_mapping_options = array(
         'do_not_import' => 'Do Not Import',
         'post_title' => 'Name',
@@ -153,14 +155,21 @@
             <thead>
                 <?php if(intval($_POST['header_row']) == 1): ?>
                     <tr class="header_row">
-                        <th class="narrow">CSV Header Row</th>
+                        <th colspan="<?php echo sizeof($header_row); ?>">CSV Header Row</th>
+                    </tr>
+                    <tr class="header_row">
+                        <?php if($show_import_checkboxes): ?>
+                            <th></th>
+                        <?php endif; ?>
                         <?php foreach($header_row as $col): ?>
                             <th><?php echo htmlspecialchars($col); ?></th>
                         <?php endforeach; ?>
                     </tr>
                 <?php endif; ?>
                 <tr>
-                    <?php if($row_count < 100): ?><th class="narrow">Import?</th><?php endif; ?>
+                    <?php if($show_import_checkboxes): ?>
+                        <th class="narrow">Import?</th>
+                    <?php endif; ?>
                     <?php
                         reset($import_data);
                         $first_row = current($import_data);
@@ -199,7 +208,9 @@
             <tbody>
                 <?php foreach($import_data as $row_id => $row): ?>
                     <tr>
-                        <?php if($row_count < 100): ?><td class="narrow"><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></td><?php endif; ?>
+                        <?php if($show_import_checkboxes): ?>
+                            <td class="narrow"><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></td>
+                        <?php endif; ?>
                         <?php foreach($row as $col): ?>
                             <td><?php echo htmlspecialchars($col); ?></td>
                         <?php endforeach; ?>
