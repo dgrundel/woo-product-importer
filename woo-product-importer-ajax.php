@@ -103,7 +103,11 @@
             $new_post_custom_field_count = 0;
             
             //a list of image URLs to be downloaded.
-            $new_post_images = array();
+            $new_post_image_urls = array();
+            
+            //a list of image paths to be added to the database.
+            //$new_post_image_urls will be added to this array later as paths once they are downloaded.
+            $new_post_image_paths = array();
             
             //keep track of any errors or messages generated during post insert or image downloads.
             $new_post_errors = array();
@@ -250,10 +254,18 @@
                         );
                         break;
                     
-                    case 'product_image':
+                    case 'product_image_by_url':
                         $image_urls = explode('|', $col);
                         if(is_array($image_urls)) {
-                            $new_post_images = array_merge($new_post_images, $image_urls);
+                            $new_post_image_urls = array_merge($new_post_image_urls, $image_urls);
+                        }
+                        
+                        break;
+                    
+                    case 'product_image_by_path':
+                        $image_paths = explode('|', $col);
+                        if(is_array($image_paths)) {
+                            $new_post_image_paths = array_merge($new_post_image_paths, $image_paths);
                         }
                         
                         break;
@@ -340,7 +352,7 @@
                     $wp_upload_dir = wp_upload_dir();
                     
                     //grab product images
-                    foreach($new_post_images as $image_index => $image_url) {
+                    foreach($new_post_image_urls as $image_index => $image_url) {
                         
                         //convert space chars into their hex equivalent.
                         //thanks to github user 'becasual' for submitting this change
@@ -407,14 +419,19 @@
                         }
                         
                         //whew. are we there yet?
+                        $new_post_image_paths[] = $dest_path;
+                    }
+                    
+                    foreach($new_post_image_paths as $image_index => $dest_path) {
+                        
+                        $path_parts = pathinfo($dest_path);
                         
                         //add a post of type 'attachment' so this item shows up in the WP Media Library.
                         //our imported product will be the post's parent.
                         $wp_filetype = wp_check_filetype($dest_path);
                         $attachment = array(
-                            'guid' => $dest_url, 
                             'post_mime_type' => $wp_filetype['type'],
-                            'post_title' => preg_replace('/\.[^.]+$/', '', $dest_filename),
+                            'post_title' => preg_replace('/\.[^.]+$/', '', $path_parts['filename']),
                             'post_content' => '',
                             'post_status' => 'inherit'
                         );

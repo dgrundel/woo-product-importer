@@ -56,7 +56,7 @@ Here's a look at the preview/column mapping screen:
 - product_cat (Categories, by Name or ID)
 - product_tag (Tags, by Name or ID)
 - Custom Fields
-- Product Images (By URL)
+- Product Images (By URL or Local File Path)
 - _button_text (Button Text, for External Products)
 - _product_url (Product URL, for External Products)
 - _file_path (File Path, for Downloadable Product)
@@ -65,7 +65,6 @@ Here's a look at the preview/column mapping screen:
 
 **Not Supported (Yet)**
 - Variable and Grouped Products
-- Image import via a local file path
 - Custom taxonomies
 - Attributes (and Global Attributes)
 
