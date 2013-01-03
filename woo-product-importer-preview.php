@@ -100,7 +100,10 @@
         'custom_field' => 'Custom Field (Set Name Below)',
         'product_image' => 'Images (By URL, Separated by "|")',
         '_button_text' => 'Button Text (External Product Only)',
-        '_product_url' => 'Product URL (External Product Only)'
+        '_product_url' => 'Product URL (External Product Only)',
+        '_file_path' => 'File Path (Downloadable Product Only)',
+        '_download_expiry' => 'Download Expiration (in Days)',
+        '_download_limit' => 'Download Limit (Number of Downloads)'
     );
     
 ?>

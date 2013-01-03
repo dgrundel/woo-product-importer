@@ -154,12 +154,22 @@
                 
                 //prepare the col value for insertion into the database
                 switch($map_to) {
+                    
+                    //post fields
                     case 'post_title':
                     case 'post_content':
                     case 'post_excerpt':
                         $new_post[$map_to] = $col;
                         break;
                     
+                    //integer fields
+                    case '_stock':
+                    case '_download_expiry':
+                    case '_download_limit':
+                        //remove any non-numeric chars
+                        $new_post_meta[$map_to] = preg_replace("/[^0-9]/", "", $col);
+                    
+                    //float fields
                     case '_weight':
                     case '_length':
                     case '_width':
@@ -171,6 +181,7 @@
                         $new_post_meta[$map_to] = preg_replace("/[^0-9.]/", "", $col);
                         break;
                     
+                    //all other postmeta fields
                     case '_tax_status':
                     case '_tax_class':
                     case '_visibility':
@@ -178,13 +189,13 @@
                     case '_sku':
                     case '_downloadable':
                     case '_virtual':
-                    case '_stock':
                     case '_stock_status':
                     case '_backorders':
                     case '_manage_stock':
                     case '_product_type':
                     case '_button_text':
                     case '_product_url':
+                    case '_file_path':
                         $new_post_meta[$map_to] = $col;
                         break;
                     

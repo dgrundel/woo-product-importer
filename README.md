@@ -29,6 +29,7 @@ Here's a look at the preview/column mapping screen:
 **Importable Product Types**
 - Simple Products
 - Virtual Products
+- Downloadable Products
 - External Products
 
 **Full List of Importable Attributes**
@@ -58,6 +59,9 @@ Here's a look at the preview/column mapping screen:
 - Product Images (By URL)
 - _button_text (Button Text, for External Products)
 - _product_url (Product URL, for External Products)
+- _file_path (File Path, for Downloadable Product)
+- _download_expiry (Download Expiration, in Days)
+- _download_limit (Download Limit, an integer)
 
 **Not Supported (Yet)**
 - Variable and Grouped Products
