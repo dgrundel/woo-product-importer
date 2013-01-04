@@ -444,12 +444,14 @@
                             continue;
                         }
                         
+                        $dest_url = str_ireplace(ABSPATH, home_url('/'), $dest_path);
                         $path_parts = pathinfo($dest_path);
                         
                         //add a post of type 'attachment' so this item shows up in the WP Media Library.
                         //our imported product will be the post's parent.
                         $wp_filetype = wp_check_filetype($dest_path);
                         $attachment = array(
+                            'guid' => $dest_url,
                             'post_mime_type' => $wp_filetype['type'],
                             'post_title' => preg_replace('/\.[^.]+$/', '', $path_parts['filename']),
                             'post_content' => '',
