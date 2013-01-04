@@ -438,6 +438,12 @@
                     
                     foreach($new_post_image_paths as $image_index => $dest_path) {
                         
+                        //make sure we actually got the file.
+                        if(!file_exists($dest_path)) {
+                            $new_post_errors[] = "Couldn't find local file '$dest_path'.";
+                            continue;
+                        }
+                        
                         $path_parts = pathinfo($dest_path);
                         
                         //add a post of type 'attachment' so this item shows up in the WP Media Library.
