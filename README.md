@@ -1,7 +1,10 @@
 woo-product-importer
 ====================
 
-A simple, free CSV importer for WooCommerce.
+- A simple, free CSV product importer for WooCommerce.
+- Supports importing hundreds or thousands of products at once.
+- Imports images via URL or local file path.
+- Lots of other great features suggested by plugin users (see below.)
 
 Once installed, go to **Tools** &rarr; **Woo Product Importer** in the Admin Panel to use.
 
