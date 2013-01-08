@@ -71,7 +71,7 @@ Here's a look at the preview/column mapping screen:
 - Custom taxonomies
 - Attributes (and Global Attributes)
 
-If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, (*cough* *cough*) you could hire us!
+If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, ( *cough* *cough* ) you could hire us!
 
 **Other Items on the To Do List**
 - Test and refine handling of existing product. I suspect that certain existing attributes will be overwritten if not explicitly re-set in the CSV.
@@ -82,6 +82,7 @@ Thanks to the following folks for helping make this plugin even better!
 
 - Github user becasual for running his server out of memory, prompting me to add AJAXy importing and for finding that spaces in image URLs were causing problems
 - Subhan Toba for noting that we were inserting duplicate SKUs, prompting me to support product updating
+- J.Ant for suggesting the addition of External Product support.
 
 More information on our blog:
 http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
