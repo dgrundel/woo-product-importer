@@ -83,7 +83,7 @@
             $new_post_meta['_width'] = 0;
             $new_post_meta['_height'] = 0;
             $new_post_meta['_sku'] = '';
-            $new_post_meta['_sale_price'] = '';
+            $new_post_meta['_sale_price'] = null;
             $new_post_meta['_sale_price_dates_from'] = '';
             $new_post_meta['_sale_price_dates_to'] = '';
             $new_post_meta['_tax_status'] = 'taxable';
@@ -287,7 +287,12 @@
             }
             
             //set some more post_meta and parse things as appropriate
-            $new_post_meta['_price'] = isset($new_post_meta['_sale_price']) ? $new_post_meta['_sale_price'] : $new_post_meta['_regular_price'];
+            
+            //set price to sale price if we have one, regular price otherwise
+            $new_post_meta['_price'] = $new_post_meta['_sale_price'] !== null ? $new_post_meta['_sale_price'] : $new_post_meta['_regular_price'];
+            //set sale price to empty string if we didn't get one from the CSV
+            if($new_post_meta['_sale_price'] === null) $new_post_meta['_sale_price'] = '';
+            //set _product_attributes postmeta to the custom fields array. WP will serialize it for us.
             $new_post_meta['_product_attributes'] = $new_post_custom_fields;
             
             //check and set some inventory defaults
