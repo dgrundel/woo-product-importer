@@ -74,6 +74,7 @@
     $col_mapping_options = array(
         'do_not_import' => 'Do Not Import',
         'post_title' => 'Name',
+        'post_status' => 'Status (Valid: publish/draft/trash/[more in Codex])',
         'post_content' => 'Description',
         'post_excerpt' => 'Short Description',
         '_price' => 'Price',

@@ -163,6 +163,7 @@
                     case 'post_title':
                     case 'post_content':
                     case 'post_excerpt':
+                    case 'post_status':
                         $new_post[$map_to] = $col;
                         break;
                     

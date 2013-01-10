@@ -39,6 +39,7 @@ Here's a look at the preview/column mapping screen:
 - post_title (Name)
 - post_content (Description)
 - post_excerpt (Short Description)
+- post_status (Post Status -- Publish, Draft, Trash, etc.)
 - _price (Price)
 - _sale_price (Sale Price)
 - _tax_status (Tax Status)
@@ -83,6 +84,7 @@ Thanks to the following folks for helping make this plugin even better!
 - Github user becasual for running his server out of memory, prompting me to add AJAXy importing and for finding that spaces in image URLs were causing problems
 - Subhan Toba for noting that we were inserting duplicate SKUs, prompting me to support product updating
 - J.Ant for suggesting the addition of External Product support.
+- Andy for suggesting post_status importing.
 
 More information on our blog:
 http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
