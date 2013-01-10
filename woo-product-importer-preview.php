@@ -77,7 +77,7 @@
         'post_status' => 'Status (Valid: publish/draft/trash/[more in Codex])',
         'post_content' => 'Description',
         'post_excerpt' => 'Short Description',
-        '_price' => 'Price',
+        '_regular_price' => 'Regular Price',
         '_sale_price' => 'Sale Price',
         '_tax_status' => 'Tax Status (Valid: taxable/shipping/none)',
         '_tax_class' => 'Tax Class',

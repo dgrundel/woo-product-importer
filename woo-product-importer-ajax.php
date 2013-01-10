@@ -181,7 +181,6 @@
                     case '_height':
                     case '_regular_price':
                     case '_sale_price':
-                    case '_price':
                         //remove any non-numeric chars except for '.'
                         $new_post_meta[$map_to] = preg_replace("/[^0-9.]/", "", $col);
                         break;
@@ -288,7 +287,7 @@
             }
             
             //set some more post_meta and parse things as appropriate
-            $new_post_meta['_regular_price'] = $new_post_meta['_price'];
+            $new_post_meta['_price'] = isset($new_post_meta['_sale_price']) ? $new_post_meta['_sale_price'] : $new_post_meta['_regular_price'];
             $new_post_meta['_product_attributes'] = $new_post_custom_fields;
             
             //check and set some inventory defaults
