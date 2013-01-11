@@ -233,7 +233,7 @@
                                 //if term does not exist, try to insert it.
                                 //OR, if term does exist, but the parent doesn't match the one we expect, try to insert it.
                                 if( $term === false ||
-                                    ( $depth > 0 && $term['parent'] != $term_ids[($depth - 1)]) ) {
+                                    ( $depth > 0 && intval($term['parent']) != $term_ids[($depth - 1)]) ) {
                                     
                                     $args = ($depth > 0) ? array('parent' => $term_ids[($depth - 1)]) : array();
                                     $term = wp_insert_term($term_names[$depth], $tax, $args);
