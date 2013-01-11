@@ -156,7 +156,7 @@
             <thead>
                 <?php if(intval($_POST['header_row']) == 1): ?>
                     <tr class="header_row">
-                        <th colspan="<?php echo sizeof($header_row); ?>">CSV Header Row</th>
+                        <th colspan="<?php echo ($show_import_checkboxes) ? sizeof($header_row) + 1 : sizeof($header_row); ?>">CSV Header Row</th>
                     </tr>
                     <tr class="header_row">
                         <?php if($show_import_checkboxes): ?>

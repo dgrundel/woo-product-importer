@@ -4,6 +4,7 @@ woo-product-importer
 - A simple, free CSV product importer for WooCommerce.
 - Supports importing hundreds or thousands of products at once.
 - Imports images via URL or local file path.
+- Imports hierarchical category structures (see below.)
 - Lots of other great features suggested by plugin users (see below.)
 
 Once installed, go to **Tools** &rarr; **Woo Product Importer** in the Admin Panel to use.
@@ -73,6 +74,14 @@ Here's a look at the preview/column mapping screen:
 - Attributes (and Global Attributes)
 
 If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, ( *cough* *cough* ) you could hire us!
+
+**Importing Hierarchical Categories**
+
+You can now import hierarchical category structures!
+
+- Include the full category "path" in your CSV, separated by forward slashes.
+- For example, to add a product in a category called "Spoons", with a parent category of "Utensils", inside another category called "Kitchen", set your CSV field to "Kitchen/Utensils/Spoons".
+- The plugin will create the entire hierarchy if it does not exist. If some parts exist, but others do not, it will fill in the blanks.
 
 **Other Items on the To Do List**
 - Test and refine handling of existing product. I suspect that certain existing attributes will be overwritten if not explicitly re-set in the CSV.
