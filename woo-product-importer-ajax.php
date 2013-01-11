@@ -220,18 +220,37 @@
                     case 'product_cat_by_name':
                     case 'product_tag_by_name':
                         $tax = str_replace('_by_name', '', $map_to);
-                        $term_names = explode('|', $col);
-                        foreach($term_names as $term_name) {
-                            $term = get_term_by('name', $term_name, $tax, 'ARRAY_A');
+                        $term_paths = explode('|', $col);
+                        foreach($term_paths as $term_path) {
                             
-                            //if term does not exist, try to insert it.
-                            if($term === false) {
-                                $term = wp_insert_term($term_name, $tax);
+                            $term_names = explode('/', $term_path);
+                            $term_ids = array();
+                            
+                            for($depth = 0; $depth < count($term_names); $depth++) {
+                                
+                                $term = get_term_by('name', $term_names[$depth], $tax, 'ARRAY_A');
+                                
+                                //if term does not exist, try to insert it.
+                                //OR, if term does exist, but the parent doesn't match the one we expect, try to insert it.
+                                if( $term === false ||
+                                    ( $depth > 0 && $term['parent'] != $term_ids[($depth - 1)]) ) {
+                                    
+                                    $args = ($depth > 0) ? array('parent' => $term_ids[($depth - 1)]) : array();
+                                    $term = wp_insert_term($term_names[$depth], $tax, $args);
+                                }
+                                
+                                if(is_array($term)) {
+                                    $term_ids[$depth] = intval($term['term_id']);
+                                } else {
+                                    //uh oh.
+                                    $new_post_errors[] = "Couldn't find or create {$tax} with path {$term_path}.";
+                                    break;
+                                }
                             }
                             
-                            //if we got a term, save the id so we can associate
-                            if(is_array($term)) {
-                                $new_post_terms[$tax][] = intval($term['term_id']);
+                            //if we got a term at the end of the path, save the id so we can associate
+                            if(array_key_exists(count($term_names) - 1, $term_ids)) {
+                                $new_post_terms[$tax][] = $term_ids[(count($term_names) - 1)];
                             }
                         }
                         break;
