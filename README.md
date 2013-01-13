@@ -2,7 +2,7 @@ woo-product-importer
 ====================
 
 - A simple, free CSV product importer for WooCommerce.
-- Supports importing hundreds or thousands of products at once.
+- Supports importing hundreds or thousands of products at once. (The only limit is your patience!)
 - Imports images via URL or local file path.
 - Imports hierarchical category structures (see *Importing Hierarchical Categories* below.)
 - Lots of other great features suggested by plugin users (see *Cool Stuff It/You Can Do* and *Full List of Importable Attributes* below.)
@@ -15,14 +15,15 @@ A sample CSV file is included to help you get started. (woo-importer-example.csv
 
 **Cool Stuff It/You Can Do**
 - AJAXy Importing (avoids timing out on large data sets)
-- Import Images via a URL (Requires allow_url_fopen or cURL on your server)
+- Import Images via a URL (Requires *allow_url_fopen* or *cURL* on your server)
 - Set Featured Image
 - Import Categories and Tags (Categories and Tags are created if they don't exist)
-- Add Categories and Tags to Products by Category/Tag Name or ID.
+- Import entire hierarchical (parent/child) Category structures
+- Add Categories and Tags to Products by Category/Tag Name or ID
 - Import Custom Fields
 - Set Visibility on Custom Fields
 - Map any CSV column to any Product field (No header row required, but if you happened to include one, I'll use it to take a stab at what goes where)
-- Map multiple CSV columns to one Product field (last non-empty column wins, good for merging columns)
+- Map multiple CSV columns to the same Product field (last non-empty column wins, good for merging columns)
 - Basic validation for multiple-choice fields (fields with a limited set of valid values like yes/no, instock/outofstock, etc.)
 - Dollar signs, commas, etc. are stripped out of number fields like prices, weight, length, width, height
 - If SKU already exists, existing product is updated rather than inserting new product.
@@ -83,8 +84,10 @@ You can now import hierarchical category structures!
 - For example, to add a product in a category called "Spoons", with a parent category of "Utensils", inside another category called "Kitchen", set your CSV field to "Kitchen/Utensils/Spoons".
 - The plugin will create the hierarchy if it does not exist.
 
+More info and example on our blog: http://webpresencepartners.com/2013/01/13/importing-hierarchical-categories-into-woocommerce/
+
 **Other Items on the To Do List**
-- Test and refine handling of existing product. I suspect that certain existing attributes will be overwritten if not explicitly re-set in the CSV.
+- Test and refine handling of existing product. I suspect that certain existing attributes will be overwritten if not explicitly re-set in the CSV. Please let me know if you see things changing in your store that you didn't expect!
 
 **Thank Yous**
 
@@ -96,4 +99,9 @@ Thanks to the following folks for helping make this plugin even better!
 - Andy for suggesting post_status importing, and finding a price importing bug.
 
 More information on our blog:
+
 http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
+
+http://webpresencepartners.com/2012/10/12/image-import-via-url-with-woo-product-importer/
+
+http://webpresencepartners.com/2013/01/13/importing-hierarchical-categories-into-woocommerce/
