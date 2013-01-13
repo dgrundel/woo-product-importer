@@ -228,15 +228,14 @@
                             
                             for($depth = 0; $depth < count($term_names); $depth++) {
                                 
-                                $term = get_term_by('name', $term_names[$depth], $tax, 'ARRAY_A');
+                                $term_parent = ($depth > 0) ? $term_ids[($depth - 1)] : '';
+                                $term = term_exists($term_names[$depth], $tax, $term_parent);
                                 
                                 //if term does not exist, try to insert it.
-                                //OR, if term does exist, but the parent doesn't match the one we expect, try to insert it.
-                                if( $term === false ||
-                                    ( $depth > 0 && intval($term['parent']) != $term_ids[($depth - 1)]) ) {
-                                    
-                                    $args = ($depth > 0) ? array('parent' => $term_ids[($depth - 1)]) : array();
-                                    $term = wp_insert_term($term_names[$depth], $tax, $args);
+                                if( $term === false || $term === 0 || $term === null) {
+                                    $insert_term_args = ($depth > 0) ? array('parent' => $term_ids[($depth - 1)]) : array();
+                                    $term = wp_insert_term($term_names[$depth], $tax, $insert_term_args);
+                                    delete_option("{$tax}_children");
                                 }
                                 
                                 if(is_array($term)) {
@@ -260,10 +259,11 @@
                         $tax = str_replace('_by_id', '', $map_to);
                         $term_ids = explode('|', $col);
                         foreach($term_ids as $term_id) {
-                            $term = get_term_by('id', $term_id, $tax, 'ARRAY_A');
+                            //$term = get_term_by('id', $term_id, $tax, 'ARRAY_A');
+                            $term = term_exists($term_id, $tax);
                             
                             //if we got a term, save the id so we can associate
-                            if($term !== false && is_array($term)) {
+                            if(is_array($term)) {
                                 $new_post_terms[$tax][] = intval($term['term_id']);
                             } else {
                                 $new_post_errors[] = "Couldn't find {$tax} with ID {$term_id}.";
