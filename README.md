@@ -98,10 +98,8 @@ Thanks to the following folks for helping make this plugin even better!
 - J.Ant for suggesting the addition of External Product support.
 - Andy for suggesting post_status importing, and finding a price importing bug.
 
-More information on our blog:
+**More Information on our Blog**
 
-http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
-
-http://webpresencepartners.com/2012/10/12/image-import-via-url-with-woo-product-importer/
-
-http://webpresencepartners.com/2013/01/13/importing-hierarchical-categories-into-woocommerce/
+- http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
+- http://webpresencepartners.com/2012/10/12/image-import-via-url-with-woo-product-importer/
+- http://webpresencepartners.com/2013/01/13/importing-hierarchical-categories-into-woocommerce/
