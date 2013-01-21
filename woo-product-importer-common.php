@@ -126,4 +126,23 @@
         border-radius: 3px;
         padding: 0 10px;
     }
+    
+    .woo_product_importer_wrapper #credits {
+        margin: 20px 0 6px;
+    }
+    
+    .woo_product_importer_wrapper #credits p {
+        margin: 2px 0;
+    }
+    
+    .woo_product_importer_wrapper #donate_form {
+        float: left;
+        margin: 0 6px;
+        padding: 0;
+    }
+    
+    .woo_product_importer_wrapper #donate_form form {
+        margin: 0;
+        padding: 0;
+    }
 </style>

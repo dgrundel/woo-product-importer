@@ -149,8 +149,24 @@
     <p><a id="show_debug" href="#" class="button">Show Raw AJAX Responses</a></p>
     <div id="debug"><!-- server responses get logged here --></div>
     
-    <p id="credits">
-        Woo Product Importer was created by Daniel Grundel of <a href="http://webpresencepartners.com">Web Presence Partners</a>.<br>
-        ajax-loader.gif courtesy of <a href="http://ajaxload.info">ajaxload.info</a>. The gigantic checkmark is public domain. All other icons are from the <a href="http://www.famfamfam.com/lab/icons/silk/">Silk icon set</a> by Mark James.
-    </p>
+    <div id="credits">
+        <div id="donate_form">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="YX9JSKX6778HQ">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+        </div>
+        
+        <p>If you found this plugin useful, and it saved you some time, money, or frustration, consider making a donation. Any amount is helpful!</p>
+        <p>If you're having a problem with the plugin, <a href="https://github.com/dgrundel/woo-product-importer/issues/new" target="_blank">post your issue here</a> and we'll do our best to help.</p>
+        <p>
+            Woo Product Importer was created by Daniel Grundel of <a href="http://webpresencepartners.com" target="_blank">Web Presence Partners</a>.
+            <em>ajax-loader.gif</em> courtesy of <a href="http://ajaxload.info" target="_blank">ajaxload.info</a>.
+            The <em>gigantic checkmark</em> is public domain.
+            All other icons are from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_blank">Silk icon set</a> by Mark James.
+        </p>
+        <div style="clear:both"></div>
+    </div>
 </div>
