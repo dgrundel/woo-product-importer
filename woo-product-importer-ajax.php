@@ -89,7 +89,8 @@
             $new_post_meta_defaults['_width'] = 0;
             $new_post_meta_defaults['_height'] = 0;
             $new_post_meta_defaults['_sku'] = '';
-            $new_post_meta_defaults['_sale_price'] = null;
+            $new_post_meta_defaults['_stock'] = '';
+            $new_post_meta_defaults['_sale_price'] = '';
             $new_post_meta_defaults['_sale_price_dates_from'] = '';
             $new_post_meta_defaults['_sale_price_dates_to'] = '';
             $new_post_meta_defaults['_tax_status'] = 'taxable';
@@ -191,12 +192,16 @@
                         $new_post_meta[$map_to] = preg_replace("/[^0-9.]/", "", $col);
                         break;
                     
+                    //sku
+                    case '_sku':
+                        $new_post_meta[$map_to] = trim($col);
+                        break;
+                    
                     //all other postmeta fields
                     case '_tax_status':
                     case '_tax_class':
                     case '_visibility':
                     case '_featured':
-                    case '_sku':
                     case '_downloadable':
                     case '_virtual':
                     case '_stock_status':
@@ -314,9 +319,7 @@
             //set some more post_meta and parse things as appropriate
             
             //set price to sale price if we have one, regular price otherwise
-            $new_post_meta['_price'] = $new_post_meta['_sale_price'] !== null ? $new_post_meta['_sale_price'] : $new_post_meta['_regular_price'];
-            //set sale price to empty string if we didn't get one from the CSV
-            if($new_post_meta['_sale_price'] === null) $new_post_meta['_sale_price'] = '';
+            $new_post_meta['_price'] = array_key_exists('_sale_price', $new_post_meta) ? $new_post_meta['_sale_price'] : $new_post_meta['_regular_price'];
             
             //check and set some inventory defaults
             if(array_key_exists('_stock', $new_post_meta)) {
@@ -332,8 +335,6 @@
                 }
                 
             } else {
-                //set empty string for stock value
-                $new_post_meta['_stock'] = '';
                 
                 //set _manage_stock to no if not explicitly set by CSV
                 if(!array_key_exists('_manage_stock', $new_post_meta)) $new_post_meta['_manage_stock'] = 'no';
@@ -391,17 +392,20 @@
                     }
                     
                     //set _product_attributes postmeta to the custom fields array. WP will serialize it for us.
-                    //first, get existing attributes
-                    $existing_product_attributes = get_post_meta($new_post_id, '_product_attributes', true);
-                    if(is_array($existing_product_attributes)) {
-                        //set the 'position' value for all *new* attributes.
-                        $last_position = count($existing_product_attributes);
-                        foreach($new_post_custom_fields as $field_slug => $field_data) {
-                            if(!array_key_exists($field_slug, $existing_product_attributes)) {
-                                $field_data['position'] = ++$last_position;
+                    //first, work on existing attributes
+                    if($existing_product !== null) {
+                        
+                        $existing_product_attributes = get_post_meta($new_post_id, '_product_attributes', true);
+                        if(is_array($existing_product_attributes)) {
+                            //set the 'position' value for all *new* attributes.
+                            $last_position = count($existing_product_attributes);
+                            foreach($new_post_custom_fields as $field_slug => $field_data) {
+                                if(!array_key_exists($field_slug, $existing_product_attributes)) {
+                                    $field_data['position'] = ++$last_position;
+                                }
                             }
+                            $new_post_custom_fields = array_merge($existing_product_attributes, $new_post_custom_fields);
                         }
-                        $new_post_custom_fields = array_merge($existing_product_attributes, $new_post_custom_fields);
                     }
                     add_post_meta($new_post_id, '_product_attributes', $new_post_custom_fields, true) or
                         update_post_meta($new_post_id, '_product_attributes', $new_post_custom_fields);
