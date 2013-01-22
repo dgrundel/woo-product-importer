@@ -341,7 +341,7 @@
             
             //try to find a product with a matching SKU
             $existing_product = null;
-            if(strlen($new_post_meta['_sku']) > 0) {
+            if(array_key_exists('_sku', $new_post_meta) && !empty($new_post_meta['_sku']) > 0) {
                 $existing_post_query = array(
                     'numberposts' => 1,
                     'meta_key' => '_sku',
