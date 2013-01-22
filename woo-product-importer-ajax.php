@@ -67,31 +67,37 @@
             //unset new_post_id
             $new_post_id = null;
             
-            //set some initial post values
+            //array of imported post data
             $new_post = array();
-            $new_post['post_type'] = 'product';
-            $new_post['post_status'] = 'publish';
-            $new_post['post_title'] = '';
-            $new_post['post_content'] = '';
             
-            //set some initial post_meta values
+            //set some defaults in case the post doesn't exist
+            $new_post_defaults = array();
+            $new_post_defaults['post_type'] = 'product';
+            $new_post_defaults['post_status'] = 'publish';
+            $new_post_defaults['post_title'] = '';
+            $new_post_defaults['post_content'] = '';
+            
+            //array of imported post_meta
             $new_post_meta = array();
-            $new_post_meta['_visibility'] = 'visible';
-            $new_post_meta['_featured'] = 'no';
-            $new_post_meta['_weight'] = 0;
-            $new_post_meta['_length'] = 0;
-            $new_post_meta['_width'] = 0;
-            $new_post_meta['_height'] = 0;
-            $new_post_meta['_sku'] = '';
-            $new_post_meta['_sale_price'] = null;
-            $new_post_meta['_sale_price_dates_from'] = '';
-            $new_post_meta['_sale_price_dates_to'] = '';
-            $new_post_meta['_tax_status'] = 'taxable';
-            $new_post_meta['_tax_class'] = '';
-            $new_post_meta['_purchase_note'] = '';
-            $new_post_meta['_downloadable'] = 'no';
-            $new_post_meta['_virtual'] = 'no';
-            $new_post_meta['_backorders'] = 'no';
+            
+            //default post_meta to use if the post doesn't exist
+            $new_post_meta_defaults = array();
+            $new_post_meta_defaults['_visibility'] = 'visible';
+            $new_post_meta_defaults['_featured'] = 'no';
+            $new_post_meta_defaults['_weight'] = 0;
+            $new_post_meta_defaults['_length'] = 0;
+            $new_post_meta_defaults['_width'] = 0;
+            $new_post_meta_defaults['_height'] = 0;
+            $new_post_meta_defaults['_sku'] = '';
+            $new_post_meta_defaults['_sale_price'] = null;
+            $new_post_meta_defaults['_sale_price_dates_from'] = '';
+            $new_post_meta_defaults['_sale_price_dates_to'] = '';
+            $new_post_meta_defaults['_tax_status'] = 'taxable';
+            $new_post_meta_defaults['_tax_class'] = '';
+            $new_post_meta_defaults['_purchase_note'] = '';
+            $new_post_meta_defaults['_downloadable'] = 'no';
+            $new_post_meta_defaults['_virtual'] = 'no';
+            $new_post_meta_defaults['_backorders'] = 'no';
             
             //stores tax and term ids so we can associate our product with terms and taxonomies
             //this is a multidimensional array
@@ -311,8 +317,6 @@
             $new_post_meta['_price'] = $new_post_meta['_sale_price'] !== null ? $new_post_meta['_sale_price'] : $new_post_meta['_regular_price'];
             //set sale price to empty string if we didn't get one from the CSV
             if($new_post_meta['_sale_price'] === null) $new_post_meta['_sale_price'] = '';
-            //set _product_attributes postmeta to the custom fields array. WP will serialize it for us.
-            $new_post_meta['_product_attributes'] = $new_post_custom_fields;
             
             //check and set some inventory defaults
             if(array_key_exists('_stock', $new_post_meta)) {
@@ -364,6 +368,11 @@
                     $new_post['ID'] = $existing_product->ID;
                     $new_post_id = wp_update_post($new_post);
                 } else {
+                    
+                    //merge in default values since we're creating a new product from scratch
+                    $new_post = array_merge($new_post_defaults, $new_post);
+                    $new_post_meta = array_merge($new_post_meta_defaults, $new_post_meta);
+                    
                     $new_post_id = wp_insert_post($new_post, true);
                 }
                 
@@ -380,6 +389,22 @@
                         add_post_meta($new_post_id, $meta_key, $meta_value, true) or
                             update_post_meta($new_post_id, $meta_key, $meta_value);
                     }
+                    
+                    //set _product_attributes postmeta to the custom fields array. WP will serialize it for us.
+                    //first, get existing attributes
+                    $existing_product_attributes = get_post_meta($new_post_id, '_product_attributes', true);
+                    if(is_array($existing_product_attributes)) {
+                        //set the 'position' value for all *new* attributes.
+                        $last_position = count($existing_product_attributes);
+                        foreach($new_post_custom_fields as $field_slug => $field_data) {
+                            if(!array_key_exists($field_slug, $existing_product_attributes)) {
+                                $field_data['position'] = ++$last_position;
+                            }
+                        }
+                        $new_post_custom_fields = array_merge($existing_product_attributes, $new_post_custom_fields);
+                    }
+                    add_post_meta($new_post_id, '_product_attributes', $new_post_custom_fields, true) or
+                        update_post_meta($new_post_id, '_product_attributes', $new_post_custom_fields);
                     
                     //set post terms on inserted post
                     foreach($new_post_terms as $tax => $term_ids) {
