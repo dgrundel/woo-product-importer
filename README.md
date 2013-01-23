@@ -7,7 +7,7 @@ woo-product-importer
 - Imports hierarchical category structures (see *Importing Hierarchical Categories* below.)
 - Lots of other great features suggested by plugin users (see *Cool Stuff It/You Can Do* and *Full List of Importable Attributes* below.)
 
-Once installed, go to **Tools** &rarr; **Woo Product Importer** in the Admin Panel to use.
+Once installed, go to **Tools** &rarr; **Woo Product Importer** in the Admin Panel to use. (For help installing the plugin, see **Plugin Installation** below.)
 
 ![Import Complete Screenshot](http://webpresencepartners.com/wp-content/uploads/2012/10/complete1.png)
 
@@ -70,12 +70,9 @@ Here's a look at the preview/column mapping screen:
 - _download_expiry (Download Expiration, in Days)
 - _download_limit (Download Limit, an integer)
 
-**Not Supported (Yet)**
-- Variable and Grouped Products
-- Custom taxonomies
-- Attributes (and Global Attributes)
+**Plugin Installation**
 
-If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, ( *cough* *cough* ) you could hire us!
+Because the plugin is hosted on Github and not WordPress.org, the installation process might be a little different than you're used to. I've put together a quick rundown (with screenshots!) of how to install the plugin here: http://webpresencepartners.com/2013/01/22/installing-a-wordpress-plugin-from-a-github-repo/
 
 **Importing Hierarchical Categories**
 
@@ -86,6 +83,17 @@ You can now import hierarchical category structures!
 - The plugin will create the hierarchy if it does not exist.
 
 More info and example on our blog: http://webpresencepartners.com/2013/01/13/importing-hierarchical-categories-into-woocommerce/
+
+**Not Supported (Yet)**
+- Variable and Grouped Products
+- Custom taxonomies
+- Attributes (and Global Attributes)
+
+If you see something on the 'Not Supported' list that you absolutely must have, let me know. We can try to move it up on the priority list or, ( *cough* *cough* ) you could hire us!
+
+**To Do**
+
+- Plugin becomes self-aware.
 
 **Thank Yous**
 
