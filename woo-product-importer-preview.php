@@ -71,112 +71,114 @@
     
     $show_import_checkboxes = !!($row_count < 100);
     
+    //'mapping_hints' should be all lower case
+    //(a strtolower is performed on header_row when checking)
     $col_mapping_options = array(
         'do_not_import' => array(
             'label' => 'Do Not Import',
             'mapping_hints' => array()),
         'post_title' => array(
             'label' => 'Name',
-             'mapping_hints' => array('Title', 'Product Name')),
+            'mapping_hints' => array('title', 'product name')),
         'post_status' => array(
             'label' => 'Status (Valid: publish/draft/trash/[more in Codex])',
-             'mapping_hints' => array('Status')),
+            'mapping_hints' => array('status', 'product status', 'post status')),
         'post_content' => array(
             'label' => 'Description',
-             'mapping_hints' => array('Desc', 'Content')),
+            'mapping_hints' => array('desc', 'content')),
         'post_excerpt' => array(
             'label' => 'Short Description',
-             'mapping_hints' => array('Short Desc', 'Excerpt')),
+            'mapping_hints' => array('short desc', 'excerpt')),
         '_regular_price' => array(
             'label' => 'Regular Price',
-             'mapping_hints' => array('Price')),
+            'mapping_hints' => array('price', '_price', 'msrp')),
         '_sale_price' => array(
             'label' => 'Sale Price',
-             'mapping_hints' => array()),
+            'mapping_hints' => array()),
         '_tax_status' => array(
             'label' => 'Tax Status (Valid: taxable/shipping/none)',
-             'mapping_hints' => array('Tax Status', 'Taxable')),
+            'mapping_hints' => array('tax status', 'taxable')),
         '_tax_class' => array(
             'label' => 'Tax Class',
-             'mapping_hints' => array()),
+            'mapping_hints' => array()),
         '_visibility' => array(
             'label' => 'Visibility (Valid: visible/catalog/search/hidden)',
-             'mapping_hints' => array('Visibility', 'Visible')),
+            'mapping_hints' => array('visibility', 'visible')),
         '_featured' => array(
             'label' => 'Featured (Valid: yes/no)',
-             'mapping_hints' => array('Featured')),
+            'mapping_hints' => array('featured')),
         '_weight' => array(
             'label' => 'Weight',
-             'mapping_hints' => array('wt')),
+            'mapping_hints' => array('wt')),
         '_length' => array(
             'label' => 'Length',
-             'mapping_hints' => array('l')),
+            'mapping_hints' => array('l')),
         '_width' => array(
             'label' => 'Width',
-             'mapping_hints' => array('w')),
+            'mapping_hints' => array('w')),
         '_height' => array(
             'label' => 'Height',
-             'mapping_hints' => array('h')),
+            'mapping_hints' => array('h')),
         '_sku' => array(
             'label' => 'SKU',
-             'mapping_hints' => array()),
+            'mapping_hints' => array()),
         '_downloadable' => array(
             'label' => 'Downloadable (Valid: yes/no)',
-             'mapping_hints' => array('Downloadable')),
+            'mapping_hints' => array('downloadable')),
         '_virtual' => array(
             'label' => 'Virtual (Valid: yes/no)',
-             'mapping_hints' => array('Virtual')),
+            'mapping_hints' => array('virtual')),
         '_stock' => array(
             'label' => 'Stock',
-             'mapping_hints' => array('Qty', 'Quantity')),
+            'mapping_hints' => array('qty', 'quantity')),
         '_stock_status' => array(
             'label' => 'Stock Status (Valid: instock/outofstock)',
-             'mapping_hints' => array('Stock Status', 'In Stock')),
+            'mapping_hints' => array('stock status', 'in stock')),
         '_backorders' => array(
             'label' => 'Backorders (Valid: yes/no/notify)',
-             'mapping_hints' => array('Backorders')),
+            'mapping_hints' => array('backorders')),
         '_manage_stock' => array(
             'label' => 'Manage Stock (Valid: yes/no)',
-             'mapping_hints' => array('Manage Stock')),
+            'mapping_hints' => array('manage stock')),
         '_product_type' => array(
             'label' => 'Product Type (Valid: simple/variable/grouped/external)',
-             'mapping_hints' => array('Product Type', 'Type')),
+            'mapping_hints' => array('product type', 'type')),
         'product_cat_by_name' => array(
             'label' => 'Categories By Name (Separated by "|")',
-             'mapping_hints' => array('Category', 'Categories', 'Product Category', 'Product Categories', 'product_cat')),
+            'mapping_hints' => array('category', 'categories', 'product category', 'product categories', 'product_cat')),
         'product_cat_by_id' => array(
             'label' => 'Categories By ID (Separated by "|")',
-             'mapping_hints' => array()),
+            'mapping_hints' => array()),
         'product_tag_by_name' => array(
             'label' => 'Tags By Name (Separated by "|")',
-             'mapping_hints' => array('Tag', 'Tags', 'Product Tag', 'Product Tags', 'product_tag')),
+            'mapping_hints' => array('tag', 'tags', 'product tag', 'product tags', 'product_tag')),
         'product_tag_by_id' => array(
             'label' => 'Tags By ID (Separated by "|")',
-             'mapping_hints' => array()),
+            'mapping_hints' => array()),
         'custom_field' => array(
             'label' => 'Custom Field (Set Name Below)',
-             'mapping_hints' => array('Custom Field', 'Custom')),
+            'mapping_hints' => array('custom field', 'custom')),
         'product_image_by_url' => array(
             'label' => 'Images (By URL, Separated by "|")',
-             'mapping_hints' => array('Image URL', 'Image URLs', 'Product Image URL', 'Product Image URLs')),
+            'mapping_hints' => array('image', 'images', 'image url', 'image urls', 'product image url', 'product image urls')),
         'product_image_by_path' => array(
             'label' => 'Images (By Local File Path, Separated by "|")',
-             'mapping_hints' => array('Image Path', 'Image Paths', 'Product Image Path', 'Product Image Paths')),
+            'mapping_hints' => array('image path', 'image paths', 'product image path', 'product image paths')),
         '_button_text' => array(
             'label' => 'Button Text (External Product Only)',
-             'mapping_hints' => array('Button Text')),
+            'mapping_hints' => array('button text')),
         '_product_url' => array(
             'label' => 'Product URL (External Product Only)',
-             'mapping_hints' => array('Product URL', 'URL')),
+            'mapping_hints' => array('product url', 'url')),
         '_file_path' => array(
             'label' => 'File Path (Downloadable Product Only)',
-             'mapping_hints' => array('File Path', 'File')),
+            'mapping_hints' => array('file path', 'file')),
         '_download_expiry' => array(
             'label' => 'Download Expiration (in Days)',
-             'mapping_hints' => array('Download Expiration', 'Download Expiry')),
+            'mapping_hints' => array('download expiration', 'download expiry')),
         '_download_limit' => array(
             'label' => 'Download Limit (Number of Downloads)',
-            'mapping_hints' => array('Download Limit', 'Number of Downloads'))
+            'mapping_hints' => array('download limit', 'number of downloads'))
     );
     
 ?>
@@ -253,9 +255,10 @@
                                             if(intval($_POST['header_row']) == 1) {
                                                 //pre-select this value if the header_row
                                                 //matches the label, value, or any of the hints.
-                                                if( $header_row[$key] == $value ||
-                                                    $header_row[$key] == $meta['label'] ||
-                                                    in_array($header_row[$key], $meta['mapping_hints']) ) {
+                                                $header_value = strtolower($header_row[$key]);
+                                                if( $header_value == strtolower($value) ||
+                                                    $header_value == strtolower($meta['label']) ||
+                                                    in_array($header_value, $meta['mapping_hints']) ) {
                                                         
                                                     echo 'selected="selected"';
                                                 }
