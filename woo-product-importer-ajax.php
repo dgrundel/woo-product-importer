@@ -11,9 +11,6 @@
         'product_image_set_featured' => maybe_unserialize(stripslashes($_POST['product_image_set_featured']))
     );
     
-    //var_dump($post_data);
-    //var_dump($_POST['custom_field_name']);
-    
     if(isset($post_data['uploaded_file_path'])) {
         
         $error_messages = array();
@@ -394,14 +391,16 @@
                     //set _product_attributes postmeta to the custom fields array. WP will serialize it for us.
                     //first, work on existing attributes
                     if($existing_product !== null) {
-                        
                         $existing_product_attributes = get_post_meta($new_post_id, '_product_attributes', true);
                         if(is_array($existing_product_attributes)) {
                             //set the 'position' value for all *new* attributes.
-                            $last_position = count($existing_product_attributes);
+                            $max_position = 0;
+                            foreach($existing_product_attributes as $field_slug => $field_data) {
+                                $max_position = max(intval($field_data['position']), $max_position);
+                            }
                             foreach($new_post_custom_fields as $field_slug => $field_data) {
                                 if(!array_key_exists($field_slug, $existing_product_attributes)) {
-                                    $field_data['position'] = ++$last_position;
+                                    $new_post_custom_fields[$field_slug]['position'] = ++$max_position;
                                 }
                             }
                             $new_post_custom_fields = array_merge($existing_product_attributes, $new_post_custom_fields);
