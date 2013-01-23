@@ -72,42 +72,111 @@
     $show_import_checkboxes = !!($row_count < 100);
     
     $col_mapping_options = array(
-        'do_not_import' => 'Do Not Import',
-        'post_title' => 'Name',
-        'post_status' => 'Status (Valid: publish/draft/trash/[more in Codex])',
-        'post_content' => 'Description',
-        'post_excerpt' => 'Short Description',
-        '_regular_price' => 'Regular Price',
-        '_sale_price' => 'Sale Price',
-        '_tax_status' => 'Tax Status (Valid: taxable/shipping/none)',
-        '_tax_class' => 'Tax Class',
-        '_visibility' => 'Visibility (Valid: visible/catalog/search/hidden)',
-        '_featured' => 'Featured (Valid: yes/no)',
-        '_weight' => 'Weight',
-        '_length' => 'Length',
-        '_width' => 'Width',
-        '_height' => 'Height',
-        '_sku' => 'SKU',
-        '_downloadable' => 'Downloadable (Valid: yes/no)',
-        '_virtual' => 'Virtual (Valid: yes/no)',
-        '_stock' => 'Stock',
-        '_stock_status' => 'Stock Status (Valid: instock/outofstock)',
-        '_backorders' => 'Backorders (Valid: yes/no/notify)',
-        '_manage_stock' => 'Manage Stock (Valid: yes/no)',
-        '_product_type' => 'Product Type (Valid: simple/variable/grouped/external)',
-        '_product_url' => 'Product URL',
-        'product_cat_by_name' => 'Categories By Name (Separated by "|")',
-        'product_cat_by_id' => 'Categories By ID (Separated by "|")',
-        'product_tag_by_name' => 'Tags By Name (Separated by "|")',
-        'product_tag_by_id' => 'Tags By ID (Separated by "|")',
-        'custom_field' => 'Custom Field (Set Name Below)',
-        'product_image_by_url' => 'Images (By URL, Separated by "|")',
-        'product_image_by_path' => 'Images (By Local File Path, Separated by "|")',
-        '_button_text' => 'Button Text (External Product Only)',
-        '_product_url' => 'Product URL (External Product Only)',
-        '_file_path' => 'File Path (Downloadable Product Only)',
-        '_download_expiry' => 'Download Expiration (in Days)',
-        '_download_limit' => 'Download Limit (Number of Downloads)'
+        'do_not_import' => array(
+            'label' => 'Do Not Import',
+            'mapping_hints' => array()),
+        'post_title' => array(
+            'label' => 'Name',
+             'mapping_hints' => array('Title', 'Product Name')),
+        'post_status' => array(
+            'label' => 'Status (Valid: publish/draft/trash/[more in Codex])',
+             'mapping_hints' => array('Status')),
+        'post_content' => array(
+            'label' => 'Description',
+             'mapping_hints' => array('Desc', 'Content')),
+        'post_excerpt' => array(
+            'label' => 'Short Description',
+             'mapping_hints' => array('Short Desc', 'Excerpt')),
+        '_regular_price' => array(
+            'label' => 'Regular Price',
+             'mapping_hints' => array('Price')),
+        '_sale_price' => array(
+            'label' => 'Sale Price',
+             'mapping_hints' => array()),
+        '_tax_status' => array(
+            'label' => 'Tax Status (Valid: taxable/shipping/none)',
+             'mapping_hints' => array('Tax Status', 'Taxable')),
+        '_tax_class' => array(
+            'label' => 'Tax Class',
+             'mapping_hints' => array()),
+        '_visibility' => array(
+            'label' => 'Visibility (Valid: visible/catalog/search/hidden)',
+             'mapping_hints' => array('Visibility', 'Visible')),
+        '_featured' => array(
+            'label' => 'Featured (Valid: yes/no)',
+             'mapping_hints' => array('Featured')),
+        '_weight' => array(
+            'label' => 'Weight',
+             'mapping_hints' => array('wt')),
+        '_length' => array(
+            'label' => 'Length',
+             'mapping_hints' => array('l')),
+        '_width' => array(
+            'label' => 'Width',
+             'mapping_hints' => array('w')),
+        '_height' => array(
+            'label' => 'Height',
+             'mapping_hints' => array('h')),
+        '_sku' => array(
+            'label' => 'SKU',
+             'mapping_hints' => array()),
+        '_downloadable' => array(
+            'label' => 'Downloadable (Valid: yes/no)',
+             'mapping_hints' => array('Downloadable')),
+        '_virtual' => array(
+            'label' => 'Virtual (Valid: yes/no)',
+             'mapping_hints' => array('Virtual')),
+        '_stock' => array(
+            'label' => 'Stock',
+             'mapping_hints' => array('Qty', 'Quantity')),
+        '_stock_status' => array(
+            'label' => 'Stock Status (Valid: instock/outofstock)',
+             'mapping_hints' => array('Stock Status', 'In Stock')),
+        '_backorders' => array(
+            'label' => 'Backorders (Valid: yes/no/notify)',
+             'mapping_hints' => array('Backorders')),
+        '_manage_stock' => array(
+            'label' => 'Manage Stock (Valid: yes/no)',
+             'mapping_hints' => array('Manage Stock')),
+        '_product_type' => array(
+            'label' => 'Product Type (Valid: simple/variable/grouped/external)',
+             'mapping_hints' => array('Product Type', 'Type')),
+        'product_cat_by_name' => array(
+            'label' => 'Categories By Name (Separated by "|")',
+             'mapping_hints' => array('Category', 'Categories', 'Product Category', 'Product Categories', 'product_cat')),
+        'product_cat_by_id' => array(
+            'label' => 'Categories By ID (Separated by "|")',
+             'mapping_hints' => array()),
+        'product_tag_by_name' => array(
+            'label' => 'Tags By Name (Separated by "|")',
+             'mapping_hints' => array('Tag', 'Tags', 'Product Tag', 'Product Tags', 'product_tag')),
+        'product_tag_by_id' => array(
+            'label' => 'Tags By ID (Separated by "|")',
+             'mapping_hints' => array()),
+        'custom_field' => array(
+            'label' => 'Custom Field (Set Name Below)',
+             'mapping_hints' => array('Custom Field', 'Custom')),
+        'product_image_by_url' => array(
+            'label' => 'Images (By URL, Separated by "|")',
+             'mapping_hints' => array('Image URL', 'Image URLs', 'Product Image URL', 'Product Image URLs')),
+        'product_image_by_path' => array(
+            'label' => 'Images (By Local File Path, Separated by "|")',
+             'mapping_hints' => array('Image Path', 'Image Paths', 'Product Image Path', 'Product Image Paths')),
+        '_button_text' => array(
+            'label' => 'Button Text (External Product Only)',
+             'mapping_hints' => array('Button Text')),
+        '_product_url' => array(
+            'label' => 'Product URL (External Product Only)',
+             'mapping_hints' => array('Product URL', 'URL')),
+        '_file_path' => array(
+            'label' => 'File Path (Downloadable Product Only)',
+             'mapping_hints' => array('File Path', 'File')),
+        '_download_expiry' => array(
+            'label' => 'Download Expiration (in Days)',
+             'mapping_hints' => array('Download Expiration', 'Download Expiry')),
+        '_download_limit' => array(
+            'label' => 'Download Limit (Number of Downloads)',
+            'mapping_hints' => array('Download Limit', 'Number of Downloads'))
     );
     
 ?>
@@ -179,8 +248,19 @@
                         <th>
                             <div class="map_to_settings">
                                 Map to: <select name="map_to[<?php echo $key; ?>]" class="map_to">
-                                    <?php foreach($col_mapping_options as $value => $name): ?>
-                                        <option value="<?php echo $value; ?>" <?php if($header_row[$key] == $value || $header_row[$key] == $name) echo 'selected="selected"'; ?>><?php echo $name; ?></option>
+                                    <?php foreach($col_mapping_options as $value => $meta): ?>
+                                        <option value="<?php echo $value; ?>" <?php
+                                            if(intval($_POST['header_row']) == 1) {
+                                                //pre-select this value if the header_row
+                                                //matches the label, value, or any of the hints.
+                                                if( $header_row[$key] == $value ||
+                                                    $header_row[$key] == $meta['label'] ||
+                                                    in_array($header_row[$key], $meta['mapping_hints']) ) {
+                                                        
+                                                    echo 'selected="selected"';
+                                                }
+                                            }
+                                        ?>><?php echo $meta['label']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
