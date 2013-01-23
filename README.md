@@ -22,7 +22,8 @@ A sample CSV file is included to help you get started. (woo-importer-example.csv
 - Add Categories and Tags to Products by Category/Tag Name or ID
 - Import Custom Fields
 - Set Visibility on Custom Fields
-- Map any CSV column to any Product field (No header row required, but if you happened to include one, I'll use it to take a stab at what goes where)
+- Map any CSV column to any Product field (No header row is required, but...)
+- If you include a header row, the plugin will attempt to map column values to product fields automatically. (You can override this, of course.)
 - Map multiple CSV columns to the same Product field (last non-empty column wins, good for merging columns)
 - Basic validation for multiple-choice fields (fields with a limited set of valid values like yes/no, instock/outofstock, etc.)
 - Dollar signs, commas, etc. are stripped out of number fields like prices, weight, length, width, height
