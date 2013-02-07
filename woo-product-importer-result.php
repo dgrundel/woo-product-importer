@@ -180,7 +180,8 @@
         <p>If you found this plugin useful, and it saved you some time, money, or frustration, consider making a donation. Any amount is helpful!</p>
         <p>If you're having a problem with the plugin, <a href="https://github.com/dgrundel/woo-product-importer/issues/new" target="_blank">post your issue here</a> and we'll do our best to help.</p>
         <p>
-            Woo Product Importer was created by Daniel Grundel of <a href="http://webpresencepartners.com" target="_blank">Web Presence Partners</a>.
+            Woo Product Importer was created by Daniel Grundel of <a href="http://webpresencepartners.com" target="_blank">Web Presence Partners</a> and is copyright 2012-2013 Web Presence Partners LLC.
+            It is licensed under the GNU LGPL v3.
             <em>ajax-loader.gif</em> courtesy of <a href="http://ajaxload.info" target="_blank">ajaxload.info</a>.
             The <em>gigantic checkmark</em> is public domain.
             All other icons are from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_blank">Silk icon set</a> by Mark James.
