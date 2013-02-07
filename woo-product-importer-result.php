@@ -15,7 +15,7 @@
                 "header_row": <?php echo json_encode($_POST['header_row']); ?>,
                 "limit": limit,
                 "offset": offset,
-                "import_row": '<?php echo (serialize($_POST['import_row'])); ?>',
+                "import_row": '<?php echo isset($_POST['import_row']) ? serialize($_POST['import_row']) : ""; ?>',
                 "map_to": '<?php echo (serialize($_POST['map_to'])); ?>',
                 "custom_field_name": '<?php echo (serialize($_POST['custom_field_name'])); ?>',
                 "custom_field_visible": '<?php echo (serialize($_POST['custom_field_visible'])); ?>',

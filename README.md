@@ -103,6 +103,7 @@ Thanks to the following folks for helping make this plugin even better!
 - Subhan Toba for noting that we were inserting duplicate SKUs, prompting me to support product updating
 - J.Ant for suggesting the addition of External Product support.
 - Andy for suggesting post_status importing, and finding a price importing bug.
+- Github user miguelGnomonet for submitting a bug report.
 
 **More Information on our Blog**
 

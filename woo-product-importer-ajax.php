@@ -59,7 +59,7 @@
             
             //don't import if the checkbox wasn't checked
             //only applies when row_count is less than 100
-            if($row_count < 100 && intval($post_data['import_row'][$row_id]) != 1) continue;
+            if(is_array($post_data['import_row']) && intval($post_data['import_row'][$row_id]) != 1) continue;
             
             //unset new_post_id
             $new_post_id = null;
