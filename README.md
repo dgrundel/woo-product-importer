@@ -110,3 +110,20 @@ Thanks to the following folks for helping make this plugin even better!
 - http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/
 - http://webpresencepartners.com/2012/10/12/image-import-via-url-with-woo-product-importer/
 - http://webpresencepartners.com/2013/01/13/importing-hierarchical-categories-into-woocommerce/
+
+**License**
+
+Woo Product Importer is Copyright 2012-2013 Web Presence Partners LLC.
+
+Woo Product Importer is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Woo Product Importer is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Woo Product Importer.  If not, see <http://www.gnu.org/licenses/>.
