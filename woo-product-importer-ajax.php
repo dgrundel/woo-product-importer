@@ -1,4 +1,6 @@
 <?php
+    ini_set("auto_detect_line_endings", true);
+
     $post_data = array(
         'uploaded_file_path' => $_POST['uploaded_file_path'],
         'header_row' => $_POST['header_row'],

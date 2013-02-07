@@ -1,6 +1,7 @@
 <?php
-    $error_messages = array();
+    ini_set("auto_detect_line_endings", true);
     
+    $error_messages = array();
     
     if(isset($_POST['import_csv_url']) && strlen($_POST['import_csv_url']) > 0) {
         
