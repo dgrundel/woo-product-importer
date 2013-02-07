@@ -78,14 +78,13 @@
             $error_messages[] = 'Could not open file.';
         }
         
-        if(sizeof($import_data) == 0) {
-            $error_messages[] = 'No data to import.';
-        }
-        
-        if(intval($_POST['header_row']) == 1)
+        if(intval($_POST['header_row']) == 1 && sizeof($import_data) > 0)
             $header_row = array_shift($import_data);
-            
+        
         $row_count = sizeof($import_data);
+        if($row_count == 0)
+            $error_messages[] = 'No data to import.';
+        
     }
     
     $show_import_checkboxes = !!($row_count < 100);
@@ -232,94 +231,96 @@
         </ul>
     <?php endif; ?>
     
-    <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
-        <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($file_path); ?>">
-        <input type="hidden" name="header_row" value="<?php echo $_POST['header_row']; ?>">
-        <input type="hidden" name="row_count" value="<?php echo $row_count; ?>">
-        <input type="hidden" name="limit" value="5">
-        
-        <p>
-            <button class="button-primary" type="submit">Import</button>
-        </p>
-        
-        <table class="wp-list-table widefat fixed pages" cellspacing="0">
-            <thead>
-                <?php if(intval($_POST['header_row']) == 1): ?>
-                    <tr class="header_row">
-                        <th colspan="<?php echo ($show_import_checkboxes) ? sizeof($header_row) + 1 : sizeof($header_row); ?>">CSV Header Row</th>
-                    </tr>
-                    <tr class="header_row">
-                        <?php if($show_import_checkboxes): ?>
-                            <th></th>
-                        <?php endif; ?>
-                        <?php foreach($header_row as $col): ?>
-                            <th><?php echo htmlspecialchars($col); ?></th>
-                        <?php endforeach; ?>
-                    </tr>
-                <?php endif; ?>
-                <tr>
-                    <?php if($show_import_checkboxes): ?>
-                        <th class="narrow">Import?</th>
+    <?php if($row_count > 0): ?>
+        <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
+            <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($file_path); ?>">
+            <input type="hidden" name="header_row" value="<?php echo $_POST['header_row']; ?>">
+            <input type="hidden" name="row_count" value="<?php echo $row_count; ?>">
+            <input type="hidden" name="limit" value="5">
+            
+            <p>
+                <button class="button-primary" type="submit">Import</button>
+            </p>
+            
+            <table class="wp-list-table widefat fixed pages" cellspacing="0">
+                <thead>
+                    <?php if(intval($_POST['header_row']) == 1): ?>
+                        <tr class="header_row">
+                            <th colspan="<?php echo ($show_import_checkboxes) ? sizeof($header_row) + 1 : sizeof($header_row); ?>">CSV Header Row</th>
+                        </tr>
+                        <tr class="header_row">
+                            <?php if($show_import_checkboxes): ?>
+                                <th></th>
+                            <?php endif; ?>
+                            <?php foreach($header_row as $col): ?>
+                                <th><?php echo htmlspecialchars($col); ?></th>
+                            <?php endforeach; ?>
+                        </tr>
                     <?php endif; ?>
-                    <?php
-                        reset($import_data);
-                        $first_row = current($import_data);
-                        foreach($first_row as $key => $col):
-                    ?>
-                        <th>
-                            <div class="map_to_settings">
-                                Map to: <select name="map_to[<?php echo $key; ?>]" class="map_to">
-                                    <?php foreach($col_mapping_options as $value => $meta): ?>
-                                        <option value="<?php echo $value; ?>" <?php
-                                            if(intval($_POST['header_row']) == 1) {
-                                                //pre-select this value if the header_row
-                                                //matches the label, value, or any of the hints.
-                                                $header_value = strtolower($header_row[$key]);
-                                                if( $header_value == strtolower($value) ||
-                                                    $header_value == strtolower($meta['label']) ||
-                                                    in_array($header_value, $meta['mapping_hints']) ) {
-                                                        
-                                                    echo 'selected="selected"';
-                                                }
-                                            }
-                                        ?>><?php echo $meta['label']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="custom_field_settings field_settings">
-                                <h4>Custom Field Settings</h4>
-                                <p>
-                                    <label for="custom_field_name_<?php echo $key; ?>">Name</label>
-                                    <input type="text" name="custom_field_name[<?php echo $key; ?>]" id="custom_field_name_<?php echo $key; ?>" value="<?php echo $header_row[$key]; ?>" />
-                                </p>
-                                <p>
-                                    <input type="checkbox" name="custom_field_visible[<?php echo $key; ?>]" id="custom_field_visible_<?php echo $key; ?>" value="1" checked="checked" />
-                                    <label for="custom_field_visible_<?php echo $key; ?>">Visible?</label>
-                                </p>
-                            </div>
-                            <div class="product_image_settings field_settings">
-                                <h4>Image Settings</h4>
-                                <p>
-                                    <input type="checkbox" name="product_image_set_featured[<?php echo $key; ?>]" id="product_image_set_featured_<?php echo $key; ?>" value="1" checked="checked" />
-                                    <label for="product_image_set_featured_<?php echo $key; ?>">Set First Image as Featured</label>
-                                </p>
-                            </div>
-                        </th>
-                    <?php endforeach; ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($import_data as $row_id => $row): ?>
                     <tr>
                         <?php if($show_import_checkboxes): ?>
-                            <td class="narrow"><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></td>
+                            <th class="narrow">Import?</th>
                         <?php endif; ?>
-                        <?php foreach($row as $col): ?>
-                            <td><?php echo htmlspecialchars($col); ?></td>
+                        <?php
+                            reset($import_data);
+                            $first_row = current($import_data);
+                            foreach($first_row as $key => $col):
+                        ?>
+                            <th>
+                                <div class="map_to_settings">
+                                    Map to: <select name="map_to[<?php echo $key; ?>]" class="map_to">
+                                        <?php foreach($col_mapping_options as $value => $meta): ?>
+                                            <option value="<?php echo $value; ?>" <?php
+                                                if(intval($_POST['header_row']) == 1) {
+                                                    //pre-select this value if the header_row
+                                                    //matches the label, value, or any of the hints.
+                                                    $header_value = strtolower($header_row[$key]);
+                                                    if( $header_value == strtolower($value) ||
+                                                        $header_value == strtolower($meta['label']) ||
+                                                        in_array($header_value, $meta['mapping_hints']) ) {
+                                                            
+                                                        echo 'selected="selected"';
+                                                    }
+                                                }
+                                            ?>><?php echo $meta['label']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="custom_field_settings field_settings">
+                                    <h4>Custom Field Settings</h4>
+                                    <p>
+                                        <label for="custom_field_name_<?php echo $key; ?>">Name</label>
+                                        <input type="text" name="custom_field_name[<?php echo $key; ?>]" id="custom_field_name_<?php echo $key; ?>" value="<?php echo $header_row[$key]; ?>" />
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" name="custom_field_visible[<?php echo $key; ?>]" id="custom_field_visible_<?php echo $key; ?>" value="1" checked="checked" />
+                                        <label for="custom_field_visible_<?php echo $key; ?>">Visible?</label>
+                                    </p>
+                                </div>
+                                <div class="product_image_settings field_settings">
+                                    <h4>Image Settings</h4>
+                                    <p>
+                                        <input type="checkbox" name="product_image_set_featured[<?php echo $key; ?>]" id="product_image_set_featured_<?php echo $key; ?>" value="1" checked="checked" />
+                                        <label for="product_image_set_featured_<?php echo $key; ?>">Set First Image as Featured</label>
+                                    </p>
+                                </div>
+                            </th>
                         <?php endforeach; ?>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </form>
+                </thead>
+                <tbody>
+                    <?php foreach($import_data as $row_id => $row): ?>
+                        <tr>
+                            <?php if($show_import_checkboxes): ?>
+                                <td class="narrow"><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></td>
+                            <?php endif; ?>
+                            <?php foreach($row as $col): ?>
+                                <td><?php echo htmlspecialchars($col); ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </form>
+    <?php endif; ?>
 </div>
