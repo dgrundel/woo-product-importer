@@ -28,7 +28,8 @@
         'map_to' => maybe_unserialize(stripslashes($_POST['map_to'])),
         'custom_field_name' => maybe_unserialize(stripslashes($_POST['custom_field_name'])),
         'custom_field_visible' => maybe_unserialize(stripslashes($_POST['custom_field_visible'])),
-        'product_image_set_featured' => maybe_unserialize(stripslashes($_POST['product_image_set_featured']))
+        'product_image_set_featured' => maybe_unserialize(stripslashes($_POST['product_image_set_featured'])),
+        'product_image_skip_duplicates' => maybe_unserialize(stripslashes($_POST['product_image_skip_duplicates']))
     );
     
     if(isset($post_data['uploaded_file_path'])) {
@@ -523,6 +524,8 @@
                             $existing_attachment_query = array(
                                 'numberposts' => 1,
                                 'meta_key' => '_import_source',
+                                'post_status' => 'inherit',
+                                'post_parent' => $existing_product->ID,
                                 'meta_query' => array(
                                     array(
                                         'key'=>'_import_source',
@@ -534,6 +537,7 @@
                             $existing_attachments = get_posts($existing_attachment_query);
                             if(is_array($existing_attachments) && sizeof($existing_attachments) > 0) {
                                 //we've already got this file.
+                                $new_post_messages[] = "Skipping import of duplicate image '".$dest_path_info['source']."'.";
                                 continue;
                             }
                         }

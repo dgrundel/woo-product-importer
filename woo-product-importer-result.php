@@ -37,7 +37,8 @@
                 "map_to": '<?php echo (serialize($_POST['map_to'])); ?>',
                 "custom_field_name": '<?php echo (serialize($_POST['custom_field_name'])); ?>',
                 "custom_field_visible": '<?php echo (serialize($_POST['custom_field_visible'])); ?>',
-                "product_image_set_featured": '<?php echo (serialize($_POST['product_image_set_featured'])); ?>'
+                "product_image_set_featured": '<?php echo (serialize($_POST['product_image_set_featured'])); ?>',
+                "product_image_skip_duplicates": '<?php echo (serialize($_POST['product_image_skip_duplicates'])); ?>'
             };
             
             //ajaxurl is defined by WordPress

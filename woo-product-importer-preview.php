@@ -210,12 +210,15 @@
                 $(this).closest('th').find('.custom_field_settings').hide(400);
             }
             
-            if($(this).val() == 'product_image') {
+            if($(this).val() == 'product_image_by_url' || $(this).val() == 'product_image_by_path') {
                 $(this).closest('th').find('.product_image_settings').show(400);
             } else {
                 $(this).closest('th').find('.product_image_settings').hide(400);
             }
         });
+        
+        //to show the appropriate settings boxes.
+        $("select.map_to").trigger('change');
     });
 </script>
 
