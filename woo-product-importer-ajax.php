@@ -29,7 +29,8 @@
         'custom_field_name' => maybe_unserialize(stripslashes($_POST['custom_field_name'])),
         'custom_field_visible' => maybe_unserialize(stripslashes($_POST['custom_field_visible'])),
         'product_image_set_featured' => maybe_unserialize(stripslashes($_POST['product_image_set_featured'])),
-        'product_image_skip_duplicates' => maybe_unserialize(stripslashes($_POST['product_image_skip_duplicates']))
+        'product_image_skip_duplicates' => maybe_unserialize(stripslashes($_POST['product_image_skip_duplicates'])),
+        'post_meta_key' => maybe_unserialize(stripslashes($_POST['post_meta_key']))
     );
     
     if(isset($post_data['uploaded_file_path'])) {
@@ -239,6 +240,10 @@
                     case '_product_url':
                     case '_file_path':
                         $new_post_meta[$map_to] = $col;
+                        break;
+                    
+                    case 'post_meta':
+                        $new_post_meta[$post_data['post_meta_key'][$key]] = $col;
                         break;
                     
                     case '_product_type':

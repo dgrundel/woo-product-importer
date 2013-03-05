@@ -196,7 +196,10 @@
             'mapping_hints' => array('download expiration', 'download expiry')),
         '_download_limit' => array(
             'label' => 'Download Limit (Number of Downloads)',
-            'mapping_hints' => array('download limit', 'number of downloads'))
+            'mapping_hints' => array('download limit', 'number of downloads')),
+        'post_meta' => array(
+            'label' => 'Post Meta',
+            'mapping_hints' => array('postmeta')),
     );
     
 ?>
@@ -214,6 +217,12 @@
                 $(this).closest('th').find('.product_image_settings').show(400);
             } else {
                 $(this).closest('th').find('.product_image_settings').hide(400);
+            }
+            
+            if($(this).val() == 'post_meta') {
+                $(this).closest('th').find('.post_meta_settings').show(400);
+            } else {
+                $(this).closest('th').find('.post_meta_settings').hide(400);
             }
         });
         
@@ -309,6 +318,13 @@
                                     <p>
                                         <input type="checkbox" name="product_image_skip_duplicates[<?php echo $key; ?>]" id="product_image_skip_duplicates_<?php echo $key; ?>" value="1" checked="checked" />
                                         <label for="product_image_skip_duplicates_<?php echo $key; ?>">Skip Duplicate Images</label>
+                                    </p>
+                                </div>
+                                <div class="post_meta_settings field_settings">
+                                    <h4>Post Meta Settings</h4>
+                                    <p>
+                                        <label for="post_meta_key_<?php echo $key; ?>">Meta Key</label>
+                                        <input type="text" name="post_meta_key[<?php echo $key; ?>]" id="post_meta_key_<?php echo $key; ?>" value="<?php echo $header_row[$key]; ?>" />
                                     </p>
                                 </div>
                             </th>

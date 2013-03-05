@@ -38,7 +38,8 @@
                 "custom_field_name": '<?php echo (serialize($_POST['custom_field_name'])); ?>',
                 "custom_field_visible": '<?php echo (serialize($_POST['custom_field_visible'])); ?>',
                 "product_image_set_featured": '<?php echo (serialize($_POST['product_image_set_featured'])); ?>',
-                "product_image_skip_duplicates": '<?php echo (serialize($_POST['product_image_skip_duplicates'])); ?>'
+                "product_image_skip_duplicates": '<?php echo (serialize($_POST['product_image_skip_duplicates'])); ?>',
+                "post_meta_key": '<?php echo (serialize($_POST['post_meta_key'])); ?>'
             };
             
             //ajaxurl is defined by WordPress
