@@ -197,7 +197,11 @@
                     case '_download_expiry':
                     case '_download_limit':
                         //remove any non-numeric chars
-                        $new_post_meta[$map_to] = preg_replace("/[^0-9]/", "", $col);
+                        $col_value = preg_replace("/[^0-9]/", "", $col);
+                        if($col_value == "") continue;
+                        
+                        $new_post_meta[$map_to] = $col_value;
+                        break;
                     
                     //float fields
                     case '_weight':
@@ -207,12 +211,18 @@
                     case '_regular_price':
                     case '_sale_price':
                         //remove any non-numeric chars except for '.'
-                        $new_post_meta[$map_to] = preg_replace("/[^0-9.]/", "", $col);
+                        $col_value = preg_replace("/[^0-9.]/", "", $col);
+                        if($col_value == "") continue;
+                        
+                        $new_post_meta[$map_to] = $col_value;
                         break;
                     
                     //sku
                     case '_sku':
-                        $new_post_meta[$map_to] = trim($col);
+                        $col_value = trim($col);
+                        if($col_value == "") continue;
+                        
+                        $new_post_meta[$map_to] = $col_value;
                         break;
                     
                     //all other postmeta fields
