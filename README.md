@@ -70,6 +70,7 @@ Here's a look at the preview/column mapping screen:
 - _file_path (File Path, for Downloadable Product)
 - _download_expiry (Download Expiration, in Days)
 - _download_limit (Download Limit, an integer)
+- Post Meta (WordPress' native post_meta)
 
 **Plugin Installation**
 
