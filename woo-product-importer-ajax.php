@@ -326,7 +326,12 @@
                     case 'product_image_by_path':
                         $image_paths = explode('|', $col);
                         if(is_array($image_paths)) {
-                            $new_post_image_paths = array_merge($new_post_image_paths, $image_paths);
+                            foreach($image_paths as $image_path) {
+                                $new_post_image_paths[] = array(
+                                    'path' => $image_path,
+                                    'source' => $image_path
+                                );
+                            }
                         }
                         
                         break;
@@ -505,23 +510,46 @@
                         }
                         
                         //whew. are we there yet?
-                        $new_post_image_paths[] = $dest_path;
+                        $new_post_image_paths[] = array(
+                            'path' => $dest_path,
+                            'source' => $image_url
+                        );
                     }
                     
-                    foreach($new_post_image_paths as $image_index => $dest_path) {
+                    foreach($new_post_image_paths as $image_index => $dest_path_info) {
+                        
+                        //check for duplicate images
+                        if(intval($post_data['product_image_skip_duplicates'][$key]) == 1) {
+                            $existing_attachment_query = array(
+                                'numberposts' => 1,
+                                'meta_key' => '_import_source',
+                                'meta_query' => array(
+                                    array(
+                                        'key'=>'_import_source',
+                                        'value'=> $dest_path_info['source'],
+                                        'compare' => '='
+                                    )
+                                ),
+                                'post_type' => 'attachment');
+                            $existing_attachments = get_posts($existing_attachment_query);
+                            if(is_array($existing_attachments) && sizeof($existing_attachments) > 0) {
+                                //we've already got this file.
+                                continue;
+                            }
+                        }
                         
                         //make sure we actually got the file.
-                        if(!file_exists($dest_path)) {
-                            $new_post_errors[] = "Couldn't find local file '$dest_path'.";
+                        if(!file_exists($dest_path_info['path'])) {
+                            $new_post_errors[] = "Couldn't find local file '".$dest_path_info['path']."'.";
                             continue;
                         }
                         
-                        $dest_url = str_ireplace(ABSPATH, home_url('/'), $dest_path);
-                        $path_parts = pathinfo($dest_path);
+                        $dest_url = str_ireplace(ABSPATH, home_url('/'), $dest_path_info['path']);
+                        $path_parts = pathinfo($dest_path_info['path']);
                         
                         //add a post of type 'attachment' so this item shows up in the WP Media Library.
                         //our imported product will be the post's parent.
-                        $wp_filetype = wp_check_filetype($dest_path);
+                        $wp_filetype = wp_check_filetype($dest_path_info['path']);
                         $attachment = array(
                             'guid' => $dest_url,
                             'post_mime_type' => $wp_filetype['type'],
@@ -529,12 +557,16 @@
                             'post_content' => '',
                             'post_status' => 'inherit'
                         );
-                        $attachment_id = wp_insert_attachment( $attachment, $dest_path, $new_post_id );
+                        $attachment_id = wp_insert_attachment( $attachment, $dest_path_info['path'], $new_post_id );
                         // you must first include the image.php file
                         // for the function wp_generate_attachment_metadata() to work
                         require_once(ABSPATH . 'wp-admin/includes/image.php');
-                        $attach_data = wp_generate_attachment_metadata( $attachment_id, $dest_path );
+                        $attach_data = wp_generate_attachment_metadata( $attachment_id, $dest_path_info['path'] );
                         wp_update_attachment_metadata( $attachment_id, $attach_data );
+                        
+                        //keep track of where the attachment came from so we don't import duplicates later
+                        add_post_meta($attachment_id, '_import_source', $dest_path_info['source'], true) or
+                            update_post_meta($attachment_id, '_import_source', $dest_path_info['source']);
                         
                         //set the image as featured if it is the first image in the set AND
                         //the user checked the box on the preview page.

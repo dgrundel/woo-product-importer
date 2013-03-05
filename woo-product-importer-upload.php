@@ -47,4 +47,16 @@
             </tbody>
         </table>
     </form>
+    
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>Path to Your <strong>uploads</strong> Folder</th>
+                <td><?php
+                    $upload_dir = wp_upload_dir();
+                    echo $upload_dir['basedir'];
+                ?></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

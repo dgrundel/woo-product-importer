@@ -303,6 +303,10 @@
                                         <input type="checkbox" name="product_image_set_featured[<?php echo $key; ?>]" id="product_image_set_featured_<?php echo $key; ?>" value="1" checked="checked" />
                                         <label for="product_image_set_featured_<?php echo $key; ?>">Set First Image as Featured</label>
                                     </p>
+                                    <p>
+                                        <input type="checkbox" name="product_image_skip_duplicates[<?php echo $key; ?>]" id="product_image_skip_duplicates_<?php echo $key; ?>" value="1" checked="checked" />
+                                        <label for="product_image_skip_duplicates_<?php echo $key; ?>">Skip Duplicate Images</label>
+                                    </p>
                                 </div>
                             </th>
                         <?php endforeach; ?>
