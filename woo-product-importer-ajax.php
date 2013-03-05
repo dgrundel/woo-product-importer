@@ -518,8 +518,8 @@
                     
                     foreach($new_post_image_paths as $image_index => $dest_path_info) {
                         
-                        //check for duplicate images
-                        if(intval($post_data['product_image_skip_duplicates'][$key]) == 1) {
+                        //check for duplicate images, only for existing products
+                        if($existing_product !== null && intval($post_data['product_image_skip_duplicates'][$key]) == 1) {
                             $existing_attachment_query = array(
                                 'numberposts' => 1,
                                 'meta_key' => '_import_source',
