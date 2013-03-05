@@ -3,7 +3,7 @@ woo-product-importer
 
 - A simple, free CSV product importer for WooCommerce.
 - Supports importing hundreds or thousands of products at once. (The only limit is your patience!)
-- Imports images via URL or local file path.
+- Imports images via URL or local file path. (Now detects and skips duplicate images!)
 - Imports hierarchical category structures (see *Importing Hierarchical Categories* below.)
 - Lots of other great features suggested by plugin users (see *Cool Stuff It/You Can Do* and *Full List of Importable Attributes* below.)
 
@@ -28,6 +28,7 @@ A sample CSV file is included to help you get started. (woo-importer-example.csv
 - Basic validation for multiple-choice fields (fields with a limited set of valid values like yes/no, instock/outofstock, etc.)
 - Dollar signs, commas, etc. are stripped out of number fields like prices, weight, length, width, height
 - If SKU already exists, existing product is updated rather than inserting new product. (Custom fields in product are now preserved, as well.)
+- If SKU already exists and importing images, will skip duplicate image imports.
 
 Here's a look at the preview/column mapping screen:
 ![Column Mapping Screenshot](http://webpresencepartners.com/wp-content/uploads/2012/10/preview.png)
@@ -104,6 +105,7 @@ Thanks to the following folks for helping make this plugin even better!
 - J.Ant for suggesting the addition of External Product support.
 - Andy for suggesting post_status importing, and finding a price importing bug.
 - Github user miguelGnomonet for submitting a bug report.
+- Many users for reporting duplicate image imports.
 
 **More Information on our Blog**
 
