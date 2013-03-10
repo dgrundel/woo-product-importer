@@ -107,6 +107,7 @@ Thanks to the following folks for helping make this plugin even better!
 - Andy for suggesting post_status importing, and finding a price importing bug.
 - Github user miguelGnomonet for submitting a bug report.
 - Many users for reporting duplicate image imports.
+- Dave Taylor for putting way more columns in his CSV than I ever would. ;) The import preview table is now responsive!
 
 **More Information on our Blog**
 
