@@ -79,8 +79,18 @@
     
     .woo_product_importer_wrapper table th { vertical-align: top; }
     
+    .woo_product_importer_wrapper table.super_wide th,
+    .woo_product_importer_wrapper table.super_wide td {
+        width: 120px;
+        min-width: 120px;
+    }
+    
+    .woo_product_importer_wrapper table.super_wide th.narrow,
+    .woo_product_importer_wrapper table.super_wide td.narrow
     .woo_product_importer_wrapper table th.narrow,
-    .woo_product_importer_wrapper table td.narrow { width: 65px; }
+    .woo_product_importer_wrapper table td.narrow {
+        width: 65px;
+    }
     .woo_product_importer_wrapper table input { margin: 1px 0; }
     
     .woo_product_importer_wrapper table tr.header_row th {
@@ -94,6 +104,7 @@
         padding: 2px;
         overflow: hidden;
     }
+    .woo_product_importer_wrapper .map_to_settings select { width: 98%; }
     
     .woo_product_importer_wrapper .field_settings {
         display: none;
@@ -115,6 +126,7 @@
         font-size: .9em;
         line-height: 1.3em;
     }
+    .woo_product_importer_wrapper .field_settings select { width: 98%; }
     .woo_product_importer_wrapper .field_settings input[type="text"] { width: 98%; }
     
     .woo_product_importer_wrapper #inserted_rows tr.error td { background-color: #FFF6D3; }

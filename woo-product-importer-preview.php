@@ -228,6 +228,20 @@
         
         //to show the appropriate settings boxes.
         $("select.map_to").trigger('change');
+        
+        $(window).resize(function(){
+            $("#import_data_preview").addClass("fixed").removeClass("super_wide");
+            $("#import_data_preview").css("width", "100%");
+            
+            var cell_width = $("#import_data_preview tbody tr:first td:last").width();
+            if(cell_width < 60) {
+                $("#import_data_preview").removeClass("fixed").addClass("super_wide");
+                $("#import_data_preview").css("width", "auto");
+            }
+        });
+        
+        //set table layout
+        $(window).trigger('resize');
     });
 </script>
 
@@ -254,7 +268,7 @@
                 <button class="button-primary" type="submit">Import</button>
             </p>
             
-            <table class="wp-list-table widefat fixed pages" cellspacing="0">
+            <table id="import_data_preview" class="wp-list-table widefat fixed pages" cellspacing="0">
                 <thead>
                     <?php if(intval($_POST['header_row']) == 1): ?>
                         <tr class="header_row">
