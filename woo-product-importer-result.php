@@ -1,31 +1,31 @@
 <?php /*
     This file is part of Woo Product Importer.
-    
+
     Woo Product Importer is Copyright 2012-2013 Web Presence Partners LLC.
 
     Woo Product Importer is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    
+
     Woo Product Importer is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU Lesser General Public License for more details.
-    
+
     You should have received a copy of the GNU Lesser General Public License
     along with Woo Product Importer.  If not, see <http://www.gnu.org/licenses/>.
 */ ?>
 <script type="text/javascript">
     jQuery(document).ready(function($){
-        
+
         $("#show_debug").click(function(){
             $("#debug").show();
             $(this).hide();
         });
-        
+
         doAjaxImport(<?php echo intval($_POST['limit']); ?>, 0);
-        
+
         function doAjaxImport(limit, offset) {
             var data = {
                 "action": "woo-product-importer-ajax",
@@ -39,27 +39,28 @@
                 "custom_field_visible": '<?php echo (serialize($_POST['custom_field_visible'])); ?>',
                 "product_image_set_featured": '<?php echo (serialize($_POST['product_image_set_featured'])); ?>',
                 "product_image_skip_duplicates": '<?php echo (serialize($_POST['product_image_skip_duplicates'])); ?>',
-                "post_meta_key": '<?php echo (serialize($_POST['post_meta_key'])); ?>'
+                "post_meta_key": '<?php echo (serialize($_POST['post_meta_key'])); ?>',
+                "user_locale": '<?php echo (serialize($_POST['user_locale'])); ?>'
             };
-            
+
             //ajaxurl is defined by WordPress
             $.post(ajaxurl, data, ajaxImportCallback);
         }
-        
+
         function ajaxImportCallback(response_text) {
-            
+
             $("#debug").append($(document.createElement("p")).text(response_text));
-            
+
             var response = jQuery.parseJSON(response_text);
-            
+
             $("#insert_count").text(response.insert_count + " (" + response.insert_percent +"%)");
             $("#remaining_count").text(response.remaining_count);
             $("#row_count").text(response.row_count);
-            
+
             //show inserted rows
             for(var row_num in response.inserted_rows) {
                 var tr = $(document.createElement("tr"));
-                
+
                 if(response.inserted_rows[row_num]['success'] == true) {
                     if(response.inserted_rows[row_num]['has_errors'] == true) {
                         tr.addClass("error");
@@ -69,19 +70,19 @@
                 } else {
                     tr.addClass("fail");
                 }
-                
+
                 var post_link = $(document.createElement("a"));
                 post_link.attr("target", "_blank");
                 post_link.attr("href", "<?php echo get_admin_url(); ?>post.php?post=" + response.inserted_rows[row_num]['post_id'] + "&action=edit");
                 post_link.text(response.inserted_rows[row_num]['post_id']);
-                
+
                 tr.append($(document.createElement("td")).append($(document.createElement("span")).addClass("icon")));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['row_id']));
                 tr.append($(document.createElement("td")).append(post_link));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['name']));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['sku']));
                 tr.append($(document.createElement("td")).text(response.inserted_rows[row_num]['price']));
-                
+
                 var result_messages = "";
                 if(response.inserted_rows[row_num]['has_messages'] == true) {
                     result_messages += response.inserted_rows[row_num]['messages'].join("\n") + "\n";
@@ -92,15 +93,15 @@
                     result_messages += "No errors.";
                 }
                 tr.append($(document.createElement("td")).text(result_messages));
-                
+
                 tr.appendTo("#inserted_rows tbody");
             }
-            
+
             //show error messages
             for(var message in response.error_messages) {
                 $(document.createElement("li")).text(response.error_messages[message]).appendTo(".import_error_messages");
             }
-            
+
             //move on to the next set!
             if(parseInt(response.remaining_count) > 0) {
                 doAjaxImport(response.limit, response.new_offset);
@@ -114,16 +115,16 @@
 <div class="woo_product_importer_wrapper wrap">
     <div id="icon-tools" class="icon32"><br /></div>
     <h2>Woo Product Importer &raquo; Results</h2>
-    
+
     <ul class="import_error_messages">
     </ul>
-    
+
     <div id="import_status">
         <div id="import_in_progress">
             <img src="<?php echo plugin_dir_url(__FILE__); ?>img/ajax-loader.gif"
                 alt="Importing. Please do not close this window or click your browser's stop button."
                 title="Importing. Please do not close this window or click your browser's stop button.">
-            
+
             <strong>Importing. Please do not close this window or click your browser's stop button.</strong>
         </div>
         <div id="import_complete">
@@ -132,7 +133,7 @@
                 title="Import complete!">
             <strong>Import Complete! Results below.</strong>
         </div>
-        
+
         <table>
             <tbody>
                 <tr>
@@ -150,7 +151,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <table id="inserted_rows" class="wp-list-table widefat fixed pages" cellspacing="0">
         <thead>
             <tr>
@@ -165,10 +166,10 @@
         </thead>
         <tbody><!-- rows inserted via AJAX --></tbody>
     </table>
-    
+
     <p><a id="show_debug" href="#" class="button">Show Raw AJAX Responses</a></p>
     <div id="debug"><!-- server responses get logged here --></div>
-    
+
     <div id="credits">
         <div id="donate_form">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
@@ -178,7 +179,7 @@
                 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
             </form>
         </div>
-        
+
         <p>If you found this plugin useful, and it saved you some time, money, or frustration, consider making a donation. Any amount is helpful!</p>
         <p>If you're having a problem with the plugin, <a href="https://github.com/dgrundel/woo-product-importer/issues/new" target="_blank">post your issue here</a> and we'll do our best to help.</p>
         <p>

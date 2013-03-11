@@ -1,39 +1,40 @@
 <?php /*
     This file is part of Woo Product Importer.
-    
+
     Woo Product Importer is Copyright 2012-2013 Web Presence Partners LLC.
 
     Woo Product Importer is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    
+
     Woo Product Importer is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU Lesser General Public License for more details.
-    
+
     You should have received a copy of the GNU Lesser General Public License
     along with Woo Product Importer.  If not, see <http://www.gnu.org/licenses/>.
-*/ 
-    
+*/
+
     ini_set("auto_detect_line_endings", true);
-    
+    setlocale(LC_ALL, $_POST['user_locale']);
+
     $error_messages = array();
-    
+
     if(isset($_POST['import_csv_url']) && strlen($_POST['import_csv_url']) > 0) {
-        
+
         $file_path = $_POST['import_csv_url'];
-        
+
     } elseif(isset($_FILES['import_csv']['tmp_name'])) {
-        
+
         if(function_exists('wp_upload_dir')) {
             $upload_dir = wp_upload_dir();
             $upload_dir = $upload_dir['basedir'].'/csv_import';
         } else {
             $upload_dir = dirname(__FILE__).'/uploads';
         }
-        
+
         if(!file_exists($upload_dir)) {
             $old_umask = umask(0);
             mkdir($upload_dir, 0755, true);
@@ -42,53 +43,53 @@
         if(!file_exists($upload_dir)) {
             $error_messages[] = 'Could not create upload directory "'.$upload_dir.'".';
         }
-        
+
         //gets uploaded file extension for security check.
         $uploaded_file_ext = strtolower(pathinfo($_FILES['import_csv']['name'], PATHINFO_EXTENSION));
-        
+
         //full path to uploaded file. slugifys the file name in case there are weird characters present.
         $uploaded_file_path = $upload_dir.'/'.sanitize_title(basename($_FILES['import_csv']['name'],'.'.$uploaded_file_ext)).'.'.$uploaded_file_ext;
-        
+
         if($uploaded_file_ext != 'csv') {
             $error_messages[] = 'The file extension "'.$uploaded_file_ext.'" is not allowed.';
-            
+
         } else {
-            
+
             if(move_uploaded_file($_FILES['import_csv']['tmp_name'], $uploaded_file_path)) {
                 $file_path = $uploaded_file_path;
-                
+
             } else {
                 $error_messages[] = 'move_uploaded_file() returned false.';
             }
         }
     }
-    
+
     if($file_path) {
         //now that we have the file, grab contents
         $handle = fopen($file_path, 'r' );
         $import_data = array();
-        
+
         if ( $handle !== FALSE ) {
             while ( ( $line = fgetcsv($handle) ) !== FALSE ) {
                 $import_data[] = $line;
             }
             fclose( $handle );
-            
+
         } else {
             $error_messages[] = 'Could not open file.';
         }
-        
+
         if(intval($_POST['header_row']) == 1 && sizeof($import_data) > 0)
             $header_row = array_shift($import_data);
-        
+
         $row_count = sizeof($import_data);
         if($row_count == 0)
             $error_messages[] = 'No data to import.';
-        
+
     }
-    
+
     $show_import_checkboxes = !!($row_count < 100);
-    
+
     //'mapping_hints' should be all lower case
     //(a strtolower is performed on header_row when checking)
     $col_mapping_options = array(
@@ -201,45 +202,45 @@
             'label' => 'Post Meta',
             'mapping_hints' => array('postmeta')),
     );
-    
+
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function($){
         $("select.map_to").change(function(){
-            
+
             if($(this).val() == 'custom_field') {
                 $(this).closest('th').find('.custom_field_settings').show(400);
             } else {
                 $(this).closest('th').find('.custom_field_settings').hide(400);
             }
-            
+
             if($(this).val() == 'product_image_by_url' || $(this).val() == 'product_image_by_path') {
                 $(this).closest('th').find('.product_image_settings').show(400);
             } else {
                 $(this).closest('th').find('.product_image_settings').hide(400);
             }
-            
+
             if($(this).val() == 'post_meta') {
                 $(this).closest('th').find('.post_meta_settings').show(400);
             } else {
                 $(this).closest('th').find('.post_meta_settings').hide(400);
             }
         });
-        
+
         //to show the appropriate settings boxes.
         $("select.map_to").trigger('change');
-        
+
         $(window).resize(function(){
             $("#import_data_preview").addClass("fixed").removeClass("super_wide");
             $("#import_data_preview").css("width", "100%");
-            
+
             var cell_width = $("#import_data_preview tbody tr:first td:last").width();
             if(cell_width < 60) {
                 $("#import_data_preview").removeClass("fixed").addClass("super_wide");
                 $("#import_data_preview").css("width", "auto");
             }
         });
-        
+
         //set table layout
         $(window).trigger('resize');
     });
@@ -248,7 +249,7 @@
 <div class="woo_product_importer_wrapper wrap">
     <div id="icon-tools" class="icon32"><br /></div>
     <h2>Woo Product Importer &raquo; Preview</h2>
-    
+
     <?php if(sizeof($error_messages) > 0): ?>
         <ul class="import_error_messages">
             <?php foreach($error_messages as $message):?>
@@ -256,18 +257,19 @@
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
-    
+
     <?php if($row_count > 0): ?>
         <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
             <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($file_path); ?>">
             <input type="hidden" name="header_row" value="<?php echo $_POST['header_row']; ?>">
+            <input type="hidden" name="user_locale" value="<?php echo htmlspecialchars($_POST['user_locale']); ?>">
             <input type="hidden" name="row_count" value="<?php echo $row_count; ?>">
             <input type="hidden" name="limit" value="5">
-            
+
             <p>
                 <button class="button-primary" type="submit">Import</button>
             </p>
-            
+
             <table id="import_data_preview" class="wp-list-table widefat fixed pages" cellspacing="0">
                 <thead>
                     <?php if(intval($_POST['header_row']) == 1): ?>
@@ -304,7 +306,7 @@
                                                     if( $header_value == strtolower($value) ||
                                                         $header_value == strtolower($meta['label']) ||
                                                         in_array($header_value, $meta['mapping_hints']) ) {
-                                                            
+
                                                         echo 'selected="selected"';
                                                     }
                                                 }
