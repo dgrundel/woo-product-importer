@@ -29,6 +29,7 @@ A sample CSV file is included to help you get started. (woo-importer-example.csv
 - Dollar signs, commas, etc. are stripped out of number fields like prices, weight, length, width, height
 - If SKU already exists, existing product is updated rather than inserting new product. (Custom fields in product are now preserved, as well.)
 - If SKU already exists and importing images, will skip duplicate image imports.
+- Locale settings are supported to better handle importing files with special characters and other alphabets.
 
 Here's a look at the preview/column mapping screen:
 ![Column Mapping Screenshot](http://webpresencepartners.com/wp-content/uploads/2012/10/preview.png)
@@ -108,6 +109,7 @@ Thanks to the following folks for helping make this plugin even better!
 - Github user miguelGnomonet for submitting a bug report.
 - Many users for reporting duplicate image imports.
 - Dave Taylor for putting way more columns in his CSV than I ever would. ;) The import preview table is now responsive!
+- Many, many users for reporting trouble importing CSV files in foreign languages.
 
 **More Information on our Blog**
 
