@@ -114,7 +114,7 @@
 
 <div class="woo_product_importer_wrapper wrap">
     <div id="icon-tools" class="icon32"><br /></div>
-    <h2>Woo Product Importer &raquo; Results</h2>
+    <h2><?php _e( 'Woo Product Importer &raquo; Results', 'woo-product-importer' ); ?></h2>
 
     <ul class="import_error_messages">
     </ul>
@@ -122,30 +122,30 @@
     <div id="import_status">
         <div id="import_in_progress">
             <img src="<?php echo plugin_dir_url(__FILE__); ?>img/ajax-loader.gif"
-                alt="Importing. Please do not close this window or click your browser's stop button."
-                title="Importing. Please do not close this window or click your browser's stop button.">
+                alt="<?php _( 'Importing. Please do not close this window or click your browser\'s stop button.', 'woo-product-importer' ); ?>"
+                title="<?php _e( 'Importing. Please do not close this window or click your browser\'s stop button.', 'woo-product-importer' ); ?>">
 
-            <strong>Importing. Please do not close this window or click your browser's stop button.</strong>
+            <strong><?php _e( 'Importing. Please do not close this window or click your browser\'s stop button.', 'woo-product-importer' ); ?></strong>
         </div>
         <div id="import_complete">
             <img src="<?php echo plugin_dir_url(__FILE__); ?>img/complete.png"
-                alt="Import complete!"
-                title="Import complete!">
-            <strong>Import Complete! Results below.</strong>
+                alt="<?php _e( 'Import complete!', 'woo-product-importer' ); ?>"
+                title="<?php _e( 'Import complete!', 'woo-product-importer' ); ?>">
+            <strong><?php _e( 'Import Complete! Results below.', 'woo-product-importer' ); ?></strong>
         </div>
 
         <table>
             <tbody>
                 <tr>
-                    <th>Processed</th>
+                    <th><?php _e( 'Processed', 'woo-product-importer' ); ?></th>
                     <td id="insert_count">0</td>
                 </tr>
                 <tr>
-                    <th>Remaining</th>
+                    <th><?php _e( 'Remainin', 'woo-product-importer' ); ?>g</th>
                     <td id="remaining_count"><?php echo $_POST['row_count']; ?></td>
                 </tr>
                 <tr>
-                    <th>Total</th>
+                    <th><?php _e( 'Total', 'woo-product-importer' ); ?></th>
                     <td id="row_count"><?php echo $_POST['row_count']; ?></td>
                 </tr>
             </tbody>
@@ -156,18 +156,18 @@
         <thead>
             <tr>
                 <th style="width: 30px;"></th>
-                <th style="width: 80px;">CSV Row</th>
-                <th style="width: 80px;">New Post ID</th>
-                <th>Name</th>
-                <th>SKU</th>
-                <th style="width: 120px;">Price</th>
-                <th>Result</th>
+                <th style="width: 80px;"><?php _e( 'CSV Row', 'woo-product-importer' ); ?></th>
+                <th style="width: 80px;"><?php _e( 'New Post ID', 'woo-product-importer' ); ?></th>
+                <th><?php _e( 'Name', 'woo-product-importer' ); ?></th>
+                <th><?php _e( 'SKU', 'woo-product-importer' ); ?></th>
+                <th style="width: 120px;"><?php _e( 'Price', 'woo-product-importer' ); ?></th>
+                <th><?php _e( 'Result', 'woo-product-importer' ); ?></th>
             </tr>
         </thead>
         <tbody><!-- rows inserted via AJAX --></tbody>
     </table>
 
-    <p><a id="show_debug" href="#" class="button">Show Raw AJAX Responses</a></p>
+    <p><a id="show_debug" href="#" class="button"><?php _e( 'Show Raw AJAX Responses', 'woo-product-importer' ); ?></a></p>
     <div id="debug"><!-- server responses get logged here --></div>
 
     <div id="credits">
@@ -175,19 +175,19 @@
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                 <input type="hidden" name="cmd" value="_s-xclick">
                 <input type="hidden" name="hosted_button_id" value="YX9JSKX6778HQ">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="<?php _e( 'PayPal - The safer, easier way to pay online!', 'woo-product-importer' ); ?>">
                 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
             </form>
         </div>
 
-        <p>If you found this plugin useful, and it saved you some time, money, or frustration, consider making a donation. Any amount is helpful!</p>
-        <p>If you're having a problem with the plugin, <a href="https://github.com/dgrundel/woo-product-importer/issues/new" target="_blank">post your issue here</a> and we'll do our best to help.</p>
+        <p><?php _e( 'If you found this plugin useful, and it saved you some time, money, or frustration, consider making a donation. Any amount is helpful!', 'woo-product-importer' ); ?></p>
+        <p><?php _e( 'If you\'re having a problem with the plugin, <a href="https://github.com/dgrundel/woo-product-importer/issues/new" target="_blank">post your issue here</a> and we\'ll do our best to help.', 'woo-product-importer' ); ?></p>
         <p>
-            Woo Product Importer was created by Daniel Grundel of <a href="http://webpresencepartners.com" target="_blank">Web Presence Partners</a> and is copyright 2012-2013 Web Presence Partners LLC.
+            <?php _e( 'Woo Product Importer was created by Daniel Grundel of <a href="http://webpresencepartners.com" target="_blank">Web Presence Partners</a> and is copyright 2012-2013 Web Presence Partners LLC.
             It is licensed under the GNU LGPL v3.
             <em>ajax-loader.gif</em> courtesy of <a href="http://ajaxload.info" target="_blank">ajaxload.info</a>.
             The <em>gigantic checkmark</em> is public domain.
-            All other icons are from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_blank">Silk icon set</a> by Mark James.
+            All other icons are from the <a href="http://www.famfamfam.com/lab/icons/silk/" target="_blank">Silk icon set</a> by Mark James.', 'woo-product-importer' ); ?>
         </p>
         <div style="clear:both"></div>
     </div>

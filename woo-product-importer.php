@@ -5,6 +5,8 @@
     Version: 1
     Author: Daniel Grundel, Web Presence Partners
     Author URI: http://www.webpresencepartners.com
+    Text Domain: woo-product-importer
+    Domain Path: /languages/
 */
 
 /*
@@ -29,12 +31,17 @@
     class WebPres_Woo_Product_Importer {
         
         public function __construct() {
+            add_action( 'init', array( 'WebPres_Woo_Product_Importer', 'translations' ), 1 );
             add_action('admin_menu', array('WebPres_Woo_Product_Importer', 'admin_menu'));
             add_action('wp_ajax_woo-product-importer-ajax', array('WebPres_Woo_Product_Importer', 'render_ajax_action'));
         }
-        
+
+        public function translations() {
+            load_plugin_textdomain( 'woo-product-importer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        }
+
         public function admin_menu() {
-            add_management_page('Woo Product Importer', 'Woo Product Importer', 'manage_options', 'woo-product-importer', array('WebPres_Woo_Product_Importer', 'render_admin_action'));
+            add_management_page( __( 'Woo Product Importer', 'woo-product-importer' ), __( 'Woo Product Importer', 'woo-product-importer' ), 'manage_options', 'woo-product-importer', array('WebPres_Woo_Product_Importer', 'render_admin_action'));
         }
         
         public function render_admin_action() {
@@ -50,4 +57,3 @@
     }
     
     $webpres_woo_product_importer = new WebPres_Woo_Product_Importer();
-?>

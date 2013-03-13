@@ -51,11 +51,11 @@
             }
             fclose( $handle );
         } else {
-            $error_messages[] = 'Could not open CSV file.';
+            $error_messages[] = __( 'Could not open CSV file.', 'woo-product-importer' );
         }
 
         if(sizeof($import_data) == 0) {
-            $error_messages[] = 'No data found in CSV file.';
+            $error_messages[] = __( 'No data found in CSV file.', 'woo-product-importer' );
         }
 
         //discard header row from data set, if we have one
@@ -405,7 +405,7 @@
 
                 //insert/update product
                 if($existing_product !== null) {
-                    $new_post_messages[] = 'Updating product with ID '.$existing_product->ID.'.';
+                    $new_post_messages[] = sprintf( __( 'Updating product with ID %s.', 'woo-product-importer' ), $existing_product->ID );
 
                     $new_post['ID'] = $existing_product->ID;
                     $new_post_id = wp_update_post($new_post);
@@ -419,9 +419,9 @@
                 }
 
                 if(is_wp_error($new_post_id)) {
-                    $new_post_errors[] = 'Couldn\'t insert product with name "'.$new_post['post_title'].'".';
+                    $new_post_errors[] = sprintf( __( 'Couldn\'t insert product with name %s.', 'woo-product-importer' ), $new_post['post_title'] );
                 } elseif($new_post_id == 0) {
-                    $new_post_errors[] = 'Couldn\'t update product with ID "'.$new_post['ID'].'".';
+                    $new_post_errors[] = sprintf( __( 'Couldn\'t update product with ID %s.', 'woo-product-importer' ), $new_post['ID'] );
                 } else {
                     //insert successful!
                     $new_post_insert_success = true;
@@ -477,7 +477,7 @@
                         $allowed_extensions = array('jpg', 'jpeg', 'gif', 'png');
                         $image_ext = strtolower($pathinfo['extension']);
                         if(!in_array($image_ext, $allowed_extensions)) {
-                            $new_post_errors[] = "A valid file extension wasn't found in '$image_url'. Extension found was '$image_ext'. Allowed extensions are: ".implode(',', $allowed_extensions);
+                            $new_post_errors[] = sprintf( __( 'A valid file extension wasn\'t found in %s. Extension found was %s. Allowed extensions are: %s.', 'woo-product-importer' ), $image_url, $image_ext, implode( ',', $allowed_extensions ) );
                             continue;
                         }
 
@@ -492,7 +492,7 @@
                             //attempt to copy() file show error on failure.
                             if( ! @copy($image_url, $dest_path)) {
                                 $http_status = $http_response_header[0];
-                                $new_post_errors[] = "'{$http_status}' encountered while attempting to download '$image_url'.";
+                                $new_post_errors[] = sprintf( __( '%s encountered while attempting to download %s', 'woo-product-importer' ), '{$http_status}', $image_url );
                             }
 
                         } elseif(function_exists('curl_init')) {
@@ -514,17 +514,17 @@
                             //delete the file if the download was unsuccessful
                             if($http_status != 200) {
                                 unlink($dest_path);
-                                $new_post_errors[] = "HTTP status '{$http_status}' encountered while attempting to download '$image_url'.";
+                                $new_post_errors[] = sprintf( __( 'HTTP status %s encountered while attempting to download %s', 'woo-product-importer' ), '{$http_status}', $image_url );
                             }
                         } else {
                             //well, damn. no joy, as they say.
-                            $error_messages[] = "Looks like allow_url_fopen is off and cURL is not enabled. No images were imported.";
+                            $error_messages[] = sprintf( __( 'Looks like %s is off and %s is not enabled. No images were imported.', 'woo-product-importer' ), '<code>allow_url_fopen</code>', '<code>cURL</code>'  );
                             break;
                         }
 
                         //make sure we actually got the file.
                         if(!file_exists($dest_path)) {
-                            $new_post_errors[] = "Couldn't download file '$image_url'.";
+                            $new_post_errors[] = sprintf( __( 'Couldn\'t download file %s.', 'woo-product-importer' ), $image_url );
                             continue;
                         }
 
@@ -555,14 +555,14 @@
                             $existing_attachments = get_posts($existing_attachment_query);
                             if(is_array($existing_attachments) && sizeof($existing_attachments) > 0) {
                                 //we've already got this file.
-                                $new_post_messages[] = "Skipping import of duplicate image '".$dest_path_info['source']."'.";
+                                $new_post_messages[] = sprintf( __( 'Skipping import of duplicate image %s.', 'woo-product-importer' ), $dest_path_info['source'] );
                                 continue;
                             }
                         }
 
                         //make sure we actually got the file.
                         if(!file_exists($dest_path_info['path'])) {
-                            $new_post_errors[] = "Couldn't find local file '".$dest_path_info['path']."'.";
+                            $new_post_errors[] = sprintf( __( 'Couldn\'t find local file %s.', 'woo-product-importer' ), $dest_path_info['path'] );
                             continue;
                         }
 
@@ -599,7 +599,7 @@
                 }
 
             } else {
-                $new_post_errors[] = 'Skipped import of product without a name';
+                $new_post_errors[] = __( 'Skipped import of product without a name', 'woo-product-importer' );
             }
 
             //this is returned back to the results page.
