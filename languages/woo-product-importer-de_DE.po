@@ -1,0 +1,562 @@
+# This German Language File: Copyright (C) 2013 by David Decker of deckerweb.de & genesisthemes.de
+# This file is distributed under the same license as the Woo Product Importer Plugin package.
+#
+# Weitere deutsche Sprachdateien für WordPress-Plugins und -Themes sind hier zu finden:
+# --> http://deckerweb.de/sprachdateien/
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Woo Product Importer v1\n"
+"Report-Msgid-Bugs-To: http://deckerweb.de/kontakt/\n"
+"POT-Creation-Date: 2013-03-13 10:09:52+0000\n"
+"PO-Revision-Date: 2013-03-13 11:27+0100\n"
+"Last-Translator: David Decker <deckerweb.mobil@googlemail.com>\n"
+"Language-Team: DECKERWEB <deckerweb.mobil@googlemail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:54
+msgid "Could not open CSV file."
+msgstr "CSV-Datei konnte nicht geöffnet werden."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:58
+msgid "No data found in CSV file."
+msgstr "In der CSV-Datei wurden keine Daten gefunden."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:408
+#, php-format
+msgid "Updating product with ID %s."
+msgstr "Produkt mit ID %s wird aktualisiert."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:422
+#, php-format
+msgid "Couldn't insert product with name %s."
+msgstr "Produkt mit Name %s konnte nicht eingefügt werden."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:424
+#, php-format
+msgid "Couldn't update product with ID %s."
+msgstr "Produkt mit ID %s konnte nicht aktualisiert werden."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:495
+#, php-format
+msgid "%s encountered while attempting to download %s"
+msgstr "%s trat auf, während des Versuchs, %s herunterzuladen."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:517
+#, php-format
+msgid "HTTP status %s encountered while attempting to download %s"
+msgstr "HTTP-Status %s trat auf, während des Versuchs %s herunterzuladen."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:521
+#, php-format
+msgid "Looks like %s is off and %s is not enabled. No images were imported."
+msgstr "Es sieht so aus, als wäre %s ausgeschaltet sowie %s nicht akiviert auf Ihrem Webserver. Es wurden keine Bilder importiert."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:527
+#, php-format
+msgid "Couldn't download file %s."
+msgstr "Datei %s konnte nicht heruntergeladen werden."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:558
+#, php-format
+msgid "Skipping import of duplicate image %s."
+msgstr "Import des Bild-Duplikats %s wird übersprungen."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:565
+#, php-format
+msgid "Couldn't find local file %s."
+msgstr "Lokale Datei %s konnte nicht gefunden werden."
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:602
+msgid "Skipped import of product without a name"
+msgstr "Import für Produkt ohne einen Namen wurde übersprungen."
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:44
+#, php-format
+msgid "Could not create upload directory %s."
+msgstr "Hochlade-Verzeichnis %s konnte nicht erstellt werden."
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:54
+#, php-format
+msgid "The file extension %s is not allowed."
+msgstr "Die Dateierweiterung %s ist nicht erlaubt."
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:62
+#, php-format
+msgid "%s returned false."
+msgstr "%s lieferte 'falsch' zurück."
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:79
+msgid "Could not open file."
+msgstr "Datei konnte nicht geöffnet werden."
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:87
+msgid "No data to import."
+msgstr "Es liegen keine importierbaren Daten vor."
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:97
+msgid "Do Not Import"
+msgstr "Nicht importieren"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:100
+#: woo-product-importer-preview.php:320
+#: woo-product-importer-result.php:161
+msgid "Name"
+msgstr "Name"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:103
+msgid "Status (Valid: publish/draft/trash/[more in Codex])"
+msgstr "Status (Gültig:  publish/ draft/ trash/  Papierkorb [mehr im Codex])"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:106
+msgid "Description"
+msgstr "Beschreibung"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:109
+msgid "Short Description"
+msgstr "Kurzbeschreibung"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:112
+msgid "Regular Price"
+msgstr "Regulärer Preis"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:115
+msgid "Sale Price"
+msgstr "Aktionspreis"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:118
+msgid "Tax Status (Valid: taxable/shipping/none)"
+msgstr "Steuerstatus (Gültig: taxable/ shipping/ none)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:121
+msgid "Tax Class"
+msgstr "Steuerklasse"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:124
+msgid "Visibility (Valid: visible/catalog/search/hidden)"
+msgstr "Sichtbarkeit (Gültig: visible/ catalog/ search/ hidden)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:127
+msgid "Featured (Valid: yes/no)"
+msgstr "Empfohlen (Gültig: yes/ no)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:130
+msgid "Weight"
+msgstr "Gewicht"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:133
+msgid "Length"
+msgstr "Länge"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:136
+msgid "Width"
+msgstr "Breite"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:139
+msgid "Height"
+msgstr "Höhe"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:142
+#: woo-product-importer-result.php:162
+msgid "SKU"
+msgstr "Art.-Nr. (SKU)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:145
+msgid "Downloadable (Valid: yes/no)"
+msgstr "Herunterladbar (Gültig: yes/ no)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:148
+msgid "Virtual (Valid: yes/no)"
+msgstr "Virtuell (Gültig: yes/ no)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:151
+msgid "Stock"
+msgstr "Lager"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:154
+msgid "Stock Status (Valid: instock/outofstock)"
+msgstr "Lagerstatus (Gültig: instock/ outofstock)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:157
+msgid "Backorders (Valid: yes/no/notify)"
+msgstr "Nachbestellungen (Gültig: yes/ no/ notify)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:160
+msgid "Manage Stock (Valid: yes/no)"
+msgstr "Lagerverwaltung (Gültig: yes/ no)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:163
+msgid "Product Type (Valid: simple/variable/grouped/external)"
+msgstr "Produkttyp (Gültig: simple/ variable/ grouped/ external)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:166
+msgid "Categories By Name (Separated by \"|\")"
+msgstr "Kategorien nach Name (Getrennt von \"|\")"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:169
+msgid "Categories By ID (Separated by \"|\")"
+msgstr "Kategorien nach ID (Getrennt von \"|\")"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:172
+msgid "Tags By Name (Separated by \"|\")"
+msgstr "Schlagwörter nach Name (Getrennt von \"|\")"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:175
+msgid "Tags By ID (Separated by \"|\")"
+msgstr "Schlagwörter nach ID (Getrennt von \"|\")"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:178
+msgid "Custom Field (Set Name Below)"
+msgstr "Benutzerdefiniertes Feld (Name unten festlegen)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:181
+msgid "Images (By URL, Separated by \"|\")"
+msgstr "Bilder (nach URL, getrennt von \"|\")"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:184
+msgid "Images (By Local File Path, Separated by \"|\")"
+msgstr "Bilder (Nach lokalem Dateipfad, getrennt von \"|\")"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:187
+msgid "Button Text (External Product Only)"
+msgstr "Button-Text (nur bei externen Produkten)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:190
+msgid "Product URL (External Product Only)"
+msgstr "Produkt-URL (nur bei externen Produkten)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:193
+msgid "File Path (Downloadable Product Only)"
+msgstr "Dateipfad (nur bei herunterladbaren Produkten)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:196
+msgid "Download Expiration (in Days)"
+msgstr "Download-Ablauf (in Tagen)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:199
+msgid "Download Limit (Number of Downloads)"
+msgstr "Download-Limit (Anzahl der Downloads)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:202
+msgid "Post Meta"
+msgstr "Beitrags-Metainformationen"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:251
+msgid "Woo Product Importer &raquo; Preview"
+msgstr "Woo Produkt-Importer &raquo; Vorschau"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:270
+msgid "Import"
+msgstr "Importieren"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:277
+msgid "CSV Header Row"
+msgstr "CSV-Kopfzeile (Überschriften)"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:290
+msgid "Import?"
+msgstr "Importieren?"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:325
+msgid "Visible?"
+msgstr "Sichtbar?"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:329
+msgid "Image Settings"
+msgstr "Bildeinstellungen"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:332
+msgid "Set First Image as Featured"
+msgstr "Das erste Bild als Beitragsbild (Featured) festlegen"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:336
+msgid "Skip Duplicate Images"
+msgstr "Bilder-Duplikate überspringen"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:340
+msgid "Post Meta Settings"
+msgstr "Beitrags-Meta-Einstellungen"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:342
+msgid "Meta Key"
+msgstr "Meta-Schlüssel"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:117
+msgid "Woo Product Importer &raquo; Results"
+msgstr "Woo Produkt-Importer &raquo; Ergebnisse"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:126
+#: woo-product-importer-result.php:128
+msgid "Importing. Please do not close this window or click your browser's stop button."
+msgstr "Import läuft. Bitte dieses Fenster <strong>nicht</strong> schließen oder den Stop-Button im Browser klicken!"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:132
+#: woo-product-importer-result.php:133
+msgid "Import complete!"
+msgstr "Import vollständig abgeschlossen!"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:134
+msgid "Import Complete! Results below."
+msgstr "Import abgeschlossen! Ergebnisse siehe unten."
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:140
+msgid "Processed"
+msgstr "Verarbeitet"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:144
+msgid "Remainin"
+msgstr "Verbleibend"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:148
+msgid "Total"
+msgstr "Gesamt"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:159
+msgid "CSV Row"
+msgstr "CSV-Zeile"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:160
+msgid "New Post ID"
+msgstr "Neue Produkt-ID (Post ID)"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:163
+msgid "Price"
+msgstr "Preis"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:164
+msgid "Result"
+msgstr "Ergebnis"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:170
+msgid "Show Raw AJAX Responses"
+msgstr "Rohe AJAX-Antworten anzeigen"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:178
+msgid "PayPal - The safer, easier way to pay online!"
+msgstr "PayPal - Der sicherere, einfachere Weg, online zu bezahlen!"
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:183
+msgid "If you found this plugin useful, and it saved you some time, money, or frustration, consider making a donation. Any amount is helpful!"
+msgstr "Wenn Sie das Plugin nützlich finden und es Ihnen einige Ersparnis von Zeit, Frustration oder Geld eingebracht hat, dann ziehen Sie doch eine Spende in Erwägung. Jeder Betrag hilft, die zukünftige Entwicklung dieses Plugins zu unterstützen!"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:463
+msgid "Woo Product Importer &raquo; Upload"
+msgstr "Woo Produkt-Importer &raquo; Hochladen"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:469
+msgid "File to Import"
+msgstr "Datei zum Importieren"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:473
+msgid "URL to Import"
+msgstr "URL zum Importieren"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:476
+msgid "Enter the full URL to a CSV file. Leave this field blank if uploading a file."
+msgstr "Geben Sie einen vollständigen Pfad zu einer CSV-Datei an. Lassen Sie das Feld hier frei, falls Sie oben eine Datei <em>hochladen</em>."
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:483
+msgid "First Row is Header Row"
+msgstr "Erste Zeile ist Kopfzeile (Überschriften)"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:489
+msgid "Upload and Preview"
+msgstr "Hochladen und Vorschau"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:490
+msgid "Advanced Settings &darr;"
+msgstr "Erweiterte Einstellungen &darr;"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:497
+msgid "Advanced Settings"
+msgstr "Erweiterte Einstellungen"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:501
+msgid "Path to Your <strong>uploads</strong> Folder"
+msgstr "Pfad zu Ihrem <strong>Hochlade</strong>-Ordner (Uploads)"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:508
+msgid "Set Locale"
+msgstr "Lokale festlegen (Ländereinstellung)"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:512
+msgid "Couldn't get a list of available locales from your server."
+msgstr "Es konnte keine Liste von verfügbaren Lokalen von Ihrem Webserver geladen werden."
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:516
+msgid "System Default"
+msgstr "Systemstandard"
+
+#@ woo-product-importer
+#: woo-product-importer-upload.php:521
+msgid "If you have special characters in your CSV, (such as &aelig;, &szlig;, &eacute;, etc.) set this to a locale compatible with those characters."
+msgstr "Falls Sie Sonderzeichen in Ihrer CSV-Datei verwenden (z.B. &aelig;, &szlig;, &eacute;, etc.), setzen Sie die Lokale auf eine kompatible Einstellung mit diesen Zeichen."
+
+#@ woo-product-importer
+#. translators: plugin header field 'Name'
+#: woo-product-importer.php:0
+#: woo-product-importer.php:44
+msgid "Woo Product Importer"
+msgstr "Woo Produkt-Importer"
+
+#@ woo-product-importer
+#. translators: plugin header field 'PluginURI'
+#: woo-product-importer.php:0
+msgid "http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/"
+msgstr "http://webpresencepartners.com/2012/09/19/a-free-simple-woocommerce-csv-importer/"
+
+#@ woo-product-importer
+#. translators: plugin header field 'Description'
+#: woo-product-importer.php:0
+msgid "Free CSV import utility for WooCommerce"
+msgstr "Kostenloses CSV-Importwerkzeug für WooCommerce."
+
+#@ woo-product-importer
+#. translators: plugin header field 'Author'
+#: woo-product-importer.php:0
+msgid "Daniel Grundel, Web Presence Partners"
+msgstr "Daniel Grundel, Web Presence Partners"
+
+#@ woo-product-importer
+#. translators: plugin header field 'AuthorURI'
+#: woo-product-importer.php:0
+msgid "http://www.webpresencepartners.com"
+msgstr "http://www.webpresencepartners.com/"
+
+#@ woo-product-importer
+#. translators: plugin header field 'Version'
+#: woo-product-importer.php:0
+msgid "1"
+msgstr "1"
+
+#@ woo-product-importer
+#: woo-product-importer-ajax.php:480
+#, php-format
+msgid "A valid file extension wasn't found in %s. Extension found was %s. Allowed extensions are: %s."
+msgstr "Eine gültige Dateierweiterung wurde nicht in %s gefunden. Die gefundene Erweiterung war: %s. Erlaubte Dateierweiterungen sind: %s."
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:184
+msgid "If you're having a problem with the plugin, <a href=\"https://github.com/dgrundel/woo-product-importer/issues/new\" target=\"_blank\">post your issue here</a> and we'll do our best to help."
+msgstr "Fals Sie ein Problem mit diesem Plugin haben, <a href=\"https://github.com/dgrundel/woo-product-importer/issues/new\" target=\"_blank\">geben Sie eine Fehlermeldung in unserem Issue-Tracker ab</a> und wir werden unser Bestes geben, das Problem zu lösen."
+
+#@ woo-product-importer
+#: woo-product-importer-result.php:186
+msgid ""
+"Woo Product Importer was created by Daniel Grundel of <a href=\"http://webpresencepartners.com\" target=\"_blank\">Web Presence Partners</a> and is copyright 2012-2013 Web Presence Partners LLC.\n"
+"            It is licensed under the GNU LGPL v3.\n"
+"            <em>ajax-loader.gif</em> courtesy of <a href=\"http://ajaxload.info\" target=\"_blank\">ajaxload.info</a>.\n"
+"            The <em>gigantic checkmark</em> is public domain.\n"
+"            All other icons are from the <a href=\"http://www.famfamfam.com/lab/icons/silk/\" target=\"_blank\">Silk icon set</a> by Mark James."
+msgstr "Woo Produkt-Importer wurde erstellt von Daniel Grundel von <a href=\"http://webpresencepartners.com\" target=\"_blank\">Web Presence Partners</a> und unterliegt dem Urheberrecht copyright 2012-2013 Web Presence Partners LLC. Das Plugin ist lizensiert unter der GNU LGPL v3. <em>ajax-loader.gif</em> von <a href=\"http://ajaxload.info\" target=\"_blank\">ajaxload.info</a>. Das <em>große abgehakt-Zeichen</em> ist lizenzfrei. Alle anderen Icons sind aus dem <a href=\"http://www.famfamfam.com/lab/icons/silk/\" target=\"_blank\">Silk Icon Set</a> von Mark James."
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:299
+msgid "Map to:"
+msgstr "Zuordnen zu:"
+
+#@ woo-product-importer
+#: woo-product-importer-preview.php:318
+msgid "Custom Field Settings"
+msgstr "Benutzerdefiniertes Feld Einstellungen"
+
