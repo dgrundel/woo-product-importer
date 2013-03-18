@@ -32,6 +32,7 @@
         'product_image_skip_duplicates' => maybe_unserialize(stripslashes($_POST['product_image_skip_duplicates'])),
         'post_meta_key' => maybe_unserialize(stripslashes($_POST['post_meta_key'])),
         'user_locale' => maybe_unserialize(stripslashes($_POST['user_locale'])),
+        'import_csv_separator' => maybe_unserialize(stripslashes($_POST['import_csv_separator'])),
     );
 
     if(isset($post_data['uploaded_file_path'])) {
@@ -46,7 +47,7 @@
         $import_data = array();
 
         if ( $handle !== FALSE ) {
-            while ( ( $line = fgetcsv($handle) ) !== FALSE ) {
+            while ( ( $line = fgetcsv($handle, 0, $post_data['import_csv_separator']) ) !== FALSE ) {
                 $import_data[] = $line;
             }
             fclose( $handle );

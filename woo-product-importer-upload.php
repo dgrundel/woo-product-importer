@@ -498,6 +498,11 @@
             <table class="form-table">
                 <tbody>
                     <tr>
+                        <th><?php _e( 'CSV field separator', 'woo-product-importer' ); ?></th>
+                        <td>
+                        <input type="text" name="import_csv_separator" id="import_csv_separator" class="code" value=";" maxlength="1"></td>
+                    </tr>
+                    <tr>
                         <th><?php _e( 'Path to Your <strong>uploads</strong> Folder', 'woo-product-importer' ); ?></th>
                         <td><?php
                             $upload_dir = wp_upload_dir();

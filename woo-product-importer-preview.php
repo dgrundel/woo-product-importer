@@ -70,7 +70,11 @@
         $import_data = array();
 
         if ( $handle !== FALSE ) {
-            while ( ( $line = fgetcsv($handle) ) !== FALSE ) {
+        	$field_sep = null;
+        	if(isset($_POST['import_csv_separator'])) {
+        		$field_sep = $_POST['import_csv_separator'];
+        	}
+            while ( ( $line = fgetcsv($handle, 0, $field_sep) ) !== FALSE ) {
                 $import_data[] = $line;
             }
             fclose( $handle );
