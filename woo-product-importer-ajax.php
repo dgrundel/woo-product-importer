@@ -492,7 +492,7 @@
                             //attempt to copy() file show error on failure.
                             if( ! @copy($image_url, $dest_path)) {
                                 $http_status = $http_response_header[0];
-                                $new_post_errors[] = sprintf( __( '%s encountered while attempting to download %s', 'woo-product-importer' ), '{$http_status}', $image_url );
+                                $new_post_errors[] = sprintf( __( '%s encountered while attempting to download %s', 'woo-product-importer' ), $http_status, $image_url );
                             }
 
                         } elseif(function_exists('curl_init')) {
@@ -514,7 +514,7 @@
                             //delete the file if the download was unsuccessful
                             if($http_status != 200) {
                                 unlink($dest_path);
-                                $new_post_errors[] = sprintf( __( 'HTTP status %s encountered while attempting to download %s', 'woo-product-importer' ), '{$http_status}', $image_url );
+                                $new_post_errors[] = sprintf( __( 'HTTP status %s encountered while attempting to download %s', 'woo-product-importer' ), $http_status, $image_url );
                             }
                         } else {
                             //well, damn. no joy, as they say.
