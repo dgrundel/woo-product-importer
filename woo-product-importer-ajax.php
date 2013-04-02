@@ -266,6 +266,7 @@
 
                     case 'product_cat_by_name':
                     case 'product_tag_by_name':
+                    case 'product_shipping_class_by_name':
                         $tax = str_replace('_by_name', '', $map_to);
                         $term_paths = explode('|', $col);
                         foreach($term_paths as $term_path) {
@@ -303,6 +304,7 @@
 
                     case 'product_cat_by_id':
                     case 'product_tag_by_id':
+                    case 'product_shipping_class_by_id':
                         $tax = str_replace('_by_id', '', $map_to);
                         $term_ids = explode('|', $col);
                         foreach($term_ids as $term_id) {

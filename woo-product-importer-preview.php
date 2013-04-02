@@ -171,6 +171,12 @@
         'product_tag_by_name' => array(
             'label' => __( 'Tags By Name (Separated by "|")', 'woo-product-importer' ),
             'mapping_hints' => array('tag', 'tags', 'product tag', 'product tags', 'product_tag')),
+        'product_shipping_class_by_id' => array(
+            'label' => __( 'Shipping Class By ID (Separated by "|")', 'woo-product-importer' ),
+            'mapping_hints' => array()),
+        'product_shipping_class_by_name' => array(
+            'label' => __( 'Shipping Class By Name (Separated by "|")', 'woo-product-importer' ),
+            'mapping_hints' => array('product_shipping_class', 'shipping_class', 'product shipping class', 'shipping class')),
         'product_tag_by_id' => array(
             'label' => __( 'Tags By ID (Separated by "|")', 'woo-product-importer' ),
             'mapping_hints' => array()),

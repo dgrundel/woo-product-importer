@@ -64,6 +64,7 @@ Here's a look at the preview/column mapping screen:
 - _manage_stock (Manage Stock)
 - product_cat (Categories, by Name or ID)
 - product_tag (Tags, by Name or ID)
+- product_shipping_class (Shipping Class, by Name or ID)
 - Custom Fields
 - Product Images (By URL or Local File Path)
 - _button_text (Button Text, for External Products)
