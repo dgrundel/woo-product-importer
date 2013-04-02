@@ -98,6 +98,10 @@ If you see something on the 'Not Supported' list that you absolutely must have, 
 
 - Plugin becomes self-aware.
 
+**Contributors**
+
+- David Decker (deckerweb) has added full i18n support as well as a German translation to the plugin. Thank you, David!
+
 **Thank Yous**
 
 Thanks to the following folks for helping make this plugin even better!
