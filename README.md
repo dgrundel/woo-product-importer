@@ -102,6 +102,7 @@ If you see something on the 'Not Supported' list that you absolutely must have, 
 **Contributors**
 
 - David Decker (deckerweb) has added full i18n support as well as a German translation to the plugin. Thank you, David!
+- Julien LE THUAUT (jlethuau) added the (much requested) CSV field separator option to the plugin. Thanks very much!
 
 **Thank Yous**
 
