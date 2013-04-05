@@ -70,11 +70,8 @@
         $import_data = array();
 
         if ( $handle !== FALSE ) {
-        	$field_sep = null;
-        	if(isset($_POST['import_csv_separator'])) {
-        		$field_sep = $_POST['import_csv_separator'];
-        	}
-            while ( ( $line = fgetcsv($handle, 0, $field_sep) ) !== FALSE ) {
+        	$import_csv_separator = isset($_POST['import_csv_separator']) && strlen($_POST['import_csv_separator']) == 1 ? $_POST['import_csv_separator'] : ',';
+            while ( ( $line = fgetcsv($handle, 0, $import_csv_separator) ) !== FALSE ) {
                 $import_data[] = $line;
             }
             fclose( $handle );
@@ -271,10 +268,12 @@
     <?php if($row_count > 0): ?>
         <form enctype="multipart/form-data" method="post" action="<?php echo get_admin_url().'tools.php?page=woo-product-importer&action=result'; ?>">
             <input type="hidden" name="uploaded_file_path" value="<?php echo htmlspecialchars($file_path); ?>">
+            <input type="hidden" name="import_csv_separator" value="<?php echo htmlspecialchars($import_csv_separator); ?>">
             <input type="hidden" name="header_row" value="<?php echo $_POST['header_row']; ?>">
             <input type="hidden" name="user_locale" value="<?php echo htmlspecialchars($_POST['user_locale']); ?>">
             <input type="hidden" name="row_count" value="<?php echo $row_count; ?>">
             <input type="hidden" name="limit" value="5">
+                $_POST['import_csv_separator']
 
             <p>
                 <button class="button-primary" type="submit"><?php _e( 'Import', 'woo-product-importer' ); ?></button>

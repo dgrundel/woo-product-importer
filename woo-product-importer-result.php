@@ -41,7 +41,8 @@
                 "product_image_set_featured": '<?php echo (serialize($_POST['product_image_set_featured'])); ?>',
                 "product_image_skip_duplicates": '<?php echo (serialize($_POST['product_image_skip_duplicates'])); ?>',
                 "post_meta_key": '<?php echo (serialize($_POST['post_meta_key'])); ?>',
-                "user_locale": '<?php echo (serialize($_POST['user_locale'])); ?>'
+                "user_locale": '<?php echo (serialize($_POST['user_locale'])); ?>',
+                "import_csv_separator": '<?php echo (serialize($_POST['import_csv_separator'])); ?>',
             };
 
             //ajaxurl is defined by WordPress

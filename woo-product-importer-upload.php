@@ -500,7 +500,9 @@
                     <tr>
                         <th><?php _e( 'CSV field separator', 'woo-product-importer' ); ?></th>
                         <td>
-                        <input type="text" name="import_csv_separator" id="import_csv_separator" class="code" value="," maxlength="1"></td>
+                            <input type="text" name="import_csv_separator" id="import_csv_separator" class="code" value="," maxlength="1">
+                            <p class="description"><?php _e( 'Enter the character used to separate each field in your CSV. The default is the comma (,) character. Some formats use a semicolon (;) instead.', 'woo-product-importer' ); ?></p>
+                        </td>
                     </tr>
                     <tr>
                         <th><?php _e( 'Path to Your <strong>uploads</strong> Folder', 'woo-product-importer' ); ?></th>
