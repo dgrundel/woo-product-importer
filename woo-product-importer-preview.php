@@ -196,7 +196,7 @@
         '_product_url' => array(
             'label' => __( 'Product URL (External Product Only)', 'woo-product-importer' ),
             'mapping_hints' => array('product url', 'url')),
-        '_file_path' => array(
+        '_file_paths' => array(
             'label' => __( 'File Path (Downloadable Product Only)', 'woo-product-importer' ),
             'mapping_hints' => array('file path', 'file')),
         '_download_expiry' => array(
