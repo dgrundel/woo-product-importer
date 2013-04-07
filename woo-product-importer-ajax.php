@@ -242,8 +242,13 @@
                     case '_manage_stock':
                     case '_button_text':
                     case '_product_url':
-                    case '_file_path':
-                        $new_post_meta[$map_to] = $col;
+                        $new_post_meta[$map_to] = $col;   // aerobrain: _file_paths below need different value
+                        break;
+                    
+                    // aerobrain: changed _file_path to _file_paths
+                    //            add md5 of the path value
+                    case '_file_paths':
+                        $new_post_meta[$map_to] = array(md5($col) => ($col));
                         break;
 
                     case 'post_meta':
