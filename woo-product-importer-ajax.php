@@ -99,6 +99,7 @@
             $new_post_defaults['post_status'] = 'publish';
             $new_post_defaults['post_title'] = '';
             $new_post_defaults['post_content'] = '';
+            $new_post_defaults['menu_order'] = 0;
 
             //array of imported post_meta
             $new_post_meta = array();
@@ -197,7 +198,16 @@
                         $new_post[$map_to] = $col;
                         break;
 
-                    //integer fields
+                    //integer post fields
+                    case 'menu_order':
+                        //remove any non-numeric chars
+                        $col_value = preg_replace("/[^0-9]/", "", $col);
+                        if($col_value == "") continue;
+
+                        $new_post[$map_to] = $col_value;
+                        break;
+
+                    //integer postmeta fields
                     case '_stock':
                     case '_download_expiry':
                     case '_download_limit':
@@ -208,7 +218,7 @@
                         $new_post_meta[$map_to] = $col_value;
                         break;
 
-                    //float fields
+                    //float postmeta fields
                     case '_weight':
                     case '_length':
                     case '_width':

@@ -109,6 +109,9 @@
         'post_excerpt' => array(
             'label' => __( 'Short Description', 'woo-product-importer' ),
             'mapping_hints' => array('short desc', 'excerpt')),
+        'menu_order' => array(
+            'label' => __( 'Menu Order', 'woo-product-importer' ),
+            'mapping_hints' => array('menu order')),
         '_regular_price' => array(
             'label' => __( 'Regular Price', 'woo-product-importer' ),
             'mapping_hints' => array('price', '_price', 'msrp')),
