@@ -276,7 +276,6 @@
             <input type="hidden" name="user_locale" value="<?php echo htmlspecialchars($_POST['user_locale']); ?>">
             <input type="hidden" name="row_count" value="<?php echo $row_count; ?>">
             <input type="hidden" name="limit" value="5">
-                $_POST['import_csv_separator']
 
             <p>
                 <button class="button-primary" type="submit"><?php _e( 'Import', 'woo-product-importer' ); ?></button>
