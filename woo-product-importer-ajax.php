@@ -282,7 +282,7 @@
                         $term_paths = explode('|', $col);
                         foreach($term_paths as $term_path) {
 
-                            $term_names = explode('/', $term_path);
+                            $term_names = explode('>', $term_path);
                             $term_ids = array();
 
                             for($depth = 0; $depth < count($term_names); $depth++) {
