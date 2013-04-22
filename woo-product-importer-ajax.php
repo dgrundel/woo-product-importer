@@ -33,6 +33,7 @@
         'post_meta_key' => maybe_unserialize(stripslashes($_POST['post_meta_key'])),
         'user_locale' => maybe_unserialize(stripslashes($_POST['user_locale'])),
         'import_csv_separator' => maybe_unserialize(stripslashes($_POST['import_csv_separator'])),
+        'import_csv_hierarchy_separator' => maybe_unserialize(stripslashes($_POST['import_csv_hierarchy_separator']))
     );
 
     if(isset($post_data['uploaded_file_path'])) {
@@ -282,7 +283,7 @@
                         $term_paths = explode('|', $col);
                         foreach($term_paths as $term_path) {
 
-                            $term_names = explode('/', $term_path);
+                            $term_names = explode($post_data['import_csv_hierarchy_separator'], $term_path);
                             $term_ids = array();
 
                             for($depth = 0; $depth < count($term_names); $depth++) {

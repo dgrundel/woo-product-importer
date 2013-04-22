@@ -43,6 +43,7 @@
                 "post_meta_key": '<?php echo (serialize($_POST['post_meta_key'])); ?>',
                 "user_locale": '<?php echo (serialize($_POST['user_locale'])); ?>',
                 "import_csv_separator": '<?php echo (serialize($_POST['import_csv_separator'])); ?>',
+                "import_csv_hierarchy_separator": '<?php echo (serialize($_POST['import_csv_hierarchy_separator'])); ?>'
             };
 
             //ajaxurl is defined by WordPress

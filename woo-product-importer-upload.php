@@ -498,6 +498,13 @@
             <table class="form-table">
                 <tbody>
                     <tr>
+                        <th><?php _e( 'Path to Your <strong>uploads</strong> Folder', 'woo-product-importer' ); ?></th>
+                        <td><?php
+                            $upload_dir = wp_upload_dir();
+                            echo $upload_dir['basedir'];
+                        ?></td>
+                    </tr>
+                    <tr>
                         <th><?php _e( 'CSV field separator', 'woo-product-importer' ); ?></th>
                         <td>
                             <input type="text" name="import_csv_separator" id="import_csv_separator" class="code" value="," maxlength="1">
@@ -505,11 +512,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><?php _e( 'Path to Your <strong>uploads</strong> Folder', 'woo-product-importer' ); ?></th>
-                        <td><?php
-                            $upload_dir = wp_upload_dir();
-                            echo $upload_dir['basedir'];
-                        ?></td>
+                        <th><?php _e( 'Category hierarchy separator', 'woo-product-importer' ); ?></th>
+                        <td>
+                            <input type="text" name="import_csv_hierarchy_separator" id="import_csv_hierarchy_separator" class="code" value="/" maxlength="1">
+                            <p class="description"><?php _e( 'Enter the character used to separate categories in a hierarchical structure. The default is the forward-slash (/) character.', 'woo-product-importer' ); ?></p>
+                        </td>
                     </tr>
                     <tr>
                         <th><label for="user_locale"><?php _e( 'Set Locale', 'woo-product-importer' ); ?></label></th>
