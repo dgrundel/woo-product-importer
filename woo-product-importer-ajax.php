@@ -241,6 +241,14 @@
                         $new_post_meta[$map_to] = $col_value;
                         break;
 
+                    //file_path(s)
+                    case '_file_path':
+                    case '_file_paths':
+                        if(!is_array($new_post_meta['_file_paths'])) $new_post_meta['_file_paths'] = array();
+
+                        $new_post_meta['_file_paths'][md5($col)] = $col;
+                        break;
+
                     //all other postmeta fields
                     case '_tax_status':
                     case '_tax_class':
@@ -253,13 +261,7 @@
                     case '_manage_stock':
                     case '_button_text':
                     case '_product_url':
-                        $new_post_meta[$map_to] = $col;   // aerobrain: _file_paths below need different value
-                        break;
-                    
-                    // aerobrain: changed _file_path to _file_paths
-                    //            add md5 of the path value
-                    case '_file_paths':
-                        $new_post_meta[$map_to] = array(md5($col) => ($col));
+                        $new_post_meta[$map_to] = $col;
                         break;
 
                     case 'post_meta':
