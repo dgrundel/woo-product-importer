@@ -70,7 +70,7 @@ Here's a look at the preview/column mapping screen:
 - Product Images (By URL or Local File Path)
 - _button_text (Button Text, for External Products)
 - _product_url (Product URL, for External Products)
-- _file_path (File Path, for Downloadable Product)
+- _file_paths (File Paths, for Downloadable Product)
 - _download_expiry (Download Expiration, in Days)
 - _download_limit (Download Limit, an integer)
 - Post Meta (WordPress' native post_meta)
@@ -90,6 +90,7 @@ You can now import hierarchical category structures!
 More info and example on our blog: http://webpresencepartners.com/2013/01/13/importing-hierarchical-categories-into-woocommerce/
 
 **Not Supported (Yet)**
+
 - Variable and Grouped Products
 - Custom taxonomies
 - Attributes (and Global Attributes)
@@ -99,6 +100,12 @@ If you see something on the 'Not Supported' list that you absolutely must have, 
 **To Do**
 
 - Plugin becomes self-aware.
+
+**How to Get HELP!**
+
+- The issue is almost always related to the CSV file you are using, so please include that with your help request!
+- Submit your CSV file and a description of your problem here: http://webpresencepartners.com/help/
+- Or, email us directly at *info@webpresencepartners.com* with your CSV file and a description of your problem. (Caution, direct e-mail is often flagged as spam.)
 
 **Contributors**
 
