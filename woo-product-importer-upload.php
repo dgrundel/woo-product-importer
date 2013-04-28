@@ -531,6 +531,7 @@
                                     <li><?php _e( 'Couldn\'t get a list of available locales from your server.', 'woo-product-importer' ); ?></li>
                                 </ul>
                                 <input type="text" name="user_locale" id="user_locale" class="code">
+                                <p class="description"><a href="http://webpresencepartners.com/2013/04/28/a-list-of-common-locale-codes/" target="_blank"><?php _e( 'A list of common locale codes is available here.', 'woo-product-importer' ); ?></a></p>
                             <?php else: ?>
                                 <select name="user_locale" id="user_locale">
                                     <option value="0"><?php _e( 'System Default', 'woo-product-importer' ); ?></option>
