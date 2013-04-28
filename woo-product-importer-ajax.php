@@ -167,6 +167,11 @@
                         if(!in_array($col, array('yes', 'no'))) continue;
                         break;
 
+                    case 'comment_status':
+                    case 'ping_status':
+                        if(!in_array($col, array('open', 'closed'))) continue;
+                        break;
+
                     case '_visibility':
                         if(!in_array($col, array('visible', 'catalog', 'search', 'hidden'))) continue;
                         break;
@@ -196,6 +201,8 @@
                     case 'post_content':
                     case 'post_excerpt':
                     case 'post_status':
+                    case 'comment_status':
+                    case 'ping_status':
                         $new_post[$map_to] = $col;
                         break;
 

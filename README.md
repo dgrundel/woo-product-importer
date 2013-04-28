@@ -46,6 +46,8 @@ Here's a look at the preview/column mapping screen:
 - post_excerpt (Short Description)
 - post_status (Post Status -- Publish, Draft, Trash, etc.)
 - menu_order (Menu Order)
+- comment_status (Comment/Review Status -- Open, Closed)
+- ping_status (Trackback/Pingback Status -- Open, Closed)
 - _regular_price (Regular Price)
 - _sale_price (Sale Price)
 - _tax_status (Tax Status)

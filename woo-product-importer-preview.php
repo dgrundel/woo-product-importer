@@ -115,6 +115,12 @@
         'menu_order' => array(
             'label' => __( 'Menu Order', 'woo-product-importer' ),
             'mapping_hints' => array('menu order')),
+        'comment_status' => array(
+            'label' => __( 'Comment/Review Status (Valid: open/closed)', 'woo-product-importer' ),
+            'mapping_hints' => array('comment status')),
+        'ping_status' => array(
+            'label' => __( 'Pingback/Trackback Status (Valid: open/closed)', 'woo-product-importer' ),
+            'mapping_hints' => array('ping status', 'pingback status', 'pingbacks', 'trackbacks', 'trackback status')),
         '_regular_price' => array(
             'label' => __( 'Regular Price', 'woo-product-importer' ),
             'mapping_hints' => array('price', '_price', 'msrp')),
