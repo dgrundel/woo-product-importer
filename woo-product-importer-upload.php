@@ -530,14 +530,15 @@
                                 <ul class="import_error_messages">
                                     <li><?php _e( 'Couldn\'t get a list of available locales from your server.', 'woo-product-importer' ); ?></li>
                                 </ul>
+                                <input type="text" name="user_locale" id="user_locale" />
+                            <?php else: ?>
+                                <select name="user_locale" id="user_locale">
+                                    <option value="0"><?php _e( 'System Default', 'woo-product-importer' ); ?></option>
+                                    <?php foreach($locale_options as $locale_string => $label) : ?>
+                                        <option value="<?php echo htmlspecialchars($locale_string); ?>"><?php echo htmlspecialchars($label); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             <?php endif;?>
-                            <input type="hidden" name="user_locale" id="user_locale" value="" />
-                            <select name="user_locale" id="user_locale" <?php if(count($locale_options) == 0) echo 'disabled="disabled"'; ?>>
-                                <option value="0"><?php _e( 'System Default', 'woo-product-importer' ); ?></option>
-                                <?php foreach($locale_options as $locale_string => $label) : ?>
-                                    <option value="<?php echo htmlspecialchars($locale_string); ?>"><?php echo htmlspecialchars($label); ?></option>
-                                <?php endforeach; ?>
-                            </select>
                             <p class="description"><?php _e( 'If you have special characters in your CSV, (such as &aelig;, &szlig;, &eacute;, etc.) set this to a locale compatible with those characters.', 'woo-product-importer' ); ?></p>
                         </td>
                     </tr>
