@@ -423,30 +423,35 @@
     $locale_options = array();
 
     if(is_shell_exec_available()) {
-        $locales = shell_exec('locale -a');
-        $locales = explode("\n" , $locales);
 
-        foreach($locales as $loc) {
-            if(strlen($loc)) {
-                $parts = explode('.' , $loc);
-                $lc = $parts[0];
+        //hopefully suppress shell_exec warning
+        @$locales = shell_exec('locale -a');
 
-                list($lcode , $ccode) = explode('_' , $lc);
+        if(strlen($locales) > 0) {
+            $locales = explode("\n" , $locales);
 
-                $lcode = strtolower($lcode);
+            foreach($locales as $loc) {
+                if(strlen($loc)) {
+                    $parts = explode('.' , $loc);
+                    $lc = $parts[0];
 
-                $language = $language_codes[$lcode];
-                $country = $country_codes[$ccode];
+                    list($lcode , $ccode) = explode('_' , $lc);
 
-                if( array_key_exists($lcode, $language_codes) &&
-                    array_key_exists($ccode, $country_codes)){
+                    $lcode = strtolower($lcode);
 
-                    $locale_options[$loc] = strlen($parts[1]) > 0 ? $language.'/'.$country.' ('.$parts[1].')' : $language.'/'.$country;
+                    $language = $language_codes[$lcode];
+                    $country = $country_codes[$ccode];
+
+                    if( array_key_exists($lcode, $language_codes) &&
+                        array_key_exists($ccode, $country_codes)){
+
+                        $locale_options[$loc] = strlen($parts[1]) > 0 ? $language.'/'.$country.' ('.$parts[1].')' : $language.'/'.$country;
+                    }
                 }
             }
-        }
 
-        asort($locale_options);
+            asort($locale_options);
+        }
     }
 ?>
 <script type="text/javascript">
@@ -526,6 +531,7 @@
                                     <li><?php _e( 'Couldn\'t get a list of available locales from your server.', 'woo-product-importer' ); ?></li>
                                 </ul>
                             <?php endif;?>
+                            <input type="hidden" name="user_locale" id="user_locale" value="" />
                             <select name="user_locale" id="user_locale" <?php if(count($locale_options) == 0) echo 'disabled="disabled"'; ?>>
                                 <option value="0"><?php _e( 'System Default', 'woo-product-importer' ); ?></option>
                                 <?php foreach($locale_options as $locale_string => $label) : ?>
