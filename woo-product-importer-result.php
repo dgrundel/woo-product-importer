@@ -20,8 +20,7 @@
 $post_data = array(
     'uploaded_file_path' => $_POST['uploaded_file_path'],
     'header_row' => $_POST['header_row'],
-    'limit' => $_POST['limit'],
-    'offset' => $_POST['offset'],
+    'limit' => intval($_POST['limit']),
     'map_to' => maybe_unserialize(stripslashes($_POST['map_to'])),
     'custom_field_name' => maybe_unserialize(stripslashes($_POST['custom_field_name'])),
     'custom_field_visible' => maybe_unserialize(stripslashes($_POST['custom_field_visible'])),
@@ -42,7 +41,7 @@ $post_data = array(
             $(this).hide();
         });
 
-        doAjaxImport(<?php echo intval($_POST['limit']); ?>, 0);
+        doAjaxImport(<?php echo $post_data['limit']; ?>, 0);
 
         function doAjaxImport(limit, offset) {
             var data = {
@@ -51,15 +50,15 @@ $post_data = array(
                 "header_row": <?php echo json_encode($post_data['header_row']); ?>,
                 "limit": limit,
                 "offset": offset,
-                "map_to": '<?php echo (serialize($_POST['map_to'])); ?>',
-                "custom_field_name": '<?php echo (serialize($_POST['custom_field_name'])); ?>',
-                "custom_field_visible": '<?php echo (serialize($_POST['custom_field_visible'])); ?>',
-                "product_image_set_featured": '<?php echo (serialize($_POST['product_image_set_featured'])); ?>',
-                "product_image_skip_duplicates": '<?php echo (serialize($_POST['product_image_skip_duplicates'])); ?>',
-                "post_meta_key": '<?php echo (serialize($_POST['post_meta_key'])); ?>',
-                "user_locale": '<?php echo (serialize($_POST['user_locale'])); ?>',
-                "import_csv_separator": '<?php echo (serialize($_POST['import_csv_separator'])); ?>',
-                "import_csv_hierarchy_separator": '<?php echo (serialize($_POST['import_csv_hierarchy_separator'])); ?>'
+                "map_to": '<?php echo (serialize($post_data['map_to'])); ?>',
+                "custom_field_name": '<?php echo (serialize($post_data['custom_field_name'])); ?>',
+                "custom_field_visible": '<?php echo (serialize($post_data['custom_field_visible'])); ?>',
+                "product_image_set_featured": '<?php echo (serialize($post_data['product_image_set_featured'])); ?>',
+                "product_image_skip_duplicates": '<?php echo (serialize($post_data['product_image_skip_duplicates'])); ?>',
+                "post_meta_key": '<?php echo (serialize($post_data['post_meta_key'])); ?>',
+                "user_locale": '<?php echo (serialize($post_data['user_locale'])); ?>',
+                "import_csv_separator": '<?php echo (serialize($post_data['import_csv_separator'])); ?>',
+                "import_csv_hierarchy_separator": '<?php echo (serialize($post_data['import_csv_hierarchy_separator'])); ?>'
             };
 
             //ajaxurl is defined by WordPress
@@ -161,11 +160,11 @@ $post_data = array(
                 </tr>
                 <tr>
                     <th><?php _e( 'Remainin', 'woo-product-importer' ); ?>g</th>
-                    <td id="remaining_count"><?php echo $_POST['row_count']; ?></td>
+                    <td id="remaining_count"><?php echo $post_data['row_count']; ?></td>
                 </tr>
                 <tr>
                     <th><?php _e( 'Total', 'woo-product-importer' ); ?></th>
-                    <td id="row_count"><?php echo $_POST['row_count']; ?></td>
+                    <td id="row_count"><?php echo $post_data['row_count']; ?></td>
                 </tr>
             </tbody>
         </table>
