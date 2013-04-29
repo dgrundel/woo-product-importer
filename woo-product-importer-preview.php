@@ -97,6 +97,9 @@
     //'mapping_hints' should be all lower case
     //(a strtolower is performed on header_row when checking)
     $col_mapping_options = array(
+        'custom_field' => array(
+            'label' => __( 'Custom Field (Set Name Below)', 'woo-product-importer' ),
+            'mapping_hints' => array('custom field', 'custom')),    
         'do_not_import' => array(
             'label' => __( 'Do Not Import', 'woo-product-importer' ),
             'mapping_hints' => array()),
@@ -106,6 +109,9 @@
         'post_status' => array(
             'label' => __( 'Status (Valid: publish/draft/trash/[more in Codex])', 'woo-product-importer' ),
             'mapping_hints' => array('status', 'product status', 'post status')),
+        'post_date' => array(
+            'label' => __( 'Post Date', 'woo-product-importer' ),
+            'mapping_hints' => array('_post_date', 'post date')),
         'post_content' => array(
             'label' => __( 'Description', 'woo-product-importer' ),
             'mapping_hints' => array('desc', 'content')),
@@ -163,6 +169,9 @@
         '_stock' => array(
             'label' => __( 'Stock', 'woo-product-importer' ),
             'mapping_hints' => array('qty', 'quantity')),
+        'total_sales' => array(
+            'label' => __( 'Total Sales', 'woo-product-importer' ),
+            'mapping_hints' => array('total_sales', 'popularity')),
         '_stock_status' => array(
             'label' => __( 'Stock Status (Valid: instock/outofstock)', 'woo-product-importer' ),
             'mapping_hints' => array('stock status', 'in stock')),
@@ -193,9 +202,6 @@
         'product_tag_by_id' => array(
             'label' => __( 'Tags By ID (Separated by "|")', 'woo-product-importer' ),
             'mapping_hints' => array()),
-        'custom_field' => array(
-            'label' => __( 'Custom Field (Set Name Below)', 'woo-product-importer' ),
-            'mapping_hints' => array('custom field', 'custom')),
         'product_image_by_url' => array(
             'label' => __( 'Images (By URL, Separated by "|")', 'woo-product-importer' ),
             'mapping_hints' => array('image', 'images', 'image url', 'image urls', 'product image url', 'product image urls')),

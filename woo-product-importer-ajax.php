@@ -115,6 +115,7 @@
             $new_post_meta_defaults['_height'] = 0;
             $new_post_meta_defaults['_sku'] = '';
             $new_post_meta_defaults['_stock'] = '';
+            $new_post_meta_defaults['total_sales'] = 0;
             $new_post_meta_defaults['_sale_price'] = '';
             $new_post_meta_defaults['_sale_price_dates_from'] = '';
             $new_post_meta_defaults['_sale_price_dates_to'] = '';
@@ -200,6 +201,7 @@
                     case 'post_title':
                     case 'post_content':
                     case 'post_excerpt':
+                    case 'post_date':
                     case 'post_status':
                     case 'comment_status':
                     case 'ping_status':
@@ -217,6 +219,7 @@
 
                     //integer postmeta fields
                     case '_stock':
+                    case 'total_sales':
                     case '_download_expiry':
                     case '_download_limit':
                         //remove any non-numeric chars

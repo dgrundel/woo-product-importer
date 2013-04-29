@@ -484,7 +484,7 @@
                 <tr>
                     <th></th>
                     <td>
-                        <input type="checkbox" name="header_row" id="header_row" value="1">
+                        <input type="checkbox" name="header_row" id="header_row" value="1" checked>
                         <label for="header_row"><?php _e( 'First Row is Header Row', 'woo-product-importer' ); ?></label>
                     </td>
                 </tr>
