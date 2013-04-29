@@ -92,8 +92,6 @@
 
     }
 
-    $show_import_checkboxes = !!($row_count < 100);
-
     //'mapping_hints' should be all lower case
     //(a strtolower is performed on header_row when checking)
     $col_mapping_options = array(
@@ -295,21 +293,15 @@
                 <thead>
                     <?php if(intval($_POST['header_row']) == 1): ?>
                         <tr class="header_row">
-                            <th colspan="<?php echo ($show_import_checkboxes) ? sizeof($header_row) + 1 : sizeof($header_row); ?>"><?php _e( 'CSV Header Row', 'woo-product-importer' ); ?></th>
+                            <th colspan="<?php echo sizeof($header_row); ?>"><?php _e( 'CSV Header Row', 'woo-product-importer' ); ?></th>
                         </tr>
                         <tr class="header_row">
-                            <?php if($show_import_checkboxes): ?>
-                                <th></th>
-                            <?php endif; ?>
                             <?php foreach($header_row as $col): ?>
                                 <th><?php echo htmlspecialchars($col); ?></th>
                             <?php endforeach; ?>
                         </tr>
                     <?php endif; ?>
                     <tr>
-                        <?php if($show_import_checkboxes): ?>
-                            <th class="narrow"><?php _e( 'Import?', 'woo-product-importer' ); ?></th>
-                        <?php endif; ?>
                         <?php
                             reset($import_data);
                             $first_row = current($import_data);
@@ -371,9 +363,6 @@
                 <tbody>
                     <?php foreach($import_data as $row_id => $row): ?>
                         <tr>
-                            <?php if($show_import_checkboxes): ?>
-                                <td class="narrow"><input type="checkbox" name="import_row[<?php echo $row_id; ?>]" value="1" checked="checked" /></td>
-                            <?php endif; ?>
                             <?php foreach($row as $col): ?>
                                 <td><?php echo htmlspecialchars($col); ?></td>
                             <?php endforeach; ?>

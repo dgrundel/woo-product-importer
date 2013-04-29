@@ -24,7 +24,6 @@
         'header_row' => $_POST['header_row'],
         'limit' => $_POST['limit'],
         'offset' => $_POST['offset'],
-        'import_row' => maybe_unserialize(stripslashes($_POST['import_row'])),
         'map_to' => maybe_unserialize(stripslashes($_POST['map_to'])),
         'custom_field_name' => maybe_unserialize(stripslashes($_POST['custom_field_name'])),
         'custom_field_visible' => maybe_unserialize(stripslashes($_POST['custom_field_visible'])),
@@ -83,10 +82,6 @@
 
         //this is where the fun begins
         foreach($import_data as $row_id => $row) {
-
-            //don't import if the checkbox wasn't checked
-            //only applies when row_count is less than 100
-            if(is_array($post_data['import_row']) && intval($post_data['import_row'][$row_id]) != 1) continue;
 
             //unset new_post_id
             $new_post_id = null;
