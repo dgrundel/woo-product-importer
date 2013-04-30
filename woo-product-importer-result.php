@@ -17,21 +17,20 @@
     along with Woo Product Importer.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$post_data = array(
-    'uploaded_file_path' => $_POST['uploaded_file_path'],
-    'header_row' => $_POST['header_row'],
-    'limit' => intval($_POST['limit']),
-    'map_to' => $_POST['map_to'],
-    'custom_field_name' => $_POST['custom_field_name'],
-    'custom_field_visible' => $_POST['custom_field_visible'],
-    'product_image_set_featured' => $_POST['product_image_set_featured'],
-    'product_image_skip_duplicates' => $_POST['product_image_skip_duplicates'],
-    'post_meta_key' => $_POST['post_meta_key'],
-    'user_locale' => $_POST['user_locale'],
-    'import_csv_separator' => $_POST['import_csv_separator'],
-    'import_csv_hierarchy_separator' => $_POST['import_csv_hierarchy_separator']
-);
-
+    $post_data = array(
+        'uploaded_file_path' => $_POST['uploaded_file_path'],
+        'header_row' => $_POST['header_row'],
+        'limit' => intval($_POST['limit']),
+        'map_to' => $_POST['map_to'],
+        'custom_field_name' => $_POST['custom_field_name'],
+        'custom_field_visible' => $_POST['custom_field_visible'],
+        'product_image_set_featured' => $_POST['product_image_set_featured'],
+        'product_image_skip_duplicates' => $_POST['product_image_skip_duplicates'],
+        'post_meta_key' => $_POST['post_meta_key'],
+        'user_locale' => $_POST['user_locale'],
+        'import_csv_separator' => $_POST['import_csv_separator'],
+        'import_csv_hierarchy_separator' => $_POST['import_csv_hierarchy_separator']
+    );
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function($){
