@@ -95,69 +95,44 @@
     //'mapping_hints' should be all lower case
     //(a strtolower is performed on header_row when checking)
     $col_mapping_options = array(
+
         'do_not_import' => array(
             'label' => __( 'Do Not Import', 'woo-product-importer' ),
             'mapping_hints' => array()),
+
+        'optgroup_general' => array(
+            'optgroup' => true,
+            'label' => 'General'),
+
         'post_title' => array(
             'label' => __( 'Name', 'woo-product-importer' ),
             'mapping_hints' => array('title', 'product name')),
-        'post_status' => array(
-            'label' => __( 'Status (Valid: publish/draft/trash/[more in Codex])', 'woo-product-importer' ),
-            'mapping_hints' => array('status', 'product status', 'post status')),
+        '_sku' => array(
+            'label' => __( 'SKU', 'woo-product-importer' ),
+            'mapping_hints' => array()),
         'post_content' => array(
             'label' => __( 'Description', 'woo-product-importer' ),
             'mapping_hints' => array('desc', 'content')),
         'post_excerpt' => array(
             'label' => __( 'Short Description', 'woo-product-importer' ),
             'mapping_hints' => array('short desc', 'excerpt')),
+
+        'optgroup_status' => array(
+            'optgroup' => true,
+            'label' => 'Status and Visibility'),
+
+        'post_status' => array(
+            'label' => __( 'Status (Valid: publish/draft/trash/[more in Codex])', 'woo-product-importer' ),
+            'mapping_hints' => array('status', 'product status', 'post status')),
         'menu_order' => array(
             'label' => __( 'Menu Order', 'woo-product-importer' ),
             'mapping_hints' => array('menu order')),
-        'comment_status' => array(
-            'label' => __( 'Comment/Review Status (Valid: open/closed)', 'woo-product-importer' ),
-            'mapping_hints' => array('comment status')),
-        'ping_status' => array(
-            'label' => __( 'Pingback/Trackback Status (Valid: open/closed)', 'woo-product-importer' ),
-            'mapping_hints' => array('ping status', 'pingback status', 'pingbacks', 'trackbacks', 'trackback status')),
-        '_regular_price' => array(
-            'label' => __( 'Regular Price', 'woo-product-importer' ),
-            'mapping_hints' => array('price', '_price', 'msrp')),
-        '_sale_price' => array(
-            'label' => __( 'Sale Price', 'woo-product-importer' ),
-            'mapping_hints' => array()),
-        '_tax_status' => array(
-            'label' => __( 'Tax Status (Valid: taxable/shipping/none)', 'woo-product-importer' ),
-            'mapping_hints' => array('tax status', 'taxable')),
-        '_tax_class' => array(
-            'label' => __( 'Tax Class', 'woo-product-importer' ),
-            'mapping_hints' => array()),
         '_visibility' => array(
             'label' => __( 'Visibility (Valid: visible/catalog/search/hidden)', 'woo-product-importer' ),
             'mapping_hints' => array('visibility', 'visible')),
         '_featured' => array(
             'label' => __( 'Featured (Valid: yes/no)', 'woo-product-importer' ),
             'mapping_hints' => array('featured')),
-        '_weight' => array(
-            'label' => __( 'Weight', 'woo-product-importer' ),
-            'mapping_hints' => array('wt')),
-        '_length' => array(
-            'label' => __( 'Length', 'woo-product-importer' ),
-            'mapping_hints' => array('l')),
-        '_width' => array(
-            'label' => __( 'Width', 'woo-product-importer' ),
-            'mapping_hints' => array('w')),
-        '_height' => array(
-            'label' => __( 'Height', 'woo-product-importer' ),
-            'mapping_hints' => array('h')),
-        '_sku' => array(
-            'label' => __( 'SKU', 'woo-product-importer' ),
-            'mapping_hints' => array()),
-        '_downloadable' => array(
-            'label' => __( 'Downloadable (Valid: yes/no)', 'woo-product-importer' ),
-            'mapping_hints' => array('downloadable')),
-        '_virtual' => array(
-            'label' => __( 'Virtual (Valid: yes/no)', 'woo-product-importer' ),
-            'mapping_hints' => array('virtual')),
         '_stock' => array(
             'label' => __( 'Stock', 'woo-product-importer' ),
             'mapping_hints' => array('qty', 'quantity')),
@@ -170,36 +145,61 @@
         '_manage_stock' => array(
             'label' => __( 'Manage Stock (Valid: yes/no)', 'woo-product-importer' ),
             'mapping_hints' => array('manage stock')),
-        '_product_type' => array(
-            'label' => __( 'Product Type (Valid: simple/variable/grouped/external)', 'woo-product-importer' ),
-            'mapping_hints' => array('product type', 'type')),
-        'product_cat_by_name' => array(
-            'label' => __( 'Categories By Name (Separated by "|")', 'woo-product-importer' ),
-            'mapping_hints' => array('category', 'categories', 'product category', 'product categories', 'product_cat')),
-        'product_cat_by_id' => array(
-            'label' => __( 'Categories By ID (Separated by "|")', 'woo-product-importer' ),
+        'comment_status' => array(
+            'label' => __( 'Comment/Review Status (Valid: open/closed)', 'woo-product-importer' ),
+            'mapping_hints' => array('comment status')),
+        'ping_status' => array(
+            'label' => __( 'Pingback/Trackback Status (Valid: open/closed)', 'woo-product-importer' ),
+            'mapping_hints' => array('ping status', 'pingback status', 'pingbacks', 'trackbacks', 'trackback status')),
+
+        'optgroup_pricing' => array(
+            'optgroup' => true,
+            'label' => 'Pricing, Tax, and Shipping'),
+
+        '_regular_price' => array(
+            'label' => __( 'Regular Price', 'woo-product-importer' ),
+            'mapping_hints' => array('price', '_price', 'msrp')),
+        '_sale_price' => array(
+            'label' => __( 'Sale Price', 'woo-product-importer' ),
             'mapping_hints' => array()),
-        'product_tag_by_name' => array(
-            'label' => __( 'Tags By Name (Separated by "|")', 'woo-product-importer' ),
-            'mapping_hints' => array('tag', 'tags', 'product tag', 'product tags', 'product_tag')),
+        '_tax_status' => array(
+            'label' => __( 'Tax Status (Valid: taxable/shipping/none)', 'woo-product-importer' ),
+            'mapping_hints' => array('tax status', 'taxable')),
+        '_tax_class' => array(
+            'label' => __( 'Tax Class', 'woo-product-importer' ),
+            'mapping_hints' => array()),
         'product_shipping_class_by_id' => array(
             'label' => __( 'Shipping Class By ID (Separated by "|")', 'woo-product-importer' ),
             'mapping_hints' => array()),
         'product_shipping_class_by_name' => array(
             'label' => __( 'Shipping Class By Name (Separated by "|")', 'woo-product-importer' ),
             'mapping_hints' => array('product_shipping_class', 'shipping_class', 'product shipping class', 'shipping class')),
-        'product_tag_by_id' => array(
-            'label' => __( 'Tags By ID (Separated by "|")', 'woo-product-importer' ),
-            'mapping_hints' => array()),
-        'custom_field' => array(
-            'label' => __( 'Custom Field (Set Name Below)', 'woo-product-importer' ),
-            'mapping_hints' => array('custom field', 'custom')),
-        'product_image_by_url' => array(
-            'label' => __( 'Images (By URL, Separated by "|")', 'woo-product-importer' ),
-            'mapping_hints' => array('image', 'images', 'image url', 'image urls', 'product image url', 'product image urls')),
-        'product_image_by_path' => array(
-            'label' => __( 'Images (By Local File Path, Separated by "|")', 'woo-product-importer' ),
-            'mapping_hints' => array('image path', 'image paths', 'product image path', 'product image paths')),
+        '_weight' => array(
+            'label' => __( 'Weight', 'woo-product-importer' ),
+            'mapping_hints' => array('wt')),
+        '_length' => array(
+            'label' => __( 'Length', 'woo-product-importer' ),
+            'mapping_hints' => array('l')),
+        '_width' => array(
+            'label' => __( 'Width', 'woo-product-importer' ),
+            'mapping_hints' => array('w')),
+        '_height' => array(
+            'label' => __( 'Height', 'woo-product-importer' ),
+            'mapping_hints' => array('h')),
+
+        'optgroup_product_types' => array(
+            'optgroup' => true,
+            'label' => 'Special Product Types'),
+
+        '_downloadable' => array(
+            'label' => __( 'Downloadable (Valid: yes/no)', 'woo-product-importer' ),
+            'mapping_hints' => array('downloadable')),
+        '_virtual' => array(
+            'label' => __( 'Virtual (Valid: yes/no)', 'woo-product-importer' ),
+            'mapping_hints' => array('virtual')),
+        '_product_type' => array(
+            'label' => __( 'Product Type (Valid: simple/variable/grouped/external)', 'woo-product-importer' ),
+            'mapping_hints' => array('product type', 'type')),
         '_button_text' => array(
             'label' => __( 'Button Text (External Product Only)', 'woo-product-importer' ),
             'mapping_hints' => array('button text')),
@@ -215,9 +215,45 @@
         '_download_limit' => array(
             'label' => __( 'Download Limit (Number of Downloads)', 'woo-product-importer' ),
             'mapping_hints' => array('download limit', 'number of downloads')),
+
+        'optgroup_taxonomies' => array(
+            'optgroup' => true,
+            'label' => 'Categories and Tags'),
+
+        'product_cat_by_name' => array(
+            'label' => __( 'Categories By Name (Separated by "|")', 'woo-product-importer' ),
+            'mapping_hints' => array('category', 'categories', 'product category', 'product categories', 'product_cat')),
+        'product_cat_by_id' => array(
+            'label' => __( 'Categories By ID (Separated by "|")', 'woo-product-importer' ),
+            'mapping_hints' => array()),
+        'product_tag_by_name' => array(
+            'label' => __( 'Tags By Name (Separated by "|")', 'woo-product-importer' ),
+            'mapping_hints' => array('tag', 'tags', 'product tag', 'product tags', 'product_tag')),
+        'product_tag_by_id' => array(
+            'label' => __( 'Tags By ID (Separated by "|")', 'woo-product-importer' ),
+            'mapping_hints' => array()),
+
+        'optgroup_custom' => array(
+            'optgroup' => true,
+            'label' => 'Custom Attributes and Post Meta'),
+
+        'custom_field' => array(
+            'label' => __( 'Custom Field / Product Attribute (Set Name Below)', 'woo-product-importer' ),
+            'mapping_hints' => array('custom field', 'custom')),
         'post_meta' => array(
             'label' => __( 'Post Meta', 'woo-product-importer' ),
             'mapping_hints' => array('postmeta')),
+
+        'optgroup_images' => array(
+            'optgroup' => true,
+            'label' => 'Product Images'),
+
+        'product_image_by_url' => array(
+            'label' => __( 'Images (By URL, Separated by "|")', 'woo-product-importer' ),
+            'mapping_hints' => array('image', 'images', 'image url', 'image urls', 'product image url', 'product image urls', 'product images')),
+        'product_image_by_path' => array(
+            'label' => __( 'Images (By Local File Path, Separated by "|")', 'woo-product-importer' ),
+            'mapping_hints' => array('image path', 'image paths', 'product image path', 'product image paths'))
     );
 
 ?>
@@ -310,21 +346,28 @@
                             <th>
                                 <div class="map_to_settings">
                                     <?php _e( 'Map to:', 'woo-product-importer' ); ?> <select name="map_to[<?php echo $key; ?>]" class="map_to">
+                                        <optgroup>
                                         <?php foreach($col_mapping_options as $value => $meta): ?>
-                                            <option value="<?php echo $value; ?>" <?php
-                                                if(intval($_POST['header_row']) == 1) {
-                                                    //pre-select this value if the header_row
-                                                    //matches the label, value, or any of the hints.
-                                                    $header_value = strtolower($header_row[$key]);
-                                                    if( $header_value == strtolower($value) ||
-                                                        $header_value == strtolower($meta['label']) ||
-                                                        in_array($header_value, $meta['mapping_hints']) ) {
+                                            <?php if(array_key_exists('optgroup', $meta) && $meta['optgroup'] === true): ?>
+                                                </optgroup>
+                                                <optgroup label="<?php echo $meta['label']; ?>">
+                                            <?php else: ?>
+                                                <option value="<?php echo $value; ?>" <?php
+                                                    if(intval($_POST['header_row']) == 1) {
+                                                        //pre-select this value if the header_row
+                                                        //matches the label, value, or any of the hints.
+                                                        $header_value = strtolower($header_row[$key]);
+                                                        if( $header_value == strtolower($value) ||
+                                                            $header_value == strtolower($meta['label']) ||
+                                                            in_array($header_value, $meta['mapping_hints']) ) {
 
-                                                        echo 'selected="selected"';
+                                                            echo 'selected="selected"';
+                                                        }
                                                     }
-                                                }
-                                            ?>><?php echo $meta['label']; ?></option>
+                                                ?>><?php echo $meta['label']; ?></option>
+                                            <?php endif;?>
                                         <?php endforeach; ?>
+                                        </optgroup>
                                     </select>
                                 </div>
                                 <div class="custom_field_settings field_settings">
