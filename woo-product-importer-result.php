@@ -139,7 +139,7 @@
     <div id="import_status">
         <div id="import_in_progress">
             <img src="<?php echo plugin_dir_url(__FILE__); ?>img/ajax-loader.gif"
-                alt="<?php _( 'Importing. Please do not close this window or click your browser\'s stop button.', 'woo-product-importer' ); ?>"
+                alt="<?php _e( 'Importing. Please do not close this window or click your browser\'s stop button.', 'woo-product-importer' ); ?>"
                 title="<?php _e( 'Importing. Please do not close this window or click your browser\'s stop button.', 'woo-product-importer' ); ?>">
 
             <strong><?php _e( 'Importing. Please do not close this window or click your browser\'s stop button.', 'woo-product-importer' ); ?></strong>

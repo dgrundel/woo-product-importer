@@ -558,6 +558,8 @@
                         );
                     }
 
+                    $image_gallery_ids = array();
+
                     foreach($new_post_image_paths as $image_index => $dest_path_info) {
 
                         //check for duplicate images, only for existing products
@@ -617,7 +619,13 @@
                         //the user checked the box on the preview page.
                         if($image_index == 0 && intval($post_data['product_image_set_featured'][$key]) == 1) {
                             update_post_meta($new_post_id, '_thumbnail_id', $attachment_id);
+                        } else {
+                            $image_gallery_ids[] = $attachment_id;
                         }
+                    }
+
+                    if(count($image_gallery_ids) > 0) {
+                        update_post_meta($new_post_id, '_product_image_gallery', implode(',', $image_gallery_ids));
                     }
                 }
 
