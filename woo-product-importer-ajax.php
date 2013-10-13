@@ -16,6 +16,7 @@
     You should have received a copy of the GNU Lesser General Public License
     along with Woo Product Importer.  If not, see <http://www.gnu.org/licenses/>.
 */
+    global $woocommerce;
 
     ini_set("auto_detect_line_endings", true);
 
@@ -79,6 +80,10 @@
 
         //array that will be sent back to the browser with info about what we inserted.
         $inserted_rows = array();
+
+        // lookup existing product attributes
+        $attribute_taxonomies = $woocommerce->get_attribute_taxonomies(); 
+        if (! is_array($attribute_taxonomies)) $attribute_taxonomies = array();
 
         //this is where the fun begins
         foreach($import_data as $row_id => $row) {
@@ -343,17 +348,54 @@
                         break;
 
                     case 'custom_field':
-                        $field_name = $post_data['custom_field_name'][$key];
-                        $field_slug = sanitize_title($field_name);
+                        $field_name = trim($post_data['custom_field_name'][$key]);
                         $visible = intval($post_data['custom_field_visible'][$key]);
+                        $value = $col;
+                        $product_attr = null;
 
-                        $new_post_custom_fields[$field_slug] = array (
-                            "name" => $field_name,
-                            "value" => $col,
+                        // check if this is an existing product attribute
+                        foreach($attribute_taxonomies as $attr){
+                            if (! is_object($attr)) continue;
+                            if (strtolower($field_name) === strtolower($attr->attribute_name) &&
+                                taxonomy_exists( $woocommerce->attribute_taxonomy_name( $attr->attribute_name))){
+                                $product_attr = $attr;
+                                break;
+                            } 
+                        }
+
+                        // existing attribute
+                        if (! is_null($product_attr)){ 
+                            // check if this is a new term(s) for the attribute 
+                            $field_name = $woocommerce->attribute_taxonomy_name($product_attr->attribute_name);
+                            $value = '';
+                            $terms = explode('|', $col); 
+                            foreach($terms as $t) {
+                                $term = term_exists($t, $field_name);
+
+                                // if term does not exist, try to insert it.
+                                if( $term === false || $term === 0 || $term === null) {
+                                    $t = $product_attr->attribute_type === 'select' ? sanitize_title($t) : stripslashes(strip_tags($t));
+                                    $term = wp_insert_term($t, $field_name);
+                                }
+
+                                if(is_array($term)){
+                                    $new_post_terms[$field_name][] = intval($term['term_id']);
+                                }
+                                else {
+                                    //uh oh.
+                                    $new_post_errors[] = "Couldn't find or create {$field_name} with path {$term_path}.";
+                                    break;
+                                }
+                            }
+                        }
+
+                        $new_post_custom_fields[sanitize_title($field_name)] = array (
+                            "name" => woocommerce_clean($field_name), 
+                            "value" => $value, 
                             "position" => $new_post_custom_field_count++,
                             "is_visible" => $visible,
                             "is_variation" => 0,
-                            "is_taxonomy" => 0
+                            "is_taxonomy" => ! is_null($product_attr) 
                         );
                         break;
 
