@@ -36,21 +36,21 @@
             add_action('wp_ajax_woo-product-importer-ajax', array('WebPres_Woo_Product_Importer', 'render_ajax_action'));
         }
 
-        public function translations() {
+        public static function translations() {
             load_plugin_textdomain( 'woo-product-importer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
         }
 
-        public function admin_menu() {
+        public static function admin_menu() {
             add_management_page( __( 'Woo Product Importer', 'woo-product-importer' ), __( 'Woo Product Importer', 'woo-product-importer' ), 'manage_options', 'woo-product-importer', array('WebPres_Woo_Product_Importer', 'render_admin_action'));
         }
         
-        public function render_admin_action() {
+        public static function render_admin_action() {
             $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'upload';
             require_once(plugin_dir_path(__FILE__).'woo-product-importer-common.php');
             require_once(plugin_dir_path(__FILE__)."woo-product-importer-{$action}.php");
         }
         
-        public function render_ajax_action() {
+        public static function render_ajax_action() {
             require_once(plugin_dir_path(__FILE__)."woo-product-importer-ajax.php");
             die(); // this is required to return a proper result
         }
