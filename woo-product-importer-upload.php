@@ -434,19 +434,21 @@
                 if(strlen($loc)) {
                     $parts = explode('.' , $loc);
                     $lc = $parts[0];
+					
+					if (strpos($lc, '_') !== false) { 	
+						list($lcode , $ccode) = explode('_' , $lc);
+						
+						$lcode = strtolower($lcode);
 
-                    list($lcode , $ccode) = explode('_' , $lc);
+						$language = $language_codes[$lcode];
+						$country = $country_codes[$ccode];
 
-                    $lcode = strtolower($lcode);
+						if( array_key_exists($lcode, $language_codes) &&
+							array_key_exists($ccode, $country_codes)){
 
-                    $language = $language_codes[$lcode];
-                    $country = $country_codes[$ccode];
-
-                    if( array_key_exists($lcode, $language_codes) &&
-                        array_key_exists($ccode, $country_codes)){
-
-                        $locale_options[$loc] = strlen($parts[1]) > 0 ? $language.'/'.$country.' ('.$parts[1].')' : $language.'/'.$country;
-                    }
+							$locale_options[$loc] = strlen($parts[1]) > 0 ? $language.'/'.$country.' ('.$parts[1].')' : $language.'/'.$country;
+						}
+					}
                 }
             }
 
