@@ -82,7 +82,7 @@
         $inserted_rows = array();
 
         // lookup existing product attributes
-        $attribute_taxonomies = $woocommerce->get_attribute_taxonomies(); 
+        $attribute_taxonomies = wc_get_attribute_taxonomies();
         if (! is_array($attribute_taxonomies)) $attribute_taxonomies = array();
 
         //this is where the fun begins
